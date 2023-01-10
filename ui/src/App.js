@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ArticlePage from "./pages/ArticlePage";
 import NavBar from "./components/NavBar";
+import NotFoundErrorPage from "./pages/NotFoundErrorPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ArticlePage />} />
           <Route path="/connexion" element={<LoginPage />} />
+          <Route exact path="*" element={< NotFoundErrorPage/>} />
         </Routes>
       </div>
     </BrowserRouter>
