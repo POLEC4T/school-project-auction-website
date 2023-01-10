@@ -19,7 +19,6 @@ function LoginPage() {
 
     return (
         <div className='h-screen overflow-hidden'>
-            <NavBar />
             <div className='main-container flex font-outfit overflow-hidden h-screen'>
                 <div className='leftsection bg-slate-400 h-screen lg:w-2/3 w-full flex flex-col justify-between p-20 content-center text-center'>
                     <h1 className='text-4xl text-white text-center'>Connexion</h1>

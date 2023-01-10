@@ -20,7 +20,6 @@ function PageArticle() {
   
   return (
     <div>
-        <NavBar />
         <main className='contenu sm:px-20 pt-5 flex flex-row flex-wrap font-outfit'>
             <section className="gauche w-1/2 bg-gray-100">
 
