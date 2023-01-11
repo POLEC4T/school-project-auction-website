@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
+const cors = require('cors');
 
 const userController = require("./controller/user.controller");
 
@@ -10,19 +11,11 @@ const port = 3080;
 
 const db = require("./config/db.config").connect();
 db.sequelize.sync();
-//initialisation des rôles si ils ne le sont pas déjà
-db.roles.count().then((count) => {
-  if (count < 3) {
-    db.ROLES.map((role) => {
-      db.roles.create({
-        name: role,
-      });
-    });
-  }
-});
+
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "..", "ui", "build")));
+app.use(cors({ origin: true, credentials: true }));
 
 //routes
 app.get("/api", (req, res) => {
