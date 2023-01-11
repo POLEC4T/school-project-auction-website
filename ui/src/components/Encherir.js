@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Encherir({ prix }) {
 
@@ -36,12 +37,12 @@ function Encherir({ prix }) {
                         </div>  
 
                         <div className="profil mt-6 flex flex-row items-center">
-                            <img className="w-20 h-20 rounded-full" src={pfpImageExample} alt="photo-profil"/>
+                            <img className="w-20 h-20 rounded-full" src={pfpImageExample} alt="profil-pic"/>
                             <div className="text-profil flex flex-row flex-wrap">
                                 <p className="ml-5 sm:text-2xl text-lg">par nomduprofilcréateur</p>
-                                <a className="flex items-center ml-5 text-gray-500 text-xl hover:text-gray-400" href="">
+                                <Link className="flex items-center ml-5 text-gray-500 text-xl hover:text-gray-400" to="">
                                     <p className="text-2xl mr-2">+</p> Voir profil
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
@@ -60,9 +61,9 @@ function Encherir({ prix }) {
                             <p className="description text-justify mt-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde nihil, reprehenderit a, quibusdam id necessitatibus dolores quae alias accusantium similique omnis quo pariatur provident vero tempora quod officia inventore veniam!</p>
                             
                             <div className="mt-3 flex gap-2">
-                                <a className="bg-white px-2 rounded" href="">#S</a>
-                                <a className="bg-white px-2 rounded" href="">#multicolore</a>
-                                <a className="bg-white px-2 rounded" href="">#laine</a>
+                                <Link className="bg-white px-2 rounded" href="">#S</Link>
+                                <Link className="bg-white px-2 rounded" href="">#multicolore</Link>
+                                <Link className="bg-white px-2 rounded" href="">#laine</Link>
                             </div>
                             
                         </div>

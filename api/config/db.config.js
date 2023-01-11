@@ -48,7 +48,9 @@ const connect = () => {
     db.articles.belongsTo(db.users, {
         as: 'vendeur',
     })
-    db.users.hasMany(db.articles)
+    db.users.hasMany(db.articles, {
+        foreignKey: 'vendeurId',
+    })
 
     //image-article: one to many : une image appartient à 1 article mais un article a plusieurs images
     db.images.belongsTo(db.articles, {
