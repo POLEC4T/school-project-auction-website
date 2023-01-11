@@ -7,7 +7,7 @@ function VendrePage() {
 
     //usestates
     const [data, setData] = useState([]);
-    const [vendeur, setVendeur] = useState(false);
+    const [vendeur, setVendeur] = useState([]);
 
     useEffect(() => {
         getVendre().then((response) => {
@@ -16,6 +16,7 @@ function VendrePage() {
         })
         .catch((error) => {
             setData({ message: error.response.data.message});
+            setVendeur(false);
         });
     }, [])
     if (vendeur) {

@@ -45,7 +45,7 @@ function NavBar() {
 
                 {isConnected ? (
                         <div className="connexion-inscription w-48 flex">
-                        < button onClick={handleLogout} className="text-black bg-white rounded-l-md w-1/2 text-center">Déconnexion</button>
+                        < button onClick={handleLogout} className="text-black bg-white rounded-md w-full text-center">Déconnexion</button>
                         </div>
                         ) : (
                         <div className="connexion-inscription w-48 flex">

@@ -11,7 +11,7 @@ module.exports = (app) => {
   });
 
   app.get("/api/vendre", [authJwt.verifyToken, authJwt.isVendeur], (req,res) => {
-    res.json({ message: "Mise en ligne d'un article. Accès autorisé car vous avez le rôle vendeur" });
+    res.send({ message: "Mise en ligne d'un article. Accès autorisé car vous avez le rôle vendeur" });
   });
 
 
