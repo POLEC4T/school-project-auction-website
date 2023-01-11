@@ -3,9 +3,15 @@ const imageRepository = require('../repository/image.repository');
 
 class TodoController{
 
-    getArticleImagesByArticleId = async (id) => {
+    getArticleImagesByArticleId = (req,res) => {
       logger.info('imageController: getArticleImagesByArticleId')
-      return await imageRepository.getArticleImagesByArticleId(id);
+      imageRepository.getArticleImagesByArticleId(req.params.id).then((images) => {
+        if(!images){
+          return res.status(404).send({message: "Pas d'image pour cet article"});
+        }
+        return res.status(200).send(images);
+      }
+      )
   }
 
 }

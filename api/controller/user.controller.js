@@ -2,36 +2,31 @@ const logger = require('../logger/api.logger');
 const userRepository = require('../repository/user.repository');
 
 class TodoController{
-  getUsers = async () => {
+  getUsers = (req,res) => {
       logger.info('Controller: getUsers')
-      return await userRepository.getUsers();
+      userRepository.getUsers().then(data => res.send(data));
   }
 
-  getUserByLogin = async (login) => {
+  getUserByLogin = (req,res) => {
       logger.info('Controller: getUserByLogin')
-      return await userRepository.getUserByLogin(login);
+      userRepository.getUserByLogin(req.params.login).then(data => {
+        if(!data){
+          return res.status(404).send({message: "User not found"});
+        }
+        return res.status(200).send(data);
+      });
   }
 
-  getUserById = async (id) => {
+  getUserById = (req,res) => {
       logger.info('Controller: getUserById')
-      return await userRepository.getUserById(id);
+      userRepository.getUserById(req.params.id).then(data => {
+        if(!data){
+          return res.status(404).send({message: "User not found"});
+        }
+        return res.status(200).send(data);
+      }
+    )
   }
-
-  allAccess = (req, res) => {
-      res.status(200).send("Public Content.");
-    };
-    
-    vendeurBoard = (req, res) => {
-      res.status(200).send("Seller Content.");
-    };
-    
-    adminBoard = (req, res) => {
-      res.status(200).send("Admin Content.");
-    };
-    
-    acheteurBoard = (req, res) => {
-      res.status(200).send("Buyer Content.");
-    };
 }
 
 module.exports = new TodoController()

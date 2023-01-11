@@ -2,21 +2,15 @@ const logger = require("../logger/api.logger");
 const articleRepository = require("../repository/article.repository");
 
 class TodoController {
-  getArticle = async (id) => {
+  getArticle = (req,res) => {
     logger.info("ArticleController: getArticle");
-    return await articleRepository.getArticle(id);
+    articleRepository.getArticle(req.params.id).then((article) => {
+      if(!article){
+        return res.status(404).send({message: "Article non trouvé"});
+      }
+      return res.status(200).send(article);
+    }
+    )
   };
-}
-module.exports = new TodoController();
-const logger = require('../logger/api.logger');
-const articleRepository = require('../repository/article.repository');
-
-class TodoController{
-
-  getArticle = async (id) => {
-      logger.info('ArticleController: getArticle')
-      return await articleRepository.getArticle(id);
-  }
-
 }
 module.exports = new TodoController();

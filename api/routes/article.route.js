@@ -11,13 +11,9 @@ module.exports = (app) => {
     next();
   });
 
-  app.get("/api/article/:id/images", (req, res) => {
-    imageController.getArticleImagesByArticleId(req.params.id).then(data => res.json(data));
-  });
+  app.get("/api/article/:id/images", imageController.getArticleImagesByArticleId);
   
-  app.get("/api/article/:id", (req, res) => {
-    articleController.getArticle(req.params.id).then(data => res.json(data));
-  });
+  app.get("/api/article/:id",articleController.getArticle);
 
   
   
