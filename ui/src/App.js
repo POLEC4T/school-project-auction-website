@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import ArticlePage from "./pages/ArticlePage";
 import NavBar from "./components/NavBar";
 import NotFoundErrorPage from "./pages/NotFoundErrorPage";
+import VendrePage from "./pages/VendrePage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ArticlePage />} />
           <Route path="/connexion" element={<LoginPage />} />
+          <Route path="/vendre" element={<VendrePage />} />
           <Route exact path="*" element={< NotFoundErrorPage/>} />
         </Routes>
       </div>

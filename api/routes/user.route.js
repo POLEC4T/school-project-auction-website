@@ -10,26 +10,7 @@ module.exports = (app) => {
     next();
   });
 
-  app.get("/api/test/all", controller.allAccess);
-
-  app.get(
-    "/api/test/vendeur",
-    [
-        authJwt.verifyToken,
-        authJwt.isVendeur
-    ],
-    controller.vendeurBoard
-  );
-
-  app.get(
-    "/api/test/acheteur",
-    [authJwt.verifyToken, authJwt.isAcheteur],
-    controller.acheteurBoard
-  );
-
-  app.get(
-    "/api/test/admin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
-  );
+  app.get("/api/vendre", [authJwt.verifyToken, authJwt.isVendeur], (req,res) => {
+    res.json({ message: "Mise en ligne d'un article. Accès autorisé car vous avez le rôle vendeur" });
+  });
 };

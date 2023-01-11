@@ -1,9 +1,7 @@
 import React from 'react';
-import NavBar from '../components/NavBar';
 import Encherir from '../components/Encherir';
 import { useState, useEffect } from 'react';
 import { getArticle } from '../services/ArticleService'
-import { getUsers } from '../services/UserService'
 
 function PageArticle() {
 
