@@ -1,10 +1,28 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import AuthService from '../services/AuthService';
 
 function NavBar() {
 
     const iconeLoupe = require('../static/images/loupe.png');
     const logoCloth2youInverse = require('../static/images/logo-cloth2you-inverse.png');
+
+    const [isConnected, setIsConnected] = useState(false);
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        if (user) {
+            setIsConnected(true);
+        }else{
+            setIsConnected(false);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        AuthService.logout();
+        setIsConnected(false);
+    };
 
     return (
         <div>
@@ -25,10 +43,17 @@ function NavBar() {
                     </form>
                 </div>
 
-                <div className="connexion-inscription w-48 flex">
-                    < NavLink to="/connexion" className="text-white rounded-l-md w-1/2 text-center">Connexion</NavLink>
-                    < NavLink to="/inscription" className="text-black bg-white rounded-r-md w-1/2 text-center">Inscription</NavLink>
-                </div>
+                {isConnected ? (
+                        <div className="connexion-inscription w-48 flex">
+                        < button onClick={handleLogout} className="text-black bg-white rounded-l-md w-1/2 text-center">Déconnexion</button>
+                        </div>
+                        ) : (
+                        <div className="connexion-inscription w-48 flex">
+                        < NavLink to="/connexion" className="text-white rounded-l-md w-1/2 text-center">Connexion</NavLink>
+                        < NavLink to="/inscription" className="text-black bg-white rounded-r-md w-1/2 text-center">Inscription</NavLink>
+                        </div>
+                    )  }
+
             </nav>  
 
             <div className="categories w-full flex justify-around font-outfit">
