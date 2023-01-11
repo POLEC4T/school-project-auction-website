@@ -7,9 +7,14 @@ class TodoController{
       return await userRepository.getUsers();
   }
 
-  getUser = async (login) => {
-      logger.info('Controller: getUser')
-      return await userRepository.getUser(login);
+  getUserByLogin = async (login) => {
+      logger.info('Controller: getUserByLogin')
+      return await userRepository.getUserByLogin(login);
+  }
+
+  getUserById = async (id) => {
+      logger.info('Controller: getUserById')
+      return await userRepository.getUserById(id);
   }
 
   allAccess = (req, res) => {

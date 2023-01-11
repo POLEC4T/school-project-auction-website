@@ -13,7 +13,6 @@ class UserRepository {
         
         try {
             const users = await this.db.users.findAll({
-                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
               });              
             console.log('users:::', users);
             return users;
@@ -23,14 +22,29 @@ class UserRepository {
         }
     }
 
-    async getUser(login) {
+    async getUserByLogin(login) {
 
         try {
             const user = await this.db.users.findOne({
                 where: {
                     login: login
                 },
-                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+            });
+            console.log('user:::', user);
+            return user;
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+    }
+
+    async getUserById(id) {
+
+        try {
+            const user = await this.db.users.findOne({
+                where: {
+                    id: id
+                },
             });
             console.log('user:::', user);
             return user;

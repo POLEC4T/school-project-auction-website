@@ -16,12 +16,12 @@ INSERT INTO users(login,password,email,nb_strikes,date_naiss,"createdAt","update
 INSERT INTO users(login,password,email,nb_strikes,date_naiss,"createdAt","updatedAt","roleId") values('bob','obo','bob.obo@gmail.com',1,'1999-01-10',CURRENT_DATE,CURRENT_DATE,3);
 
 -- ARTICLE --
-INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,seuil_reserve,"updatedAt","userId") values('cardigan colore',30.0,'cardigan en laine de mouton de la creuse',CURRENT_DATE,CURRENT_DATE+1,'rouge,vert,jaune,bleu,rose','laine',40.0,CURRENT_DATE,1);
-INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,seuil_reserve,"updatedAt","userId") values('t-shirt vert',5.0,'t-shirt de couleur verte en coton bio',CURRENT_DATE,CURRENT_DATE+1,'vert','coton',8.0,CURRENT_DATE,2);
-INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,seuil_reserve,"updatedAt","userId") values('tricot vintage',10.0,'tricot de grand-mère iconique',CURRENT_DATE,CURRENT_DATE+1,'blanc','laine',20.0,CURRENT_DATE,3);
-INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,seuil_reserve,"updatedAt","userId") values('polaire recyclee',8.0,'polaire conçue avec des bouteilles en plastique recylees',CURRENT_DATE,CURRENT_DATE+1,'noir','polyester',15.0,CURRENT_DATE,2);
-INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,seuil_reserve,"updatedAt","userId") values('foulard doux',75.0,'foulard en soie de grande qualite',CURRENT_DATE,CURRENT_DATE+1,'blanc,jaune,noir','soie',100.0,CURRENT_DATE,4);
-INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,seuil_reserve,"updatedAt","userId") values('chaussettes de Noël',10.0,'chaussettes pour les fêtes en cachemire',CURRENT_DATE,CURRENT_DATE+1,'blanc,rouge','cachemire',18.0,CURRENT_DATE,5);
+INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('cardigan colore',30.0,'cardigan en laine de mouton de la creuse',CURRENT_DATE,CURRENT_DATE+1,'rouge,vert,jaune,bleu,rose','laine','M',40.0,CURRENT_DATE,1);
+INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('t-shirt vert',5.0,'t-shirt de couleur verte en coton bio',CURRENT_DATE,CURRENT_DATE+1,'vert','coton','S',8.0,CURRENT_DATE,2);
+INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('tricot vintage',10.0,'tricot de grand-mère iconique',CURRENT_DATE,CURRENT_DATE+1,'blanc','laine','XL',20.0,CURRENT_DATE,3);
+INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('polaire recyclee',8.0,'polaire conçue avec des bouteilles en plastique recylees',CURRENT_DATE,CURRENT_DATE+1,'noir','polyester','L',15.0,CURRENT_DATE,2);
+INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('foulard doux',75.0,'foulard en soie de grande qualite',CURRENT_DATE,CURRENT_DATE+1,'blanc,jaune,noir','soie','S',100.0,CURRENT_DATE,4);
+INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('chaussettes de Noël',10.0,'chaussettes pour les fêtes en cachemire',CURRENT_DATE,CURRENT_DATE+1,'blanc,rouge','cachemire','XS',18.0,CURRENT_DATE,5);
 
 -- ENCHERE --
 INSERT INTO encheres(montant,date,"createdAt","updatedAt","userId","articleId") values(30.0,CURRENT_DATE,CURRENT_DATE,CURRENT_DATE,1,1);
@@ -32,6 +32,8 @@ INSERT INTO encheres(montant,date,"createdAt","updatedAt","userId","articleId") 
 INSERT INTO encheres(montant,date,"createdAt","updatedAt","userId","articleId") values(10.0,CURRENT_DATE,CURRENT_DATE,CURRENT_DATE,6,5);
 
 -- IMAGE --
+INSERT INTO images(url,"createdAt","updatedAt","articleId") values('https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg',CURRENT_DATE,CURRENT_DATE,1);
+INSERT INTO images(url,"createdAt","updatedAt","articleId") values('https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg',CURRENT_DATE,CURRENT_DATE,1);
 INSERT INTO images(url,"createdAt","updatedAt","articleId") values('https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg',CURRENT_DATE,CURRENT_DATE,1);
 INSERT INTO images(url,"createdAt","updatedAt","articleId") values('https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg',CURRENT_DATE,CURRENT_DATE,2);
 INSERT INTO images(url,"createdAt","updatedAt","articleId") values('https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg',CURRENT_DATE,CURRENT_DATE,3);
