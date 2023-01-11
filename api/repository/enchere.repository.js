@@ -2,24 +2,23 @@ const db = require('../config/db.config').connect();
 const logger = require('../logger/api.logger');
 
 
-class ArticleRepository {
+class EnchereRepository {
 
 
     constructor() {
         this.db = db;
     }
 
-    async getArticle(id) {
+    async getDerniereOffre(articleId) {
 
         try {
-            console.log("sdofn");
-            const article = await this.db.articles.findOne({
+            const enchere = await this.db.encheres.findOne({
                 where: {
-                    id: id
+                    articleId: articleId
                 },
             });
-            console.log('article:::', article);
-            return article;
+            console.log('enchere:::', enchere);
+            return enchere;
         } catch (err) {
             console.log(err);
             return {};
@@ -27,4 +26,4 @@ class ArticleRepository {
     }
 }
 
-module.exports = new ArticleRepository();
+module.exports = new EnchereRepository();

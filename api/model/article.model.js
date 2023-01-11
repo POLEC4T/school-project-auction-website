@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes, Model) => {
         description: {
             type: DataTypes.STRING,
         },
+        nb_likes: {
+            type: DataTypes.NUMERIC,
+            allowNull: true,
+            defaultValue: 0,
+        },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -76,7 +81,7 @@ module.exports = (sequelize, DataTypes, Model) => {
                 }
             }
         },
-        tags: {
+        taille: {
             //Les différents tags seront tous dans la même colonne, séparés par des virgules
             type: DataTypes.STRING,
         },

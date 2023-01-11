@@ -2,24 +2,23 @@ const db = require('../config/db.config').connect();
 const logger = require('../logger/api.logger');
 
 
-class ArticleRepository {
+class ImageRepository {
 
 
     constructor() {
         this.db = db;
     }
 
-    async getArticle(id) {
+    async getArticleImagesByArticleId(articleId) {
 
         try {
-            console.log("sdofn");
-            const article = await this.db.articles.findOne({
+            const images = await this.db.images.findAll({
                 where: {
-                    id: id
+                    articleId: articleId
                 },
             });
-            console.log('article:::', article);
-            return article;
+            console.log('images:::', images);
+            return images;
         } catch (err) {
             console.log(err);
             return {};
@@ -27,4 +26,4 @@ class ArticleRepository {
     }
 }
 
-module.exports = new ArticleRepository();
+module.exports = new ImageRepository();
