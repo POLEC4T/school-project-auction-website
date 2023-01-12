@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { getArticle } from '../services/ArticleService'
 import { getUserById } from '../services/UserService'
 import { getArticleImagesByArticleId } from '../services/ImageService';
-import ImageGallery from 'react-image-gallery';
 import ImageGrid from '../components/ImageGrid';
 
 function PageArticle() {
@@ -41,9 +40,9 @@ function PageArticle() {
   
   return (
     <div>
-        <main className='contenu sm:px-20 pt-5 flex flex-row font-outfit w-screen'>
-            <section className="gauche w-full bg-gray-100">
-              {imagesLoaded && <ImageGrid images={images}/>}
+        <main className='contenu sm:px-20 pt-5 flex flex-row flex-wrap font-outfit'>
+            <section className="gauche w-1/2 bg-gray-100">
+
             </section>
             {article && vendeur && <Encherir article={article} vendeur={vendeur}/>}
         </main>
