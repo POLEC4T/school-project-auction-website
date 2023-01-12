@@ -5,9 +5,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'gowun': ['Gowun Batang', 'serif'],
-      'outfit': ['Outfit', 'sans-serif'],
-      'chivo': ['Chivo', 'sans-serif']
+        'gowun': ['Gowun Batang', 'serif'],
+        'outfit': ['Outfit', 'sans-serif'],
+        'chivo': ['Chivo', 'sans-serif']
     },
     backgroundSize: {
         '100': '100%',
@@ -19,8 +19,15 @@ module.exports = {
         },
         boxShadow: {
             'base': '-4px 4px 4px 0px'
+        },
+        backgroundImage: {
+            'hero': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/fond-login.jpg)'
+        },
+        colors: {
+            'goldenyellow':  '#D09C16'
         }
-    }
-  },
+    }   
+
+},
   plugins: [],
 }

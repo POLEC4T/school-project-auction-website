@@ -1,21 +1,22 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Separator from '../components/Separator';
 import { Link } from 'react-router-dom';
 
 import AuthService from "../services/AuthService";
-
 
 function LoginPage() {
 
     let navigate = useNavigate();
 
+    const logoGoogle = require("../static/images/logo-google.png");
+    const logo = require("../static/images/logo-outline.png");
+
+
     //usestates
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const logoGoogle = require('../static/images/logo-google.png');
 
     //fonction callback onAction
     const onChangeUsername = (e) => {
@@ -29,7 +30,6 @@ function LoginPage() {
       };
     
     const handleLogin = (e) => {
-        console.log("handleLogin");
         e.preventDefault();
         setMessage("");
         AuthService.login(username, password).then(
@@ -46,33 +46,58 @@ function LoginPage() {
     
 
     return (
-        <div className='h-screen overflow-hidden'>
-            <div className='main-container flex font-outfit overflow-hidden h-screen'>
-                <div className='leftsection bg-slate-400 h-screen lg:w-2/3 w-full flex flex-col justify-between p-20 content-center text-center'>
-                    <h1 className='text-4xl text-white text-center'>Connexion</h1>
-                    <button className='loginwithgoogle rounded-full p-2 w-1/3 h-12 bg-white text-center mx-auto flex justify-around content-center'>
-                        <img src={logoGoogle} alt="logo Google"></img>
-                        Se connecter avec Google
-                    </button>
-                    <Separator content={"Se connecter avec le nom d'utilisateur"}/>
-                    <div className='flex justify-center'>
-                        <div className='w-1/2 grid gap-2'>
-                            <input type="text" name="login" placeholder='login' className='rounded-full p-2 w-full h-12 drop-shadow-lg outline-none' value={username} onChange = {(e) => onChangeUsername(e)}/>
-                            <input type="password" name="password" placeholder="mot de passe" className='rounded-full p-2 w-full h-12 drop-shadow-lg outline-none' value={password} onChange = {(e) => onChangePassword(e)}/>
-                            <Link className='text-white text-right' to="/forgotten">Mot de passe oublié ?</Link>
-                            <p>{message}</p>
-                            <button onClick={(e)=>handleLogin(e)} type="submit" className='rounded-full p-2 bg-white w-36 drop-shadow-lg mx-auto'>Se connecter</button>
+       <body class="main-container font-outfit h-screen bg-zinc-800 bg-hero bg-center bg-100 overflow-hidden">
+
+        <nav class="nav sm:w-1/4 w-full">
+            <Link class="text-white flex flex-row items-center pt-5 pl-5" to="/">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 translate-y-0.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                </svg>
+                <h2 class="ml-5 text-2xl">Retour à l'accueil</h2>   
+                <img class="logo-image h-8 ml-5" src={logo} alt="logo"/>         
+            </Link>
+        </nav>
+
+        <div class="w-full h-full flex justify-center items-center text-zinc-800">
+                <div class="etape bg-white w-[600px] h-[500px] translate-y-[-20px] rounded-xl flex flex-col justify-between">
+                    <div class="haut flex flex-col items-center pt-5 px-5">
+
+                        <h2 class="opacity-100 font-gowun text-4xl" >Connexion</h2>
+
+                        <button class="google-connexion mt-10 h-10 sm:w-1/2 w-3/4 border-2 border-zinc-800 flex flex-row items-center rounded-xl justify-between">
+                            <img class="h-full pl-4 py-2" src={logoGoogle} alt="google-logo"/>
+                            <p class="sm:pr-3 pr-7 text-lg ">Se connecter avec Google</p>
+                        </button>
+
+                        <div class="ligne w-full flex flex-row overflow-hidden mt-10">
+                            <img class="w-1/4" src="../static/images/ligne-1.png" alt=""/>
+                            <img class="w-1/4" src="../static/images/ligne-2.png" alt=""/>
+                            <img class="w-1/4" src="../static/images/ligne-1.png" alt=""/>
+                            <img class="w-1/4" src="../static/images/ligne-2.png" alt=""/>  
                         </div>
+
+
+                        <input type="text" placeholder="login" class="placeholder-zinc-600 text-xl mt-10 h-10 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2" value={username} onChange={(e)=>onChangeUsername(e)}/>             
+
+                        <div class="mdp border-2 mt-5 h-10 rounded-xl border-zinc-800 flex flex-row w-full">
+                            <input type="password" placeholder="mot de passe" class="placeholder-zinc-600 text-xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <Link class="text-zinc-500 text-sm self-start hover:underline no-underline pl-1 pt-0.5" to="/forgotten">j'ai oublié mon mot de passe</Link>
+                        <p class="text-red-500 text-sm">{message}</p>
+                        <button class="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 text-xl hover:bg-zinc-600" onClick={(e) => handleLogin(e)}>Se connecter</button>
+                        <h2 class="mt-1">Vous n'avez pas de compte, <Link class="underline" href="/inscription">s'inscrire</Link>.</h2>
                     </div>
-                    <p className='text-white text-center'>Vous n'avez pas de compte ? <span className='text-black underline'>S'inscrire</span></p>
-                </div>
-                <div className="rightsection bg-cover bg-bottom bg-no-repeat bg-loginpagerightsection h-full w-1/3 lg:block hidden flex justify-center content-center">
-                    <div className='backdrop-blur h-3/4 w-3/4 m-auto rounded-2xl bg-white/30 flex '>
-                        <h2 className='text-5xl text-center text-white '>"La meilleure plateforme d'enchères des vêtements fait main"</h2>
-                    </div>
-                </div>
-            </div>
+                </div>      
         </div>
+    
+</body>
     );
 }
 

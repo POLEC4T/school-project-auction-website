@@ -3,14 +3,12 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ArticlePage from "./pages/ArticlePage";
-import NavBar from "./components/NavBar";
 import NotFoundErrorPage from "./pages/NotFoundErrorPage";
 import VendrePage from "./pages/VendrePage";
 
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />{/*On met la navbar ici afin qu'elle apparaisse sur toutes les pages*/}
       <div>
         <Routes>
           <Route path="/" element={<ArticlePage />} />
