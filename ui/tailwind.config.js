@@ -21,7 +21,8 @@ module.exports = {
             'base': '-4px 4px 4px 0px'
         },
         backgroundImage: {
-            'hero': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/fond-login.jpg)'
+            'hero': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/fond-login.jpg)',
+            'banniere' : 'url(./static/images/banniere-profil.jpg)',
         },
         colors: {
             'goldenyellow':  '#D09C16'

@@ -17,7 +17,6 @@ class EnchereRepository {
                     articleId: articleId
                 },
             });
-            console.log('enchere:::', enchere);
             return enchere;
         } catch (err) {
             console.log(err);

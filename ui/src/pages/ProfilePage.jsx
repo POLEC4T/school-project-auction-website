@@ -9,26 +9,22 @@ import RefusedAccess from '../components/RefusedAccess';
 function ProfilePage() {
     const [isConnected, setIsConnected] = useState(null);
     const [role, setRole] = useState(null);
-//    const [data, setData] = useState(null);
-    const[banniere, setBanniere] = useState("../static/images/banniere-profil.jpg");
-    //const[avatar, setAvatar] = useState("../static/images/default-avatar.jpg");
+    const [data, setData] = useState(null);
+    const[banniere, setBanniere] = useState();
+    const[avatar, setAvatar] = useState(require("../static/images/default-avatar.png"));
 
     useEffect(() => {
         getProfileInfos().then((response) => {
-            if (response.status === 200) {
-                setIsConnected(true);
-                setRole(response.data.role);
-                //setData(response.data);
-                if(response.data.banniere){
-                    setBanniere(response.data.banniere);
-                }
-                if(response.data.pdp){
-                    //setAvatar(response.data.pdp);
-                }
-            } else {
-                setIsConnected(false);
-            }
-        });
+            console.log(response);
+            setIsConnected(true);
+            setRole(response.data.role);
+            setData(response.data.user);
+            setBanniere(response.data.user.banniere);
+            if(response.data.user.pdp !== null) setAvatar(require(response.data.pdp));
+ 
+        }).catch((error) => {
+            setIsConnected(false);
+        })
 }, []);
 
     return(
@@ -37,11 +33,35 @@ function ProfilePage() {
         {isConnected ? (
             <>
             <NavBar/>
-            <section style={{'var(--image-url)': banniere}}  class="top sm:h-80 h-40 relative justify-center items-center bg-center bg-[image:var(--image-url)] bg-no-repeat bg-100 flex ">
-                <button name="personnaliser" class="sm:text-xl text-sm text-black bg-zinc-300 hover:bg-zinc-200 absolute sm:top-5 top-2 sm:right-5 right-2 rounded-xl px-4 py-1">personnaliser</button>
-                <h1 class="font-gowun text-6xl text-white">nomduprofil</h1>
-            </section>
+            {banniere === null ? (
+                <section  class="top sm:h-80 h-40 relative justify-center items-center bg-center bg-banniere bg-no-repeat bg-100 flex ">
+                    <button name="personnaliser" class="sm:text-xl text-sm text-black bg-zinc-300 hover:bg-zinc-200 absolute sm:top-5 top-2 sm:right-5 right-2 rounded-xl px-4 py-1">personnaliser</button>
+                    <h1 class="font-gowun text-6xl text-white">{data.login}</h1>
+                </section>
+            ) : (
+                <section style={{backgroundImage: `url(${banniere})`}}  class="top sm:h-80 h-40 relative justify-center items-center bg-center bg-no-repeat bg-100 flex ">
+                    <button name="personnaliser" class="sm:text-xl text-sm text-black bg-zinc-300 hover:bg-zinc-200 absolute sm:top-5 top-2 sm:right-5 right-2 rounded-xl px-4 py-1">personnaliser</button>
+                    <h1 class="font-gowun text-6xl text-white">{data.login}</h1>
+                </section>
+            )}
+
             <ProfileNav role={role}/>
+            <section class="bottom-profil sm:px-28 px-4">
+
+            <div class="middle1 pt-10 flex flex-row justify-between">
+
+                <div class="profil flex flex-row">
+
+                    <img class="sm:w-24 w-16 sm:h-24 h-16 rounded-full" src={avatar} alt="photo de profil"/>
+
+                    <div class="nom flex flex-col justify-around ml-5">
+
+                        <p class="sm:text-4xl text-2xl">{data.login}</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
             </>
         ) : (
             <><RefusedAccess message="Vous devez être connecté pour accéder à cette page"/></>

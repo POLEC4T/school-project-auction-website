@@ -1,5 +1,4 @@
 const db = require('../config/db.config').connect();
-const logger = require('../logger/api.logger');
 
 
 class UserRepository {
@@ -14,7 +13,6 @@ class UserRepository {
         try {
             const users = await this.db.users.findAll({
               });              
-            console.log('users:::', users);
             return users;
         } catch (err) {
             console.log(err);
@@ -30,7 +28,6 @@ class UserRepository {
                     login: login
                 },
             });
-            console.log('user:::', user);
             return user;
         } catch (err) {
             console.log(err);
@@ -46,7 +43,6 @@ class UserRepository {
                     id: id
                 },
             });
-            console.log('user:::', user);
             return user;
         } catch (err) {
             console.log(err);

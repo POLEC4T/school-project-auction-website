@@ -70,10 +70,10 @@ function LoginPage() {
                         </button>
 
                         <div class="ligne w-full flex flex-row overflow-hidden mt-10">
-                            <img class="w-1/4" src="../static/images/ligne-1.png" alt=""/>
-                            <img class="w-1/4" src="../static/images/ligne-2.png" alt=""/>
-                            <img class="w-1/4" src="../static/images/ligne-1.png" alt=""/>
-                            <img class="w-1/4" src="../static/images/ligne-2.png" alt=""/>  
+                            <img class="w-1/4" src={require("../static/images/ligne-1.png")} alt=""/>
+                            <img class="w-1/4" src={require("../static/images/ligne-2.png")} alt=""/>
+                            <img class="w-1/4" src={require("../static/images/ligne-1.png")} alt=""/>
+                            <img class="w-1/4" src={require("../static/images/ligne-2.png")} alt=""/> 
                         </div>
 
 

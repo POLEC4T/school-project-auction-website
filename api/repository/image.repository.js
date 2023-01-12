@@ -17,7 +17,6 @@ class ImageRepository {
                     articleId: articleId
                 },
             });
-            console.log('images:::', images);
             return images;
         } catch (err) {
             console.log(err);

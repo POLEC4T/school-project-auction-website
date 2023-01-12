@@ -15,7 +15,6 @@ class ArticleRepository {
                     id: id
                 },
             });
-            console.log('article:::', article);
             return article;
         } catch (err) {
             console.log(err);
