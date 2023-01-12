@@ -7,7 +7,7 @@ const cors = require('cors');
 const userController = require("./controller/user.controller");
 
 const app = express();
-const port = 3080;
+const port = process.env.PORT || 3080;
 
 const db = require("./config/db.config").connect();
 db.sequelize.sync();

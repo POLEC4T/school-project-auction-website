@@ -6,8 +6,13 @@ export async function getUsers() {
     return await response.json();
 }
 
-export async function getUser(login) {
-    const response = await fetch(`/api/users/${login}`);
+export async function getUserByLogin(login) {
+    const response = await fetch(`/api/users/login/${login}`);
+    return await response.json();
+}
+
+export async function getUserById(id) {
+    const response = await fetch(`/api/users/id/${id}`);
     return await response.json();
 }
 

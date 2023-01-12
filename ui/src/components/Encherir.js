@@ -1,12 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { getDerniereOffre } from '../services/EnchereService';
+import { useState, useEffect } from 'react';
 
-function Encherir({ prix }) {
+
+
+function Encherir({ article, vendeur }) {
 
     const pfpImageExample = require('../static/images/pfp-image-example.jpeg');
+    
+    const [offreActuelle, setOffreActuelle] = useState(0.00);
+    useEffect(() => {
+        getDerniereOffre(article.id).then((enchere) => {
+            setOffreActuelle(enchere);
+        })
+    }, [article])
+    
+
+    const placeholderPrixForm = `${offreActuelle.montant + offreActuelle.montant*0.1}€ au moins`;
+    const propositionPrix1 = offreActuelle.montant + offreActuelle.montant*0.1;
+    const propositionPrix2 = offreActuelle.montant + offreActuelle.montant*0.5;
+    const propositionPrix3 = offreActuelle.montant + offreActuelle.montant;
+    const heroPrixActuel = parseFloat(offreActuelle.montant);
+
+    const articleTags = {"col": article.couleurs.split(","), "mat": article.materiaux.split(","), "taille": article.taille};
 
     return (
-        <div>
+
+    
+        <div className='w-full'>
             <section className="droite mt-16 flex flex-col sm:w-1/2 w-screen items-center">
 
                 <div className="chrono bg-gray-400 sm:w-2/6 w-full justify-center sm:rounded-t flex h-10 items-center min-w-fit ">
@@ -24,7 +45,7 @@ function Encherir({ prix }) {
                         <div className="top flex justify-between items-start">
                             <div className="prix flex flex-col">
                                 <p className="font-chivo text-gray-500 text-lg">Offre actuelle</p>
-                                <p className="text-6xl">{prix}</p>
+                                <p className="text-6xl">{heroPrixActuel}€</p>
                                 <p className="text-gray-500 text-lg">Avec prix de réserve</p>
                             </div>    
                             
@@ -37,33 +58,37 @@ function Encherir({ prix }) {
                         </div>  
 
                         <div className="profil mt-6 flex flex-row items-center">
-                            <img className="w-20 h-20 rounded-full" src={pfpImageExample} alt="profil-pic"/>
+                            <img className="w-20 h-20 rounded-full" src={pfpImageExample} alt="photo-profil"/>
                             <div className="text-profil flex flex-row flex-wrap">
-                                <p className="ml-5 sm:text-2xl text-lg">par nomduprofilcréateur</p>
-                                <Link className="flex items-center ml-5 text-gray-500 text-xl hover:text-gray-400" to="">
+                                <p className="ml-5 sm:text-2xl text-lg">par {vendeur.login}</p>
+                                <a className="flex items-center ml-5 text-gray-500 text-xl hover:text-gray-400" href="">
                                     <p className="text-2xl mr-2">+</p> Voir profil
-                                </Link>
+                                </a>
                             </div>
                         </div>
 
                         <div className="zone-enchere flex flex-col pt-6">
                             <div className="enchere-preparee w-full flex gap-4">
-                                <button className="bg-zinc-300 hover:bg-zinc-200 w-1/3 rounded-lg h-10 text-xl">310€</button>
-                                <button className="bg-zinc-400 hover:bg-zinc-300 w-1/3 rounded-lg h-10 text-xl">310€</button>
-                                <button className="bg-zinc-500 hover:bg-zinc-400 w-1/3 rounded-lg h-10 text-xl">310€</button>
+                                <button className="bg-zinc-300 hover:bg-zinc-200 w-1/3 rounded-lg h-10 text-xl">{propositionPrix1}€</button>
+                                <button className="bg-zinc-400 hover:bg-zinc-300 w-1/3 rounded-lg h-10 text-xl">{propositionPrix2}€</button>
+                                <button className="bg-zinc-500 hover:bg-zinc-400 w-1/3 rounded-lg h-10 text-xl">{propositionPrix3}€</button>
                             </div>
-                            <input className="mt-3 bg-zinc-200 rounded-lg h-12 px-4 focus:outline-none hover:bg-zinc-200 text-xl" type="text" placeholder="310€ ou plus"/>
+                            <input className="mt-3 bg-zinc-200 rounded-lg h-12 px-4 focus:outline-none hover:bg-zinc-200 text-xl" type="text" placeholder={placeholderPrixForm}/>
                             <div className="enchere-ou-offre-maximale flex mt-3 gap-4">
                                 <button className="bg-zinc-300 hover:bg-zinc-200 w-1/3 rounded-lg h-10 text-xl">Enchérir</button>
                                 <button className="bg-zinc-300 hover:bg-zinc-200 w-2/3 rounded-lg h-10 sm:text-xl text-md">Fixer une offre maximale</button>
                             </div>
 
-                            <p className="description text-justify mt-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde nihil, reprehenderit a, quibusdam id necessitatibus dolores quae alias accusantium similique omnis quo pariatur provident vero tempora quod officia inventore veniam!</p>
+                            <p className="description text-justify mt-6">{article.description}</p>
                             
-                            <div className="mt-3 flex gap-2">
-                                <Link className="bg-white px-2 rounded" href="">#S</Link>
-                                <Link className="bg-white px-2 rounded" href="">#multicolore</Link>
-                                <Link className="bg-white px-2 rounded" href="">#laine</Link>
+                            <div className="mt-3 flex gap-2 flex-wrap">
+                                <a className="bg-white px-2 rounded" href="">#{articleTags.taille}</a>
+                                {articleTags.mat.map((materiau, i) => {
+                                    return <a key={i} className="bg-white px-2 rounded" href="">#{materiau}</a>
+                                })}
+                                {articleTags.col.map((couleur, i) => {
+                                    return <a key={i} className="bg-white px-2 rounded" href="">#{couleur}</a>
+                                })}
                             </div>
                             
                         </div>
