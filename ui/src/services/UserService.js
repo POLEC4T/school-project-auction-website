@@ -21,5 +21,5 @@ export function getVendre(){
 }
 
 export function getProfileInfos(){
-    return axios.get("/api/profile", { headers: authHeader() });
+    return axios.get("/api/profil", { headers: authHeader() });
 }

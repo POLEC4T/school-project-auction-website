@@ -14,8 +14,10 @@ module.exports = (app) => {
     res.send({ message: "Mise en ligne d'un article. Accès autorisé car vous avez le rôle vendeur" });
   });
 
+  app.get("/api/profil", [authJwt.verifyToken], userController.getProfileInfos);
 
 
+  //routes test
   app.get('/api/users', userController.getUsers);
 
   app.get('/api/users/login/:login', userController.getUserByLogin);
