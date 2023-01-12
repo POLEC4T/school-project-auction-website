@@ -5,6 +5,7 @@ import { getArticle } from '../services/ArticleService'
 import { getUserById } from '../services/UserService'
 import { getArticleImagesByArticleId } from '../services/ImageService';
 import ImageGrid from '../components/ImageGrid';
+import NavBar from '../components/NavBar'
 
 function PageArticle() {
 
@@ -40,9 +41,10 @@ function PageArticle() {
   
   return (
     <div>
+        <NavBar/>
         <main className='contenu sm:px-20 pt-5 flex flex-row flex-wrap font-outfit'>
             <section className="gauche w-1/2 bg-gray-100">
-
+              {imagesLoaded && <ImageGrid images={images}/>}
             </section>
             {article && vendeur && <Encherir article={article} vendeur={vendeur}/>}
         </main>
