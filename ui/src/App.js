@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import ArticlePage from "./pages/ArticlePage";
 import NotFoundErrorPage from "./pages/NotFoundErrorPage";
 import VendrePage from "./pages/VendrePage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<ArticlePage />} />
           <Route path="/connexion" element={<LoginPage />} />
           <Route path="/vendre" element={<VendrePage />} />
+          <Route path="/profil" element={<ProfilePage />} />
           <Route exact path="*" element={< NotFoundErrorPage/>} />
         </Routes>
       </div>

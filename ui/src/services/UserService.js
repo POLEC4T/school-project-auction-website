@@ -19,3 +19,7 @@ export async function getUserById(id) {
 export function getVendre(){
     return axios.get("/api/vendre", { headers: authHeader() });
 }
+
+export function getProfileInfos(){
+    return axios.get("/api/profile", { headers: authHeader() });
+}

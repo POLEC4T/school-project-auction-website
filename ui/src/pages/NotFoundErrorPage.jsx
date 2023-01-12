@@ -13,7 +13,7 @@ export default function NotFoundErrorPage() {
 				<h2 className="mb-8 font-extrabold text-9xl dark:text-gray-600">
 					<span className="sr-only">Error</span>404
 				</h2>
-				<p className="text-2xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
+				<p className="text-2xl font-semibold md:text-3xl">Oups, la page que vous recherchez n'existe pas</p>
 				<p className="mt-4 mb-8 dark:text-gray-400">Mais ne vous inquiétez pas, il y a pleins de choses sur notre page d'accueil</p>
 				<Link rel="noopener noreferrer" to="/" className="px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">Back to homepage</Link>
 			</div>
