@@ -32,6 +32,14 @@ function LoginPage() {
     const handleLogin = (e) => {
         e.preventDefault();
         setMessage("");
+        if (!username) {
+          setMessage("Vous devez entrer un nom d'utilisateur!");
+          return;
+        }
+        if (!password) {
+            setMessage("Vous devez entrer un mot de passe!");
+            return;
+        }
         AuthService.login(username, password).then(
             () => {
                 console.log("login success");

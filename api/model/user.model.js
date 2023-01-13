@@ -81,10 +81,6 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         date_naiss: {
           type: DataTypes.DATE,
-          allowNull: false,
-          validate: {
-            notNull: { msg: "La date de naissance ne doit pas être vide"}
-          }
         }
       }, {
         // autres options du modèle
