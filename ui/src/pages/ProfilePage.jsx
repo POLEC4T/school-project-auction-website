@@ -12,20 +12,33 @@ function ProfilePage() {
     const [data, setData] = useState(null);
     const[banniere, setBanniere] = useState();
     const[avatar, setAvatar] = useState(require("../static/images/default-avatar.png"));
+    const[isLoading, setIsLoading] = useState(true);
 
+    //Etat du bouton de la navbar
+    const [clickedButton, setClickedButton] = useState("profil");
+
+    const handleClickedButton = (value) => {
+        setClickedButton(value);
+    }
+    
     useEffect(() => {
         getProfileInfos().then((response) => {
             console.log(response);
             setIsConnected(true);
             setRole(response.data.role);
             setData(response.data.user);
-            setBanniere(response.data.user.banniere);
-            if(response.data.user.pdp !== null) setAvatar(require(response.data.pdp));
+            if(response.data.user.banniere !== null) setBanniere(response.data.user.banniere)
+            setIsLoading(false)
+            if(response.data.user.pdp !== null) setAvatar(require(response.data.user.pdp));
  
         }).catch((error) => {
             setIsConnected(false);
+            setIsLoading(false);
         })
 }, []);
+    if(isLoading){
+        return null;
+    }
 
     return(
         <main>
@@ -45,7 +58,7 @@ function ProfilePage() {
                 </section>
             )}
 
-            <ProfileNav role={role}/>
+            <ProfileNav role={role} onClickButton={handleClickedButton}/>
             <section class="bottom-profil sm:px-28 px-4">
 
             <div class="middle1 pt-10 flex flex-row justify-between">
@@ -57,6 +70,7 @@ function ProfilePage() {
                     <div class="nom flex flex-col justify-around ml-5">
 
                         <p class="sm:text-4xl text-2xl">{data.login}</p>
+                        <p>{clickedButton}</p>
                     </div>
                 </div>
             </div>

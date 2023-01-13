@@ -9,17 +9,23 @@ function VendrePage() {
     //usestates
     const [data, setData] = useState([]);
     const [vendeur, setVendeur] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getVendre().then((response) => {
             setVendeur(true);
             setData(response.data);
+            setIsLoading(false);
         })
         .catch((error) => {
             setData({ message: error.response.data.message});
             setVendeur(false);
+            setIsLoading(false);
         });
     }, [])
+    if(isLoading){
+        return null;
+    }
     if (vendeur) {
         return (
             <>
