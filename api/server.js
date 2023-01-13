@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 3080;
 
 const db = require("./config/db.config").connect();
-db.sequelize.sync();
+db.sequelize.sync({force: false});
 
 
 app.use(bodyParser.json());
