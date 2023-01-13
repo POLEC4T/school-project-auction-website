@@ -28,7 +28,7 @@ class UserRepository {
             const user = await this.db.users.findOne({
                 where: {
                     login: login
-                },
+                }, 
             });
             console.log('user:::', user);
             return user;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { getDerniereOffre } from '../services/EnchereService';
 import { useState, useEffect } from 'react';
-
-
+import moment from 'moment';
+import Timer from './Timer';
 
 function Encherir({ article, vendeur, nbLikes }) {
 
@@ -21,6 +21,7 @@ function Encherir({ article, vendeur, nbLikes }) {
     const propositionPrix2 = offreActuelle.montant + offreActuelle.montant*0.5;
     const propositionPrix3 = offreActuelle.montant + offreActuelle.montant;
     const heroPrixActuel = parseFloat(offreActuelle.montant);
+    const endDate = moment(article.createdAt).add(7, 'days');
     
 
     const articleTags = {"col": article.couleurs.split(","), "mat": article.materiaux.split(","), "taille": article.taille};
@@ -33,7 +34,7 @@ function Encherir({ article, vendeur, nbLikes }) {
 
                 <div className="chrono bg-gray-400 sm:w-2/6 w-full justify-center sm:rounded-t flex h-10 items-center min-w-fit ">
                     <span className="flex flex-row justify-center p-2 md:text-2xl text-xl">
-                        <p>00h : 00m : 00s</p>
+                        <Timer endDate={endDate}/>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="h-8 w-8 ml-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
