@@ -12,5 +12,16 @@ class TodoController {
     }
     )
   };
+
+  getNbLikeArticle = (req,res) => {
+    logger.info("ArticleController: getNbLikeArticle");
+    articleRepository.getNbLikeArticle(req.params.id).then((nbLike) => {
+      if(!nbLike){
+        return res.status(404).send({message: "Article non trouvé"});
+      }
+      return res.send({nb: nbLike});
+    }
+    )
+  };
 }
 module.exports = new TodoController();

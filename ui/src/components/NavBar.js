@@ -28,7 +28,7 @@ function NavBar() {
         <div>
             <nav className="h-14 bg-black w-full flex justify-around items-center font-outfit">
 
-                < NavLink to="/" className="logo flex h-full items-center">
+                < NavLink to="/" className="logo flex h-full items-center active:bg-non">
                     <img src={logoCloth2youInverse} alt="logo" className="h-1/2"/>
                     <h2 className="font-gowun text-2xl text-white sm:block hidden">cloth2you</h2>
                 </NavLink>

@@ -12,8 +12,12 @@ module.exports = (app) => {
   });
 
   app.get("/api/article/:id/images", imageController.getArticleImagesByArticleId);
+
+  app.get("/api/article/:id/likes", articleController.getNbLikeArticle);
   
   app.get("/api/article/:id",articleController.getArticle);
+
+  
 
   
   

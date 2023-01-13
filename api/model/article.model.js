@@ -32,11 +32,6 @@ module.exports = (sequelize, DataTypes, Model) => {
         description: {
             type: DataTypes.STRING,
         },
-        nb_likes: {
-            type: DataTypes.NUMERIC,
-            allowNull: true,
-            defaultValue: 0,
-        },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -103,6 +98,11 @@ module.exports = (sequelize, DataTypes, Model) => {
         sequelize, // instance de connexion
         modelName: 'article' // nom du modèle
       });
+
+      async function getNbLikes() {
+        const likes = await this.getLikes();
+        return likes.length;
+      }
       
       return Articles;
 }

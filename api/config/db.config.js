@@ -33,6 +33,7 @@ const connect = () => {
     db.articles = require("../model/article.model")(sequelize, DataTypes, Model);
     db.images = require("../model/image.model")(sequelize, DataTypes, Model);
     db.encheres = require("../model/enchere.model")(sequelize, DataTypes, Model);
+    db.likes = require("../model/like.model")(sequelize, DataTypes, Model);
 
     db.ROLES = ['vendeur','acheteur','admin']
 
@@ -73,6 +74,14 @@ const connect = () => {
     db.reports.belongsTo(db.users, {
         as: 'reported',
     })
+
+    // Likes / Favoris
+    db.likes.belongsTo(db.users, {
+    })
+    db.likes.belongsTo(db.articles, {
+    })
+    db.users.hasMany(db.likes)
+    db.articles.hasMany(db.likes)
    
 
     return db;
