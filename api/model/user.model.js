@@ -88,6 +88,9 @@ module.exports = (sequelize, DataTypes, Model) => {
         }
       }, {
         // autres options du modèle
+        defaultScope: {
+          attributes: { exclude: ['password'] } //exclure le password par défaut
+        },
         sequelize, // instance de connexion
         modelName: 'user' // nom du modèle
       });

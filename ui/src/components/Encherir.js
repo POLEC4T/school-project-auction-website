@@ -1,44 +1,47 @@
 import React from 'react';
 import { getDerniereOffre } from '../services/EnchereService';
 import { useState, useEffect } from 'react';
+import moment from 'moment';
+import Timer from './Timer';
 
-
-
-function Encherir({ article, vendeur }) {
+function Encherir({ article, vendeur, nbLikes }) {
 
     const pfpImageExample = require('../static/images/pfp-image-example.jpeg');
     
     const [offreActuelle, setOffreActuelle] = useState(0.00);
     useEffect(() => {
-        getDerniereOffre(article.id).then((enchere) => {
-            setOffreActuelle(enchere);
-        })
-    }, [article])
+        if (article) {
+            getDerniereOffre(article.id).then((enchere) => {
+                setOffreActuelle(enchere);
+            })
+        }
+    }, [])
     
 
-    const placeholderPrixForm = `${offreActuelle.montant + offreActuelle.montant*0.1}€ au moins`;
+    const placeholderPrixForm = `${offreActuelle.montant + offreActuelle.montant*0.1}€ ou plus`;
     const propositionPrix1 = offreActuelle.montant + offreActuelle.montant*0.1;
     const propositionPrix2 = offreActuelle.montant + offreActuelle.montant*0.5;
     const propositionPrix3 = offreActuelle.montant + offreActuelle.montant;
     const heroPrixActuel = parseFloat(offreActuelle.montant);
+    const endDate = moment(article.createdAt).add(7, 'days');
+    
 
     const articleTags = {"col": article.couleurs.split(","), "mat": article.materiaux.split(","), "taille": article.taille};
 
     return (
 
     
-        <div className='w-full'>
-            <section className="droite mt-16 flex flex-col sm:w-1/2 w-screen items-center">
+        <div className='sm:w-1/2 w-full'>
+            <section className="droite flex flex-col items-center">
 
                 <div className="chrono bg-gray-400 sm:w-2/6 w-full justify-center sm:rounded-t flex h-10 items-center min-w-fit ">
                     <span className="flex flex-row justify-center p-2 md:text-2xl text-xl">
-                        <p>00h : 00m : 00s</p>
+                        <Timer endDate={endDate}/>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="h-8 w-8 ml-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </span>
                 </div>
-
 
                 <div className="informations bg-gray-100 sm:w-5/6 w-full p-4 sm:px-9 px-4 sm:rounded-xl rounded-b-xl shadow-base shadow-gray-300">
 
@@ -53,7 +56,7 @@ function Encherir({ article, vendeur }) {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                 </svg>
-                                <p className="font-gowun">J'aime</p>
+                                <p className="font-gowun">{nbLikes}</p>
                             </button>
                         </div>  
 
@@ -75,8 +78,7 @@ function Encherir({ article, vendeur }) {
                             </div>
                             <input className="mt-3 bg-zinc-200 rounded-lg h-12 px-4 focus:outline-none hover:bg-zinc-200 text-xl" type="text" placeholder={placeholderPrixForm}/>
                             <div className="enchere-ou-offre-maximale flex mt-3 gap-4">
-                                <button className="bg-zinc-300 hover:bg-zinc-200 w-1/3 rounded-lg h-10 text-xl">Enchérir</button>
-                                <button className="bg-zinc-300 hover:bg-zinc-200 w-2/3 rounded-lg h-10 sm:text-xl text-md">Fixer une offre maximale</button>
+                                <button className="bg-zinc-300 hover:bg-zinc-200 w-full rounded-lg h-10 text-xl">Enchérir</button>
                             </div>
 
                             <p className="description text-justify mt-6">{article.description}</p>

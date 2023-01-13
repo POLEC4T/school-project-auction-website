@@ -21,6 +21,22 @@ class ArticleRepository {
             return {};
         }
     }
+
+    async getNbLikeArticle(id) {
+            
+            try {
+                const nbLike = await this.db.likes.count({
+                    where: {
+                        articleId: id
+                    },
+                });
+                console.log('nbLike:::', nbLike);
+                return nbLike;
+            } catch (err) {
+                console.log(err);
+                return {};
+            }
+        }
 }
 
 module.exports = new ArticleRepository();

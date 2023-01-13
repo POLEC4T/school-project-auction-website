@@ -16,7 +16,7 @@ INSERT INTO users(login,password,email,nb_strikes,date_naiss,"createdAt","update
 INSERT INTO users(login,password,email,nb_strikes,date_naiss,"createdAt","updatedAt","roleId") values('bob','obo','bob.obo@gmail.com',1,'1999-01-10',CURRENT_DATE,CURRENT_DATE,3);
 
 -- ARTICLE --
-INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('cardigan colore',30.0,'cardigan en laine de mouton de la creuse',CURRENT_DATE,CURRENT_DATE+1,'rouge,vert,jaune,bleu,rose','laine','M',40.0,CURRENT_DATE,1);
+INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('cardigan colore',30.0,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget mi vulputate, pretium turpis eget, pulvinar libero. Vestibulum faucibus arcu ac justo viverra, ac bibendum mi molestie. Ut facilisis vel justo vel consequat. In posuere, libero ut non. ',CURRENT_DATE,CURRENT_DATE+1,'rouge,vert,jaune,bleu,rose','laine','M',40.0,CURRENT_DATE,1);
 INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('t-shirt vert',5.0,'t-shirt de couleur verte en coton bio',CURRENT_DATE,CURRENT_DATE+1,'vert','coton','S',8.0,CURRENT_DATE,2);
 INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('tricot vintage',10.0,'tricot de grand-mère iconique',CURRENT_DATE,CURRENT_DATE+1,'blanc','laine','XL',20.0,CURRENT_DATE,3);
 INSERT INTO articles(titre,prix_depart,description,"createdAt",expires,couleurs,materiaux,taille,seuil_reserve,"updatedAt","vendeurId") values('polaire recyclee',8.0,'polaire conçue avec des bouteilles en plastique recylees',CURRENT_DATE,CURRENT_DATE+1,'noir','polyester','L',15.0,CURRENT_DATE,2);
@@ -44,3 +44,9 @@ INSERT INTO images(url,"createdAt","updatedAt","articleId") values('https://imag
 -- REPORT --
 INSERT INTO reports(motif,date,"createdAt","updatedAt") values('Ce t-shirt est offensant! il y a une inscription dessus qui est grossière!',CURRENT_DATE,CURRENT_DATE,CURRENT_DATE);
 
+-- LIKES --
+
+INSERT INTO likes("createdAt","updatedAt","userId","articleId") values(CURRENT_DATE,CURRENT_DATE,1,1);
+INSERT INTO likes("createdAt","updatedAt","userId","articleId") values(CURRENT_DATE,CURRENT_DATE,3,1);
+INSERT INTO likes("createdAt","updatedAt","userId","articleId") values(CURRENT_DATE,CURRENT_DATE,2,1);
+INSERT INTO likes("createdAt","updatedAt","userId","articleId") values(CURRENT_DATE,CURRENT_DATE,1,2);
