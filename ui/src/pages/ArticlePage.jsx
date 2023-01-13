@@ -38,6 +38,7 @@ function PageArticle() {
       getArticleImagesByArticleId(article.id).then((images) => {
         setImages(images.map(image => ({image: image.url, caption: ""})));
         setImagesLoaded(true);
+        
       });
     }
   }, [article]);
@@ -46,6 +47,7 @@ function PageArticle() {
     if (article) {
       getUserById(article.vendeurId).then((vendeur) => {
         setVendeur(vendeur);
+        
       });
     }
   }, [article]);
@@ -54,7 +56,6 @@ function PageArticle() {
     if (article) {
       getNbLikeArticle(article.id).then((nbLikesRes) => {
         setNbLikesConst(nbLikesRes.nb);
-        setArticle({...article, nb_likes: nbLikesConst});
       });
     }
   }, [article]);
@@ -74,7 +75,7 @@ function PageArticle() {
                 <section className="gauche sm:w-1/2 w-full flex justify-center mt-10 mb-10">
                   {imagesLoaded && <ImageCarousel images={images}/>}
                 </section>
-                {article && vendeur && <Encherir article={article} vendeur={vendeur}/>}
+                {article && vendeur && nbLikesConst && <Encherir article={article} vendeur={vendeur} nbLikes={nbLikesConst}/>}
               </main>
             </>
           )
