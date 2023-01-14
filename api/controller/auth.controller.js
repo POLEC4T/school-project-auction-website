@@ -1,7 +1,6 @@
 const db = require("../config/db.config").connect();
 const secret = require("../auth/secret");
-const User = db.users;
-const Role = db.roles;
+const UserRepository = require("../repository/user.repository");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -11,78 +10,53 @@ class AuthController{
 signup = (req, res) => {
   // Enregistrer l'utilisateur en bdd
   bcrypt.hash(req.body.password, 10).then(hash => {
-    User.create({
+    const user = {
       login: req.body.login,
       email: req.body.email,
       password: hash,
-      date_naiss: req.body.date_naiss
-      })
-      .then(user => {
-        if (req.body.role_id) {
-          Role.findByPk(req.body.role_id)
-          .then(role => {
-            user.setRole(role.id).then(() => {
-              res.send({ message: "Utilisateur créé avec succès", role: "ROLE_" + role.name.toUpperCase() });
-            });
-          })
-        } else {
-          // rôle par défaut : 1
-          user.setRole(1).then(() => {
-            res.send({ message: "Utilisateur créé avec succès", role: "ROLE_VENDEUR" });
-          });
-        }
+      role: req.body.role_id,
+    }
+    if (req.body.nom){
+      user.nom = req.body.nom
+      user.prenom = req.body.prenom
+      user.siren = req.body.siren
+    }
+    UserRepository.createUser(user).then((role) => {
+        res.status(200).json({ message: "L'utilisateur a été créé avec succès !" });
       })
       .catch(err => {
-        res.status(500).send({ err });
+        res.status(500).send({ message: err.message });
       });
   })
 };
 
 //connexion
-signin = (req, res) => {
-    //trouver le login dans la bdd si il existe
-  User.findOne({
-    where: {
-      login: req.body.login
-    }
-  })
-    .then(user => {
+signin = (req,res) => {
+  UserRepository.getUserByLogin(req.body.login).then((user) => {
       if (!user) {
-        return res.status(404).send({ message: "Utilisateur non trouvé" });
+          return res.status(404).json({ message: "Cet utilisateur n'existe pas"})
       }
 
-      //comparer le mdp avec bcrypt
-      const passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
+      bcrypt.compare(req.body.password, user.password).then(isPasswordValid => {
+          if (!isPasswordValid) {
+              return res.status(401).json({ message: "Le mot de passe est incorrect"})
+          }
 
-      if (!passwordIsValid) {
-        return res.status(401).send({
-          accessToken: null,
-          message: "Mot de passe invalide"
-        });
-      }
+          //JWT
+          const token = jwt.sign(
+              { id: user.id },
+              secret,
+              { expiresIn: '24h' }
+          )
 
-      //création du token
-      const token = jwt.sign({ id: user.id }, secret, {
-        expiresIn: 86400 // 24 hours
-      });
-
-      user.getRole().then(role => {
-        res.status(200).send({
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          role: "ROLE_" + role.name.toUpperCase(),
-          accessToken: token
-        });
-      });
-    })
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-};
+          const message = "L'utilisateur a été authentifié avec succès !"
+          
+      })
+  }).catch((err) => {
+      res.status(500).json({ message: err.message })
+  }
+  )
+}
 }
 
 module.exports = new AuthController()

@@ -10,8 +10,9 @@ function SignupPage() {
 
     const[page, setPage] = useState(1);
     const[formValid, setFormValid] = useState(false);
-    const [message, setMessage] = useState("");
+    //const [message, setMessage] = useState("");
 
+    //fonction callback à donner au composant fils
     const handleFormValidation = (formValid, nextPage) => {
         setFormValid(formValid);
         if(nextPage){

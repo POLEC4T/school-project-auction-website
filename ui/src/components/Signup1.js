@@ -51,7 +51,7 @@ function Signup1(props){
         e.preventDefault();
         if(formValid) {
             setMessage("");
-            props.onValidate(true);
+            props.onValidate(true,false);
             e.preventDefault();
             AuthService.register(email, password, pseudo).then(
                 () => {
@@ -62,9 +62,20 @@ function Signup1(props){
         }
         else{
             setMessage("Veuillez remplir tous les champs correctement");
-            props.onValidate(false);
+            props.onValidate(false,false);
         }
     };
+
+    const handleButtonVendeur = (e) =>{
+        e.preventDefault();
+        if(formValid) {
+            setMessage("");
+            props.onValidate(true,true);
+        }else{
+            setMessage("Veuillez remplir tous les champs correctement");
+            props.onValidate(false,false);
+        }
+    }
     return(
 
         <div className="haut flex flex-col items-center pt-5 px-5">
@@ -116,7 +127,7 @@ function Signup1(props){
         <p class="text-red-500 text-sm">{message}</p>
         <div className="choix w-full flex flex-row justify-around sm:gap-0 gap-2">
             <button className="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 sm:text-md text-sm hover:bg-zinc-600" onClick={handleRegister}>S'inscrire en tant qu'acheteur</button>
-            <button className="text-zinc-800 border-2 border-zinc-800 px-3 py-1 rounded-lg mt-5 sm:text-md text-sm hover:text-zinc-600">Je souhaite vendre mes créations</button>
+            <button className="text-zinc-800 border-2 border-zinc-800 px-3 py-1 rounded-lg mt-5 sm:text-md text-sm hover:text-zinc-600" onClick={handleButtonVendeur}>Je souhaite vendre mes créations</button>
         </div>
 
         <h2 className="mt-4  text-center">Vous avez déjà de compte, <Link className="underline" to="/connexion">se connecter</Link>.</h2>

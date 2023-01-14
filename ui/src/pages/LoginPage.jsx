@@ -100,7 +100,7 @@ function LoginPage() {
                         <Link class="text-zinc-500 text-sm self-start hover:underline no-underline pl-1 pt-0.5" to="/forgotten">j'ai oublié mon mot de passe</Link>
                         <p class="text-red-500 text-sm">{message}</p>
                         <button class="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 text-xl hover:bg-zinc-600" onClick={(e) => handleLogin(e)}>Se connecter</button>
-                        <h2 class="mt-1">Vous n'avez pas de compte, <Link class="underline" href="/inscription">s'inscrire</Link>.</h2>
+                        <h2 class="mt-1">Vous n'avez pas de compte, <Link class="underline" to="/inscription">s'inscrire</Link>.</h2>
                     </div>
                 </div>      
         </div>

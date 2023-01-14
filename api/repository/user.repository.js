@@ -1,3 +1,5 @@
+const roleModel = require('../model/role.model');
+
 const db = require('../config/db.config').connect();
 
 
@@ -16,7 +18,21 @@ class UserRepository {
             return users;
         } catch (err) {
             console.log(err);
-            return [];
+            return {};
+        }
+    }
+
+    async createUser(user) {
+        try{
+            const newUser = await this.db.users.create(user).then((user) => {
+                roleModel.findByPk(user.role_id).then((role) => {
+                    user.setRole(role.id);
+                });
+            });
+            return newUser;
+        } catch (err) {
+            console.log(err);
+            return {};
         }
     }
 

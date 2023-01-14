@@ -69,12 +69,12 @@ module.exports = (sequelize, DataTypes, Model) => {
           type: DataTypes.STRING,
           defaultValue: 'black'
         },
-        num_siret: {
+        num_siren: {
           type: DataTypes.INTEGER,
-          allowNull: true, //car si un user n'est pas vendeur il peut ne pas avoir de numéro de SIRET
+          allowNull: true, //car si un user n'est pas vendeur il peut ne pas avoir de numéro de SIREN
           validate: {
             function(value){
-              let regex = new RegExp("\d{14")
+              let regex = new RegExp("^[0-9]{14}$")
               return regex.test(value)
             }
           }
