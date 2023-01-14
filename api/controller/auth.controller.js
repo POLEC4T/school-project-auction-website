@@ -14,7 +14,7 @@ signup = (req, res) => {
       login: req.body.login,
       email: req.body.email,
       password: hash,
-      role: req.body.role_id,
+      roleId: req.body.role_id,
     }
     if (req.body.nom){
       user.nom = req.body.nom
@@ -32,7 +32,7 @@ signup = (req, res) => {
 
 //connexion
 signin = (req,res) => {
-  UserRepository.getUserByLogin(req.body.login).then((user) => {
+  UserRepository.getUserWithPasswordByLogin(req.body.login).then((user) => {
       if (!user) {
           return res.status(404).json({ message: "Cet utilisateur n'existe pas"})
       }
@@ -49,7 +49,14 @@ signin = (req,res) => {
               { expiresIn: '24h' }
           )
 
-          const message = "L'utilisateur a été authentifié avec succès !"
+          res.status(200).send({
+            id: user.id,
+            login: user.login,
+            email: user.email,
+            role_id: user.role_id,
+            accessToken: token
+            })
+            
           
       })
   }).catch((err) => {

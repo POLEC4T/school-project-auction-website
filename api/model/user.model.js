@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes, Model) => {
             notNull: { msg: "le login est obligatoire"}
           }
         },
+        nom: {
+          type: DataTypes.STRING,
+        },
+        prenom: {
+          type: DataTypes.STRING,
+        },
         pdp: {
           type: DataTypes.STRING
         },
@@ -86,6 +92,11 @@ module.exports = (sequelize, DataTypes, Model) => {
         // autres options du modèle
         defaultScope: {
           attributes: { exclude: ['password'] } //exclure le password par défaut
+        },
+        scopes: {
+          withPassword: {
+            attributes: {}
+          }
         },
         sequelize, // instance de connexion
         modelName: 'user' // nom du modèle

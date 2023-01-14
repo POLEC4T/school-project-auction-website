@@ -30,6 +30,7 @@ function LoginPage() {
       };
     
     const handleLogin = (e) => {
+        console.log("handleLogin");
         e.preventDefault();
         setMessage("");
         if (!username) {

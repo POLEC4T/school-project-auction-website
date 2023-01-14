@@ -1,7 +1,5 @@
-const roleModel = require('../model/role.model');
-
 const db = require('../config/db.config').connect();
-
+const roleModel = db.roles;
 
 class UserRepository {
 
@@ -24,11 +22,7 @@ class UserRepository {
 
     async createUser(user) {
         try{
-            const newUser = await this.db.users.create(user).then((user) => {
-                roleModel.findByPk(user.role_id).then((role) => {
-                    user.setRole(role.id);
-                });
-            });
+            const newUser = await this.db.users.create(user);
             return newUser;
         } catch (err) {
             console.log(err);
@@ -40,6 +34,21 @@ class UserRepository {
 
         try {
             const user = await this.db.users.findOne({
+                where: {
+                    login: login
+                }, 
+            });
+            return user;
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+    }
+
+    async getUserWithPasswordByLogin(login) {
+
+        try {
+            const user = await this.db.users.scope('withPassword').findOne({
                 where: {
                     login: login
                 }, 

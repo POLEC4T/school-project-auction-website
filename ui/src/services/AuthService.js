@@ -2,11 +2,24 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3080/api/auth/";
 
-const register = (login, email, password) => {
+const registerAcheteur = (login, email, password) => {
   return axios.post(API_URL + "signup", {
     login,
     email,
     password,
+    role_id: 1,
+  });
+};
+
+const registerVendeur = (login, email, password, role_id, num_siren,nom, prenom) => {
+  return axios.post(API_URL + "signup", {
+    login,
+    email,
+    password,
+    role_id : 2,
+    num_siren,
+    nom,
+    prenom
   });
 };
 
@@ -34,7 +47,7 @@ const getCurrentUser = () => {
 };
 
 const AuthService = {
-  register,
+  registerAcheteur,
   login,
   logout,
   getCurrentUser,
