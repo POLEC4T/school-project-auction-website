@@ -13,6 +13,7 @@ module.exports = {
     backgroundSize: {
         '100': '100%',
         'article': 'auto 100%',
+        'inverse': '100% auto',
         '140': '140%',
         '200': '200%'
     },
@@ -26,7 +27,7 @@ module.exports = {
         backgroundImage: {
             'hero': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/fond-login.jpg)',
             'banniere' : 'url(./static/images/banniere-profil.jpg)',
-            'intro': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/image_intro.jpg)'
+            'intro': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/image_intro.jpg)',
         },
         colors: {
             'goldenyellow':  '#D09C16'
