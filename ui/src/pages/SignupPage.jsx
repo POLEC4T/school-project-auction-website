@@ -48,12 +48,25 @@ function SignupPage() {
   const onChangeEmail = (e) => {
     e.preventDefault();
     const email = e.target.value;
+    let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+    if(!regex.test(email)){
+      setMessage("Veuillez entrer une adresse email valide");
+    }else{
+      setMessage("");
+    }
     setEmail(email);
   };
 
   const onChangePassword = (e) => {
     e.preventDefault();
     const password = e.target.value;
+    const regex = new RegExp('(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"');
+    if(!regex.test(password)){
+      setMessage("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre");
+    }else{
+      setMessage("");
+    }
+
     setPassword(password);
   };
 
@@ -84,6 +97,12 @@ function SignupPage() {
   const onChangeSiren = (e) => {
     e.preventDefault();
     const siren = e.target.value;
+    const regex = new RegExp('^[0-9]{9}$');
+    if(!regex.test(siren)){
+      setMessage("Le numéro SIREN doit contenir 9 chiffres");
+    }else{
+      setMessage("");
+    }
     setSiren(siren);
   };
 
