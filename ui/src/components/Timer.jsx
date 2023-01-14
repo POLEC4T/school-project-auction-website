@@ -9,7 +9,7 @@ function Timer({endDate}) {
         } else {
             return (
                 <div>
-                    <span>{days}j : {hours}h : {minutes}m : {seconds}s</span>
+                    <span>{days}j : {hours}h : {minutes}m</span>
                 </div>
             )
         }

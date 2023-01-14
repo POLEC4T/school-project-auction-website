@@ -6,13 +6,14 @@ import ArticlePage from "./pages/ArticlePage";
 import NotFoundErrorPage from "./pages/NotFoundErrorPage";
 import VendrePage from "./pages/VendrePage";
 import ProfilePage from "./pages/ProfilePage";
+import AccueilPage from "./pages/AccueilPage";
 
 function App() {
   return (
     <BrowserRouter>
       <div>
         <Routes>
-          <Route path="/" element={<ArticlePage />} />
+          <Route path="/" element={<AccueilPage />} />
           <Route path="/connexion" element={<LoginPage />} />
           <Route path="/vendre" element={<VendrePage />} />
           <Route path="/profil" element={<ProfilePage />} />
