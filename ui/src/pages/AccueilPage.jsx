@@ -29,7 +29,6 @@ function AccueilPage() {
             setIsLoading(false);
           } else {
             setTopArticles(response);
-            console.log(topArticles[0]);
             setIsLoading(false);
           }
         })
