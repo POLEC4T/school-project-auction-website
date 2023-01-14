@@ -7,16 +7,16 @@ const registerAcheteur = (login, email, password) => {
     login,
     email,
     password,
-    role_id: 1,
+    role_id: 2,
   });
 };
 
-const registerVendeur = (login, email, password, role_id, num_siren,nom, prenom) => {
+const registerVendeur = (login, email, password, num_siren,nom, prenom) => {
   return axios.post(API_URL + "signup", {
     login,
     email,
     password,
-    role_id : 2,
+    role_id : 1,
     num_siren,
     nom,
     prenom
@@ -48,6 +48,7 @@ const getCurrentUser = () => {
 
 const AuthService = {
   registerAcheteur,
+  registerVendeur,
   login,
   logout,
   getCurrentUser,

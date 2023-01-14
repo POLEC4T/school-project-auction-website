@@ -9,16 +9,24 @@ function SignupPage() {
 
   const googleLogo = require("../static/images/logo-google.png");
   const logo = require("../static/images/logo-outline.png");
+  const ligne1 = require("../static/images/ligne-1.png");
+  const ligne2 = require("../static/images/ligne-2.png");
 
+  //usestates correspondant aux champs du formulaire
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [message, setMessage] = useState("");
   const [pseudo, setPseudo] = useState("");
   const [formValid, setFormValid] = useState(false);
   const [page, setPage] = useState(1);
   const [cguChecked, setCguChecked] = useState(false);
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [siren, setSiren] = useState("");
+  //usestate pour afficher les messages d'erreur
+  const [message, setMessage] = useState("");
 
+  //fonctions pour gérer les changements des champs du formulaire et les boutons cliqués
   const handleCguChange = (e) => {
     setCguChecked(e.target.checked);
   };
@@ -61,18 +69,45 @@ function SignupPage() {
     setPseudo(pseudo);
   };
 
-  const handleRegisterAcheteur = (e) => {
+  const onChangePrenom = (e) => {
     e.preventDefault();
-    setMessage("");
-    if (pseudo && email && password && passwordConfirm) {
-      if (password === passwordConfirm) {
-        setFormValid(true);
-      }else{
-        setMessage("Les mots de passe ne correspondent pas");
+    const prenom = e.target.value;
+    setPrenom(prenom);
+  };
+
+  const onChangeNom = (e) => {
+    e.preventDefault();
+    const nom = e.target.value;
+    setNom(nom);
+  };
+
+  const onChangeSiren = (e) => {
+    e.preventDefault();
+    const siren = e.target.value;
+    setSiren(siren);
+  };
+
+  //useEffect pour valider le formulaire ou non
+  useEffect(() => {
+    if (page === 1) {
+      if (pseudo && email && password && passwordConfirm) {
+        if (password === passwordConfirm) {
+          setFormValid(true);
+        }
+      } else {
+        setFormValid(false);
       }
-    } else {
-      setMessage("Veuillez remplir tous les champs");
+    } else if (page === 2) {
+      if (nom && prenom && siren) {
+        setFormValid(true);
+      } else {
+        setFormValid(false);
+      }
     }
+  }, [pseudo, email, password, passwordConfirm, nom, prenom, siren]);
+
+  const handleRegisterAcheteur = (e) => {
+    setMessage("");
     if (formValid) {
       if (!cguChecked) {
         setMessage("Vous devez accepter les CGU");
@@ -82,6 +117,27 @@ function SignupPage() {
         AuthService.registerAcheteur(pseudo, email, password)
           .then(() => {
             navigate("/"); //redirection vers la page d'accueil
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.log("register failed");
+            setMessage(err.response.data.message);
+          });
+      }
+    }
+  };
+
+  const handleRegisterVendeur = (e) => {
+    setMessage("");
+    if (formValid) {
+      if (!cguChecked) {
+        setMessage("Vous devez accepter les CGU");
+      } else {
+        setMessage("");
+        e.preventDefault();
+        AuthService.registerVendeur(pseudo, email, password, nom, prenom, siren)
+          .then(() => {
+            navigate("/connexion"); //redirection vers la page de connexion
             window.location.reload();
           })
           .catch((err) => {
@@ -154,22 +210,24 @@ function SignupPage() {
               </button>
 
               <div className="ligne w-full flex flex-row overflow-hidden mt-8">
-                <img className="w-1/4" src="ligne-1.png" alt="" />
-                <img className="w-1/4" src="ligne-2.png" alt="" />
-                <img className="w-1/4" src="ligne-1.png" alt="" />
-                <img className="w-1/4" src="ligne-1.png" alt="" />
+                <img className="w-1/4" src={ligne1} alt="" />
+                <img className="w-1/4" src={ligne2} alt="" />
+                <img className="w-1/4" src={ligne1} alt="" />
+                <img className="w-1/4" src={ligne2} alt="" />
               </div>
 
               <input
                 type="text"
                 placeholder="email"
                 className="placeholder-zinc-600 mt-8 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                value={email}
                 onChange={(e) => onChangeEmail(e)}
               />
               <input
                 type="text"
                 placeholder="pseudo"
                 className="placeholder-zinc-600 mt-5 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                value={pseudo}
                 onChange={(e) => onChangePseudo(e)}
               />
 
@@ -178,6 +236,7 @@ function SignupPage() {
                   type="password"
                   placeholder="mot de passe"
                   className="placeholder-zinc-600  w-full rounded-xl focus:outline-none pl-2"
+                  value={password}
                   onChange={(e) => onChangePassword(e)}
                 />
                 <button>
@@ -207,6 +266,7 @@ function SignupPage() {
                   type="password"
                   placeholder="confirmer le mot de passe"
                   className="placeholder-zinc-600 w-full rounded-xl focus:outline-none pl-2"
+                  value={passwordConfirm}
                   onChange={(e) => onChangePasswordConfirm(e)}
                 />
                 <button>
@@ -283,10 +343,10 @@ function SignupPage() {
               <h2 className="opacity-100 font-gowun text-4xl">Inscription</h2>
 
               <div className="ligne w-full flex flex-row overflow-hidden mt-8">
-                <img className="w-1/4" src="ligne-1.png" alt="" />
-                <img className="w-1/4" src="ligne-2.png" alt="" />
-                <img className="w-1/4" src="ligne-1.png" alt="" />
-                <img className="w-1/4" src="ligne-1.png" alt="" />
+                <img className="w-1/4" src={ligne1} alt="" />
+                <img className="w-1/4" src={ligne2} alt="" />
+                <img className="w-1/4" src={ligne1} alt="" />
+                <img className="w-1/4" src={ligne2} alt="" />
               </div>
 
               <p className="text-sm text-center mt-8">
@@ -302,16 +362,22 @@ function SignupPage() {
                 type="text"
                 placeholder="nom"
                 className="placeholder-zinc-600 mt-8 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                value={nom}
+                onChange={(e) => onChangeNom(e)}
               />
               <input
                 type="text"
                 placeholder="prénom"
                 className="placeholder-zinc-600 mt-4 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                value={prenom}
+                onChange={(e) => onChangePrenom(e)}
               />
               <input
                 type="text"
                 placeholder="numéro SIREN"
                 className="placeholder-zinc-600 mt-4 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                value={siren}
+                onChange={(e) => onChangeSiren(e)}
               />
 
               <div className="cgu flex flex-row gap-2 mt-8">
@@ -320,6 +386,7 @@ function SignupPage() {
                   name="cgu"
                   id="cgu"
                   className="accent-zinc-800"
+                  onChange={(e) => handleCguChange(e)}
                 />
                 <p className="text-justify text-xs" disabled>
                   En cochant cette case, vous acceptez les termes et conditions
@@ -335,8 +402,13 @@ function SignupPage() {
                 </p>
               </div>
 
+              <p className="text-red-500 text-sm">{message}</p>
+
               <div className="choix w-full flex flex-row justify-around mt-5">
-                <button className="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 text-md hover:bg-zinc-600">
+                <button
+                  className="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 text-md hover:bg-zinc-600"
+                  onClick={(e) => handleRegisterVendeur(e)}
+                >
                   S'inscrire en tant que vendeur · euse
                 </button>
               </div>
