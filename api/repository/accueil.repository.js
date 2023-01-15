@@ -16,7 +16,7 @@ class AccueilRepository {
 
             const sortedArticles = activeArticles /*.sort((a, b) => {
                 return new Date(a.expires) - new Date(b.expires);
-            });Z */
+            });*/
 
             return sortedArticles.slice(0, 7);
 

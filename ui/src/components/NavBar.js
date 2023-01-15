@@ -25,7 +25,7 @@ function NavBar() {
 
     return (
         <div>
-            <nav className="h-14 bg-zinc-800 w-full flex justify-around items-center font-outfit gap-2">
+            <nav className="h-16 bg-zinc-800 w-full flex justify-around items-center font-outfit gap-2">
 
                 < NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }} to="/" className="logo flex h-full items-center active:bg-non">
                     <img src={logoCloth2you} alt="logo" className="h-1/2 mx-1 mr-3"/>
@@ -41,7 +41,7 @@ function NavBar() {
                 </svg>
 
                     <form action="recherche.html" className="w-full">
-                        <input type="text" placeholder="Rechercher" className="w-full rounded-xl bg-amber-50 focus:outline-none placeholder-zinc-800"/>
+                        <input type="text" placeholder="Rechercher" className="w-full rounded-r-xl bg-amber-50 focus:outline-none placeholder-zinc-800"/>
                     </form>
                 </div>
 

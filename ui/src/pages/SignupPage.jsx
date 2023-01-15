@@ -356,7 +356,10 @@ function SignupPage() {
                 </Link>
                 .
               </h2>
+
             </div>
+
+            
           ) : (
             <div className="haut flex flex-col items-center pt-5 px-5">
               <h2 className="opacity-100 font-gowun text-4xl">Inscription</h2>
@@ -433,20 +436,10 @@ function SignupPage() {
               </div>
             </div>
           )}
-          <button className="next sm:px-5 px-2" onClick={handleNextPage}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-10 h-10"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
+
+          <button className="suivant sm:px-5 px-1" onClick={handleNextPage}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </button>
         </div>
