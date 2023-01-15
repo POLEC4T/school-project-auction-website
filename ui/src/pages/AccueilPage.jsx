@@ -150,7 +150,7 @@ function AccueilPage() {
                     <div className="sm:flex hidden fin_proche sm:flex-col flex-row sm:gap-5 gap-0 text-white sm:w-1/2 w-full">
 
                         <section className="top w-full font-outfit sm:h-60 h-30  rounded-xl bg-black bg-center bg-no-repeat bg-100" style={{backgroundImage: `url(${imagesSelection[1]})`}}>
-                            <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:opacity-0 ease-in-out duration-300">
+                            <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
                                 <p className="font-chivo text-3xl"><Timer endDate={moment(topArticles[0].createdAt).add(7, 'days')} /></p>
                                 <p className="mt-5 text-2xl text-center">{topArticles[0].titre}</p>
                                 <button className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0">Details</button>
@@ -158,7 +158,7 @@ function AccueilPage() {
                         </section> 
 
                         <section className="top w-full font-outfit sm:h-60 h-30  rounded-xl bg-black bg-center bg-no-repeat bg-100" style={{backgroundImage: `url(${imagesSelection[0]})`}}>
-                            <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:opacity-0 ease-in-out duration-300">
+                            <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
                                 <p className="font-chivo text-3xl"><Timer endDate={moment(topArticles[1].createdAt).add(7, 'days')} /></p>
                                 <p className="mt-5 text-2xl text-center">{topArticles[1].titre}</p>
                                 <button className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0">Details</button>
