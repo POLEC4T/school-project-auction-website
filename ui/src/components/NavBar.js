@@ -28,7 +28,7 @@ function NavBar() {
             <nav className="h-14 bg-zinc-800 w-full flex justify-around items-center font-outfit gap-2">
 
                 < NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }} to="/" className="logo flex h-full items-center active:bg-non">
-                    <img src={logoCloth2you} alt="logo" className="h-1/2"/>
+                    <img src={logoCloth2you} alt="logo" className="h-1/2 mx-1 mr-3"/>
                     <h2 className="font-gowun text-2xl text-white sm:block hidden">cloth2you</h2>
                 </NavLink>
 

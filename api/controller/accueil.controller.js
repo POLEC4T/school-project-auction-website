@@ -5,7 +5,7 @@ class TodoController {
 
   getArticlesWithLeastTimeLeft = (req, res) => {
     logger.info("AccueilController: getArticlesWithLeastTimeLeft");
-    accueilRepository.getArticlesWithLeastTimeLeft.then((sortedArticles) => {
+    accueilRepository.getArticlesWithLeastTimeLeft().then((sortedArticles) => {
         if (!sortedArticles) {
             return res.status(404).send({ message: "Aucun article trouvé" });
         }

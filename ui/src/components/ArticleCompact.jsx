@@ -7,9 +7,8 @@ import moment from 'moment';
 import Timer from './Timer';
 
 
-function ArticleCompact(){
-    
-    const [article, setArticle] = useState(null);
+function ArticleCompact({article}){
+
     const [image, setImage] = useState(null);
     const [imagesLoaded, setImagesLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -17,28 +16,14 @@ function ArticleCompact(){
     const [error, setError] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
-    useEffect(() => {
-        getArticle(1).then((response) => {
-          if (response.message === 'Article non trouvé') {
-            setError(response.message);
-            setIsLoading(false);
-          } else {
-            setArticle(response);
-            setIsLoading(false);
-            setEndDate(moment(article.createdAt).add(7, 'days'));
-          }
-        })
-        .catch(() => {
-          setError('Error connecting to server. Please try again later.');
-        });
-      }, []);
-
-
-      useEffect(() => {
+    
+     useEffect(() => {
         if (article) {
           getArticleImagesByArticleId(article.id).then((images) => {
-            setImage(images[0].url);
-            setImagesLoaded(true);
+            if(images && images.length > 0) {
+              setImage(images[0].url);
+              setImagesLoaded(true);
+            }
           });
         }
       }, [article]);
@@ -52,11 +37,19 @@ function ArticleCompact(){
         }
     }, [article])
 
+    useEffect(() => {
+      if (article) {
+        setEndDate(moment(article.createdAt).add(7, 'days'));          
+      }
+    }, [article])
+
+
+
     
     
 
     return (
-        <div class="article flex flex-col sm:h-102 h-80 sm:w-80 w-36 bg-white rounded-xl">
+        <div class="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
 
         {imagesLoaded&&
 
@@ -68,15 +61,15 @@ function ArticleCompact(){
 
         <div class="caracteristiques flex justify-between p-2" >
             <div class="offre flex-col justify-items-start">
-                <p class="font-chivo text-zinc-600 sm:text-xl text-sm">Offre Actuelle</p>
+                <p class="font-chivo text-zinc-400 sm:text-lg text-xs">Offre Actuelle</p>
 
                 {offreActuelle&&
-                <p class="font-gowun text-lg">{offreActuelle.montant}€</p>
+                <p class="font-gowun sm:text-2xl text-md">{offreActuelle.montant}€</p>
                 }
             </div>
-            <div class="temps_restant flex flex-col justify-items-end text-md text-end">
-                <p class="font-chivo text-zinc-600 sm:text-xl text-sm">Finit dans</p>
-                <p class="font-gowun text-lg">{endDate&& <Timer endDate={endDate}/>}</p>
+            <div class="temps_restant flex flex-col justify-items-end text-end">
+                <p class="font-chivo text-zinc-400 sm:text-lg text-xs">Finit dans</p>
+                <p class="font-gowun sm:text-2xl text-md">{endDate&& <Timer endDate={endDate}/>}</p>
             </div>
         </div>
     </div> 
