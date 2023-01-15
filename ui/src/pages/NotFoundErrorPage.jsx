@@ -7,17 +7,17 @@ export default function NotFoundErrorPage() {
   return (
 	<>
 		<NavBar/>
-		<section className="flex items-center h-full p-16 dark:text-gray-800">
-		<div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-			<div className="max-w-md text-center">
-				<h2 className="mb-8 font-extrabold text-9xl dark:text-gray-600">
+		<section className="flex flex-col items-center font-outfit pt-20 text-center h-screen text-zinc-800">
+		
+			
+				<h2 className="text-9xl font-outfit font-bold">
 					<span className="sr-only">Error</span>404
 				</h2>
-				<p className="text-2xl font-semibold md:text-3xl">Oups, la page que vous recherchez n'existe pas</p>
-				<p className="mt-4 mb-8 dark:text-gray-400">Mais ne vous inquiétez pas, il y a pleins de choses sur notre page d'accueil</p>
-				<Link rel="noopener noreferrer" to="/" className="px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">Back to homepage</Link>
-			</div>
-		</div>
+				<p className="sm:text-2xl text-xl mt-2">Oups, la page que vous recherchez n'existe pas</p>
+				<p className="sm:text-2xl text-xl mt-12">Mais ne vous inquiétez pas, il y a pleins de choses sur notre page d'accueil</p>
+				<Link rel="noopener noreferrer" to="/" className="hover:bg-zinc-600 bg-zinc-800 text-amber-50 p-2 px-3 sm:text-2xl text-lg rounded-xl mt-12">Retourner à la page d'accueil</Link>
+			
+		
 	</section>
 </>
   );
