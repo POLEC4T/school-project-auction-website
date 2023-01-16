@@ -25,15 +25,15 @@ function NavBar() {
 
     return (
         <div>
-            <nav className="h-14 bg-zinc-800 w-full flex justify-around items-center font-outfit gap-2">
+            <nav className="h-16 bg-zinc-800 w-full flex justify-around items-center font-outfit gap-2">
 
                 < NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }} to="/" className="logo flex h-full items-center active:bg-non">
                     <img src={logoCloth2you} alt="logo" className="h-1/2 mx-1 mr-3"/>
                     <h2 className="font-gowun text-2xl text-white sm:block hidden">cloth2you</h2>
                 </NavLink>
 
-                < NavLink to="/profil" className="text-amber-50 hover:text-amber-100 lg:block hidden">Profil</NavLink>
-                < NavLink to="/vendre" className="text-amber-50 hover:text-amber-100 lg:block hidden">Vendre</NavLink>
+                < NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }} to="/profil" className="text-amber-50 hover:text-amber-100 lg:block hidden">Profil</NavLink>
+                < NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }} to="/vendre" className="text-amber-50 hover:text-amber-100 lg:block hidden">Vendre</NavLink>
 
                 <div className="recherche bg-amber-50 w-1/2 h-1/2 rounded-xl flex items-center ease-in duration-100 sm:max-w-48">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-1">
@@ -41,7 +41,7 @@ function NavBar() {
                 </svg>
 
                     <form action="recherche.html" className="w-full">
-                        <input type="text" placeholder="Rechercher" className="w-full rounded-xl bg-amber-50 focus:outline-none placeholder-zinc-800"/>
+                        <input type="text" placeholder="Rechercher" className="w-full rounded-r-xl bg-amber-50 focus:outline-none placeholder-zinc-800"/>
                     </form>
                 </div>
 
