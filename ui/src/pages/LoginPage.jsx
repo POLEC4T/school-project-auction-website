@@ -52,7 +52,7 @@ function LoginPage() {
   };
 
   return (
-    <body class="main-container font-outfit h-screen bg-zinc-800 bg-hero bg-center bg-100 overflow-hidden">
+    <main class="main-container font-outfit h-screen bg-zinc-800 bg-hero bg-center bg-100 overflow-hidden">
       <nav class="nav sm:w-1/4 w-full">
         <Link class="text-white flex flex-row items-center pt-5 pl-5" to="/">
           <svg
@@ -170,7 +170,7 @@ function LoginPage() {
           </div>
         </div>
       </div>
-    </body>
+    </main>
   );
 }
 
