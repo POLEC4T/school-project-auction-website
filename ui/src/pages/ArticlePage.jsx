@@ -7,6 +7,7 @@ import { getArticleImagesByArticleId } from '../services/ImageService';
 import ImageCarousel from '../components/ImageCarousel';
 import NavBar from '../components/NavBar'
 import NotFoundErrorPage from './NotFoundErrorPage';
+import { useParams } from 'react-router-dom';
 
 function PageArticle() {
 
@@ -18,8 +19,10 @@ function PageArticle() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const idPassed = useParams().id;
+
   useEffect(() => {
-    getArticle(1).then((response) => {
+    getArticle(idPassed).then((response) => {
       if (response.message === 'Article non trouvé') {
         setError(response.message);
         setIsLoading(false);
@@ -31,7 +34,7 @@ function PageArticle() {
     .catch(() => {
       setError('Error connecting to server. Please try again later.');
     });
-  }, []);
+  }, [idPassed]);
 
   useEffect(() => {
     if (article) {
@@ -51,18 +54,9 @@ function PageArticle() {
       });
     }
   }, [article]);
-
-  useEffect(() => {
-    if (article) {
-      getNbLikeArticle(article.id).then((nbLikesRes) => {
-        setNbLikesConst(nbLikesRes.nb);
-      });
-    }
-  }, [article]);
-
   
   return (
-    <div className="">
+    <div className="bg-zinc-100 h-screen">
         {isLoading ? (
           <div className="text-center">Loading...</div>
         ) : (
@@ -75,7 +69,7 @@ function PageArticle() {
                 <section className="gauche sm:w-1/2 w-full flex justify-center mt-10 mb-10">
                   {imagesLoaded && <ImageCarousel images={images}/>}
                 </section>
-                {article && vendeur && nbLikesConst && <Encherir article={article} vendeur={vendeur} nbLikes={nbLikesConst}/>}
+                {article && vendeur && <Encherir article={article} vendeur={vendeur}/>}
               </main>
             </>
           )

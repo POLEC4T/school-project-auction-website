@@ -1,5 +1,5 @@
 const { authJwt } = require("../middleware");
-const articleController = require("../controller/article.controller");
+const accueilController = require("../controller/accueil.controller");
 const imageController = require("../controller/image.controller");
 
 module.exports = (app) => {
@@ -11,10 +11,6 @@ module.exports = (app) => {
     next();
   });
 
-  app.get("/api/article/:id/images", imageController.getArticleImagesByArticleId);
-
-  app.get("/api/article/:id/likes", articleController.getNbLikeArticle);
-  
-  app.get("/api/article/:id",articleController.getArticle);
+  app.get("/api/accueil/leasttimeleft", accueilController.getArticlesWithLeastTimeLeft);
 
 };

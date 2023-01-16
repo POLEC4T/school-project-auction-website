@@ -433,7 +433,7 @@ function SignupPage() {
               </div>
             </div>
           )}
-          <button className="next sm:px-5 px-2" onClick={handleNextPage}>
+          <button className="suivant sm:px-5 px-2" onClick={handleNextPage}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

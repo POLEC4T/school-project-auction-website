@@ -52,7 +52,7 @@ function LoginPage() {
   };
 
   return (
-    <body class="main-container font-outfit h-screen bg-zinc-800 bg-hero bg-center bg-100 overflow-hidden">
+    <main class="main-container font-outfit h-screen bg-zinc-800 bg-hero bg-center bg-100 overflow-hidden">
       <nav class="nav sm:w-1/4 w-full">
         <Link class="text-white flex flex-row items-center pt-5 pl-5" to="/">
           <svg
@@ -79,14 +79,10 @@ function LoginPage() {
           <div class="haut flex flex-col items-center pt-5 px-5">
             <h2 class="opacity-100 font-gowun text-4xl">Connexion</h2>
 
-            <button class="google-connexion mt-10 h-10 sm:w-1/2 w-3/4 border-2 border-zinc-800 flex flex-row items-center rounded-xl justify-between">
-              <img
-                class="h-full pl-4 py-2"
-                src={logoGoogle}
-                alt="google-logo"
-              />
-              <p class="sm:pr-3 pr-7 text-lg ">Se connecter avec Google</p>
-            </button>
+                        <button class="google-connexion mt-10 h-10 sm:w-1/2 w-3/4 border-2 border-zinc-800 flex flex-row items-center rounded-xl justify-between">
+                            <img class="h-full pl-4 py-2" src={logoGoogle} alt="google-logo"/>
+                            <p class="sm:pr-3 pr-7 sm:text-lg text-sm ">Se connecter avec Google</p>
+                        </button>
 
             <div class="ligne w-full flex flex-row overflow-hidden mt-10">
               <img
@@ -174,7 +170,7 @@ function LoginPage() {
           </div>
         </div>
       </div>
-    </body>
+    </main>
   );
 }
 
