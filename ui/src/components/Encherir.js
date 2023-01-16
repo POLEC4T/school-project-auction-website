@@ -58,7 +58,7 @@ function Encherir({ article, vendeur }) {
                     </span>
                 </div>
 
-                <div className="informations bg-gray-100 sm:w-5/6 w-full p-4 sm:px-9 px-4 sm:rounded-xl rounded-b-xl shadow-base shadow-gray-300">
+                <div className="informations bg-white sm:w-5/6 w-full p-4 sm:px-9 px-4 sm:rounded-xl rounded-b-xl shadow-base shadow-gray-300">
 
                         <div className="top flex justify-between items-start">
                             <div className="prix flex flex-col">

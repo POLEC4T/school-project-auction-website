@@ -56,7 +56,7 @@ function PageArticle() {
   }, [article]);
   
   return (
-    <div className="">
+    <div className="bg-zinc-100 h-screen">
         {isLoading ? (
           <div className="text-center">Loading...</div>
         ) : (
