@@ -26,7 +26,17 @@ class TodoController {
 
   createArticle = (req,res) => {
     logger.info("ArticleController: createArticle");
-    articleRepository.createArticle(req.body).then((article) => {
+    const article = {
+      titre: req.body.titre,
+      description: req.body.description,
+      categorie: req.body.categorie,
+      taille: req.body.taille,
+      couleurs: req.body.couleur,
+      materiaux: req.body.materiaux,
+      prix_depart: req.body.prix_depart
+    }
+    if(req.body.seuil) article.seuil_reserve = req.body.seuil;
+    articleRepository.createArticle(article).then((article) => {
       if(!article){
         return res.status(404).send({message: "Article non créé"});
       }
