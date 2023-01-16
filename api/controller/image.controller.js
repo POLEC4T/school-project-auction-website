@@ -1,5 +1,6 @@
 const logger = require('../logger/api.logger');
 const imageRepository = require('../repository/image.repository');
+const multer = require('multer');
 
 class TodoController{
 
@@ -13,6 +14,25 @@ class TodoController{
       }
       )
   }
+
+  uploadImage = (req,res) => {
+    logger.info('imageController: uploadImage')
+
+    upload(req, res, (err) => {
+      console.log("Request ---", req.body);
+      console.log("Request file ---", req.file);
+      imageRepository.uploadImage(req.file.path,req.body.articleId).then((image) => {
+        if(!image){
+          return res.status(404).send({message: "Erreur lors de l'upload de l'image"});
+        }
+        return res.status(200).send(image);
+      })
+      if(!err)
+         return res.send(200).end();
+    }
+    )
+  }
+
 
 }
 module.exports = new TodoController();

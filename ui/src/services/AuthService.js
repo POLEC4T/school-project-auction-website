@@ -1,9 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3080/api/auth/";
-
 const registerAcheteur = (login, email, password) => {
-  return axios.post(API_URL + "signup", {
+  return axios.post("/api/auth/signup", {
     login,
     email,
     password,
@@ -12,7 +10,7 @@ const registerAcheteur = (login, email, password) => {
 };
 
 const registerVendeur = (login, email, password, num_siren,nom, prenom) => {
-  return axios.post(API_URL + "signup", {
+  return axios.post("/api/auth/signup", {
     login,
     email,
     password,
@@ -25,7 +23,7 @@ const registerVendeur = (login, email, password, num_siren,nom, prenom) => {
 
 const login = (login, password) => {
   return axios
-    .post(API_URL + "signin", {
+    .post("/api/auth/signin", {
       login,
       password,
     })

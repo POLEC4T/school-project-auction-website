@@ -12,6 +12,8 @@ import Couleur from "../components/vente/Couleur";
 import Materiaux from "../components/vente/Materiaux";
 import PrixDepart from "../components/vente/PrixDepart";
 import PrixReserve from "../components/vente/PrixReserve";
+import { createArticle } from "../services/ArticleService";
+import {uploadImage} from "../services/ImageService";
 
 function VendrePage() {
   //usestates
@@ -81,19 +83,27 @@ function VendrePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
+    const article = {
       titre: titre,
       description: description,
-      images: images,
       categorie: categorie,
       taille: taille,
       couleur: couleur,
       materiaux: materiaux,
-      prix_depart: prix_depart,
-      seuil: seuil,
+      prix_depart: prix_depart
     };
+    if (seuil !== 0) {
+      article.seuil = seuil;
+    }
     //TODO: send data to backend
-    console.log(data);
+    createArticle(article).then((response) => {
+      console.log(response);
+      uploadImage(response.data.id, images).then((response) => {
+        console.log(response);
+      }
+      );
+    });
+    console.log(article);
   };
 
   const handleNextPage = (e) => {

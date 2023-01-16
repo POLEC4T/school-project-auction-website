@@ -23,6 +23,18 @@ class ImageRepository {
             return {};
         }
     }
+
+    async uploadImage(url, articleId) {
+        try {
+            const newImage = await this.db.images.create(url).then((image) => {
+                image.setArticle(articleId);
+            });
+            return newImage;
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+    }
 }
 
 module.exports = new ImageRepository();
