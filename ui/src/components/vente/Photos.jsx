@@ -1,24 +1,27 @@
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function Photos(props) {
     const [message, setMessage] = useState("");
+    const [nbImages, setNbImages] = useState(0);
 
     const onBlur = (e) => {
-        if (props.value.length === 0) {
+        if (props.images.length+1 === 0) {
             setMessage("Vous devez ajouter au moins une photo");
-        } else if (props.value.length > 4) {
+        } else if (props.images.length === 4) {
             setMessage("Vous ne pouvez pas ajouter plus de 4 photos");
         }else {
             setMessage("");
         }
     };
 
-    const handleUpload = (e) => {
-        const chosenFiles = Array.prototype.slice.call(e.target.files);
-        props.onChange(chosenFiles);
-    }
+    useEffect(() => {
+      setNbImages(props.images.length);
+    }, [props.images.length])
+    
 
+//TODO : Afficher les previews des images
   return (
     <div class="photos w-5/6 mt-10">
       <h2 class="font-gowun text-xl font-bold">Photos :</h2>
@@ -27,8 +30,7 @@ function Photos(props) {
         <form class="flex items-center justify-between">
           <p class="w-1/3">Ajouter jusqu'à 4 photos :</p>
           <input
-            onChange={handleUpload}
-            value={props.value}
+            onChange={props.onChange}
             onBlur={onBlur}
             class="file:bg-zinc-800 file:rounded-lg file:text-white file:border-zinc-800 file:font-outfit hover:file:bg-zinc-600 w-2/3 text-center ml-5"
             type="file"
@@ -37,6 +39,7 @@ function Photos(props) {
             accept="image/*"
             onchange="fonctionHandleFile"
           />
+          <p class="w-1/3 text-right">{nbImages + " images"}</p>
         </form>
       </div>
         {message.length > 0 && (

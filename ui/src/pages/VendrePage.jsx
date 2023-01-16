@@ -6,6 +6,7 @@ import RefusedAccess from "../components/RefusedAccess";
 import Titre from "../components/vente/Titre";
 import Taille from "../components/vente/Taille";
 import Photos from "../components/vente/Photos";
+import Description from "../components/vente/Description";
 
 function VendrePage() {
 
@@ -38,8 +39,9 @@ function VendrePage() {
     }
 
     const handleImages = (e) => {
-        e.preventDefault();
-        setImages([...images, ...e.target.files]);
+        if(images.length < 4) {
+            setImages([...images,e.target.files]);
+        }
     }
 
     const handleCategorie = (e) => {
@@ -91,23 +93,24 @@ function VendrePage() {
 
     const handleNextPage = (e) => {
         e.preventDefault();
-        //on remet la validité du formulaire à false quand on change de page
-        setIsPageValid(false);
-        if(page < 3){
+        if(page < 3 && isPageValid){
             setPage(page + 1);
         }
+        //on remet la validité du formulaire à false quand on change de page
+        setIsPageValid(false);
     }
 
     const handlePreviousPage = (e) => {
         e.preventDefault();
-        //on remet la validité du formulaire à false quand on change de page
-        setIsPageValid(false);
         if(page > 1){
             setPage(page - 1);
         }
+        //on remet la validité du formulaire à false quand on change de page
+        setIsPageValid(false);
     }
 
     //useEffect
+    //verifier le droit d'accès à la page
     useEffect(() => {
         getVendre().then((response) => {
             setVendeur(true);
@@ -120,6 +123,30 @@ function VendrePage() {
             setIsLoading(false);
         });
     }, [])
+
+    //vérifier si la page est valide
+    useEffect(() => {
+        if(page === 1){
+            console.log()
+            if(titre !== "" && description !== "" && description.length <=255 && images.length >= 0 && images.length <4){
+                setIsPageValid(true);
+            }
+        }
+        else if(page === 2){
+            if(taille !== "" && couleur !== "" && materiaux !== "" && categorie !== ""){
+                setIsPageValid(true);
+            }
+        }
+        else if(page === 3){
+            if(prix_depart !== 0 && seuil !== 0){
+                setIsPageValid(true);
+            }
+        }
+        else{
+            setIsPageValid(false);
+        }
+    }, [page,titre,description,images,categorie,taille,couleur,materiaux,prix_depart,seuil])
+
     if(isLoading){
         return null;
     }
@@ -127,7 +154,7 @@ function VendrePage() {
         return (
             <>
                 <NavBar/>
-                <main class="main-container flex flex-row items-center justify-center font-outfit h-full w-screen bg-zinc-800 bg-hero bg-cover bg-100 overflow-hidden sm:px-48 px-0 py-24"> 
+                <main class="main-container flex flex-row items-center justify-center font-outfit h-screen w-screen bg-zinc-800 bg-vente bg-cover bg-100 overflow-hidden sm:px-48 px-0 py-24"> 
                 
                 <div class="etape bg-white w-full h-full rounded-xl flex flex-row justify-between translate-y-[-40px]">
         
@@ -137,15 +164,18 @@ function VendrePage() {
                           </svg>                  
                     </button>
 
+                    <div class="formulaire mt-5 flex flex-col items-center w-full">
+
                     <h2 class="font-gowun sm:text-4xl text-2xl">Mise aux enchères ({page}/3)</h2>
 
                     {page === 1 && (
                         <>
+                        <Photos onChange={handleImages} images={images}/>
                         <Titre onChange={handleTitre} value={titre}/>
-                        <Photos onChange={handleImages} value={images}/>
+                        <Description onChange={handleDescription} value={description}/>
                         </>
                     )}
-                    {/*afficher form en fonction de la page */}
+                    </div>
                     <button class="suivant sm:px-5 px-2" onClick={handleNextPage}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
