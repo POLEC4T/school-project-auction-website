@@ -24,6 +24,16 @@ class TodoController {
     )
   };
 
+  createArticle = (req,res) => {
+    logger.info("ArticleController: createArticle");
+    articleRepository.createArticle(req.body).then((article) => {
+      if(!article){
+        return res.status(404).send({message: "Article non trouvé"});
+      }
+      return res.send(article);
+    }
+  )};
+
 
 
 
