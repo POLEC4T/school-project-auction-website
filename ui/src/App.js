@@ -8,6 +8,7 @@ import VendrePage from "./pages/VendrePage";
 import ProfilePage from "./pages/ProfilePage";
 import SignupPage from "./pages/SignupPage";
 import AccueilPage from "./pages/AccueilPage";
+import ResultatsRecherche from "./pages/ResultatsRecherche";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<AccueilPage />} />
+          <Route path="/resultats-recherche/:recherche" element={<ResultatsRecherche />} />
           <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="/connexion" element={<LoginPage />} />
           <Route path="/inscription" element={<SignupPage />} />
