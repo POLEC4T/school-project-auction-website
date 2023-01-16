@@ -11,10 +11,10 @@ const connect = () => {
     const password = process.env.DB_PASSWORD;
     const database = process.env.DB_NAME;
 
-    const sequelize = new Sequelize(database, userName, password, {
-        host: hostName,
+    const sequelize = new Sequelize('TestDB', 'milon', 'M1l@475960', {
+        host: 'localhost',
         dialect: 'postgres',
-        port: process.env.DB_PORT,
+        port: '5432',
         logging: false,
         pool: {
             max: 10,
@@ -82,6 +82,10 @@ const connect = () => {
     })
     db.users.hasMany(db.likes)
     db.articles.hasMany(db.likes)
+
+    const fs = require('fs');
+
+    
    
 
     return db;

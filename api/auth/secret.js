@@ -1,1 +1,1 @@
-module.exports = 'clePriveeDEMERDE'
+module.exports = 'clePrivee'
