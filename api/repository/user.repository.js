@@ -1,5 +1,5 @@
 const db = require('../config/db.config').connect();
-
+const roleModel = db.roles;
 
 class UserRepository {
 
@@ -16,7 +16,17 @@ class UserRepository {
             return users;
         } catch (err) {
             console.log(err);
-            return [];
+            return {};
+        }
+    }
+
+    async createUser(user) {
+        try{
+            const newUser = await this.db.users.create(user);
+            return newUser;
+        } catch (err) {
+            console.log(err);
+            return {};
         }
     }
 
@@ -24,6 +34,21 @@ class UserRepository {
 
         try {
             const user = await this.db.users.findOne({
+                where: {
+                    login: login
+                }, 
+            });
+            return user;
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+    }
+
+    async getUserWithPasswordByLogin(login) {
+
+        try {
+            const user = await this.db.users.scope('withPassword').findOne({
                 where: {
                     login: login
                 }, 

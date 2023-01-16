@@ -53,7 +53,7 @@ function ArticleCompact({article}){
 
         {imagesLoaded&&
 
-        <div className="image w-full h-full bg-cover bg-no-repeat bg-center bg-article rounded-t flex items-center justify-center" style={{backgroundImage: `url(${image})`}}>
+        <div className="image w-full h-full bg-cover bg-no-repeat bg-center bg-inverse rounded-t flex items-center justify-center" style={{backgroundImage: `url(${image})`}}>
           <p className="font-outfit text-2xl">{article.titre}</p>
         </div>
 

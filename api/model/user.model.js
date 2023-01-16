@@ -15,7 +15,13 @@ module.exports = (sequelize, DataTypes, Model) => {
           validate: {
             notEmpty: { msg: "le login ne doit pas être vide"},
             notNull: { msg: "le login est obligatoire"}
-          }
+          } 
+        },
+        nom: {
+          type: DataTypes.STRING,
+        },
+        prenom: {
+          type: DataTypes.STRING,
         },
         pdp: {
           type: DataTypes.STRING
@@ -61,6 +67,7 @@ module.exports = (sequelize, DataTypes, Model) => {
           allowNull: false,
           defaultValue: 0
         },
+        
         //éléments de personnalisation
         banniere: {
           type: DataTypes.STRING
@@ -69,27 +76,28 @@ module.exports = (sequelize, DataTypes, Model) => {
           type: DataTypes.STRING,
           defaultValue: 'black'
         },
-        num_siret: {
+        num_siren: {
           type: DataTypes.INTEGER,
-          allowNull: true, //car si un user n'est pas vendeur il peut ne pas avoir de numéro de SIRET
+          allowNull: true, //car si un user n'est pas vendeur il peut ne pas avoir de numéro de SIREN
           validate: {
             function(value){
-              let regex = new RegExp("\d{14")
+              let regex = new RegExp("^[0-9]{14}$")
               return regex.test(value)
             }
           }
         },
         date_naiss: {
           type: DataTypes.DATE,
-          allowNull: false,
-          validate: {
-            notNull: { msg: "La date de naissance ne doit pas être vide"}
-          }
         }
       }, {
         // autres options du modèle
         defaultScope: {
           attributes: { exclude: ['password'] } //exclure le password par défaut
+        },
+        scopes: {
+          withPassword: {
+            attributes: {}
+          }
         },
         sequelize, // instance de connexion
         modelName: 'user' // nom du modèle

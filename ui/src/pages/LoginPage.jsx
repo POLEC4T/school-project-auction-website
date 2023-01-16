@@ -92,11 +92,11 @@ function LoginPage() {
 
                         {eye === "closed" ? (
 
-                            <input type="text" placeholder="mot de passe" class="placeholder-zinc-600 text-xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
+                            <input type="password" placeholder="mot de passe" class="placeholder-zinc-600 text-xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
 
                         ) : (
 
-                            <input type="password" placeholder="mot de passe" class="placeholder-zinc-600 text-xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
+                            <input type="text" placeholder="mot de passe" class="placeholder-zinc-600 text-xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
 
                         )
 
