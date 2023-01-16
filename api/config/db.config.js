@@ -11,10 +11,10 @@ const connect = () => {
     const password = process.env.DB_PASSWORD;
     const database = process.env.DB_NAME;
 
-    const sequelize = new Sequelize('TestDB', 'milon', 'M1l@475960', {
-        host: 'localhost',
+    const sequelize = new Sequelize(database, userName, password, {
+        host: hostName,
         dialect: 'postgres',
-        port: '5432',
+        port: process.env.DB_PORT,
         logging: false,
         pool: {
             max: 10,
