@@ -15,7 +15,6 @@ function RefusedAccess(props) {
                 <Link to="/" className="hover:bg-zinc-600 bg-zinc-800 text-amber-50 p-2 px-3 sm:text-2xl text-lg rounded-xl mt-10">Retourner à la page d'accueil</Link>
             </div>
         </>
-
     );
 }
 
