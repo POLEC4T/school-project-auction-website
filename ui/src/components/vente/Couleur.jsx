@@ -1,10 +1,29 @@
 import React from "react";
+import { useState } from "react";
 
 function Couleur(props) {
+  const [message, setMessage] = useState("");
+
+  const handleBlur = (e) => {
+    let regex = new RegExp("^[a-zA-Z]+(,[a-zA-Z]+)*$");
+    if (props.value.length === 0) {
+      setMessage("La couleur est obligatoire");
+    }
+    else if(!regex.test(props.value)) { 
+      setMessage("La couleur doit être au format suivant : couleur1,couleur2,couleur3");
+    }
+    else {
+      setMessage("");
+    }
+  };
+  
   return (
     <div class="couleur sm:mt-8 mt-12 w-5/6">
       <h2 class="font-gowun text-xl font-bold">Couleurs :</h2>
       <input
+        onChange={props.onChange}
+        onBlur={handleBlur}
+        value={props.value}
         type="text"
         placeholder="exemple : rouge,bleu,jaune"
         class="placeholder-zinc-600 h-8 w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2"
@@ -27,6 +46,9 @@ function Couleur(props) {
         si votre produit possède plusieurs couleurs, veillez à les entrer sous
         la forme suivante : couleur1,couleur2,couleur3
       </div>
+      {message && (
+        <p class="text-red-600 text-xs">{message}</p>
+      )}
     </div>
   );
 }

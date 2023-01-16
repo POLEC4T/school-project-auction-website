@@ -4,10 +4,10 @@ import { useEffect } from "react";
 
 function Photos(props) {
     const [message, setMessage] = useState("");
-    const [nbImages, setNbImages] = useState(0);
+    const [images, setImages] = useState("");
 
     const onBlur = (e) => {
-        if (props.images.length+1 === 0) {
+        if (props.images.length === 0) {
             setMessage("Vous devez ajouter au moins une photo");
         } else if (props.images.length === 4) {
             setMessage("Vous ne pouvez pas ajouter plus de 4 photos");
@@ -17,8 +17,8 @@ function Photos(props) {
     };
 
     useEffect(() => {
-      setNbImages(props.images.length);
-    }, [props.images.length])
+      setImages(props.value);
+    }, [props.value])
     
 
 //TODO : Afficher les previews des images
@@ -39,7 +39,7 @@ function Photos(props) {
             accept="image/*"
             onchange="fonctionHandleFile"
           />
-          <p class="w-1/3 text-right">{nbImages + " images"}</p>
+          <p class="w-1/3 text-right">{images}</p>
         </form>
       </div>
         {message.length > 0 && (

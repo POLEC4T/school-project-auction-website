@@ -82,10 +82,7 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         seuil_reserve: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             validate: {
-                notNull : { msg: "attribut obligatoire"},
-                isEmpty: { msg: "attribut obligatoire"},
                 isSeuilValid(value){
                     if(value < this.prix){
                         throw new Error("Le prix de réserve doit être supérieur ou égal au prix de départ")
