@@ -7,6 +7,7 @@ import NotFoundErrorPage from "./pages/NotFoundErrorPage";
 import VendrePage from "./pages/VendrePage";
 import ProfilePage from "./pages/ProfilePage";
 import SignupPage from "./pages/SignupPage";
+import AccueilPage from "./pages/AccueilPage";
 
 function App() {
   return (
