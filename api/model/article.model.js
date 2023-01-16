@@ -92,8 +92,12 @@ module.exports = (sequelize, DataTypes, Model) => {
                     }
                 }
             }
+        },
+        categorie: {
+            type: DataTypes.STRING,
         }
-      }, {
+      }, 
+      {
         // autres options du modèle
         sequelize, // instance de connexion
         modelName: 'article' // nom du modèle
