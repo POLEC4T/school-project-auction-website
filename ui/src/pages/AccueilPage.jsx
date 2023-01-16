@@ -119,7 +119,7 @@ function AccueilPage() {
 
                 <div className="button-afficher-plus w-full flex justify-center sm:mt-10 mt-5" >
                     {topArticles&&
-                        <button className="fleche bg-zinc-800 rounded-full w-36 text-white flex items-center font-outfit justify-around p-2 hover:bg-zinc-600" onClick={handleClick} disabled={numArticles >= topArticles.length}>
+                        <button className="fleche bg-zinc-800 rounded-full w-36 text-white flex items-center font-outfit justify-around p-2 hover:bg-zinc-600" onClick={handleClick}>
                         
                                 {buttonState === "Afficher moins" ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="white" class="w-6 h-6 rotate-180">
