@@ -82,6 +82,10 @@ const connect = () => {
     })
     db.users.hasMany(db.likes)
     db.articles.hasMany(db.likes)
+
+    const fs = require('fs');
+
+    
    
 
     return db;

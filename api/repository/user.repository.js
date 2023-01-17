@@ -74,6 +74,38 @@ class UserRepository {
             return {};
         }
     }
+
+    async deleteUser(id) {
+            
+        try {
+            const user = await this.db.users.destroy({
+                where: {
+                    id: id
+                },
+            });
+            return user;
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+    }
+
+    async deleteUserByLogin(login) {  
+        try {
+            const user = await this.db.users.destroy({
+                where: {
+                    login: login
+                },
+            });
+            return user;
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+    }
+
+    
+
 }
 
 module.exports = new UserRepository();

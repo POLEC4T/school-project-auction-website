@@ -8,18 +8,16 @@ describe('Test ArticleRepository', () => {
         // Test pour vérifier que la méthode retourne un article avec l'ID donné
         it('devrait retourner un article avec l\'ID donné', async () => {
             const id = 1;
-            articleRepository.getArticle(id).then(article => {
-                // Vérifie qu'il y a une correspondance stricte entre l'ID de l'article retourné et l'ID donné
-                assert.strictEqual(article.id, id);
-            })
+            const article = await articleRepository.getArticle(id);
+            // Vérifie qu'il y a une correspondance stricte entre l'ID de l'article retourné et l'ID donné
+            assert.strictEqual(article.id, id);
         });
         // Test pour vérifier que la méthode retourne un objet vide en cas d'erreur
-        it('devrait retourner un objet vide en cas d\'erreur', async () => {
+        it('devrait retourner un null en cas d\'erreur', async () => {
             const id = -1;
-            articleRepository.getArticle(id).then(article => {
-                // Vérifie qu'il y a une correspondance stricte entre l'objet retourné et un objet vide {}
-                assert.deepStrictEqual(article, {});
-            });
+            const article = await articleRepository.getArticle(id);
+            // Vérifie qu'il y a une correspondance stricte entre l'objet retourné et un objet vide {}
+            assert.deepStrictEqual(article, null);    
         });
     })
 });

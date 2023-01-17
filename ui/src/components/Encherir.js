@@ -3,8 +3,9 @@ import { getDerniereOffre } from '../services/EnchereService';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 import Timer from './Timer';
+import { getNbLikeArticle } from '../services/ArticleService';
 
-function Encherir({ article, vendeur, nbLikes }) {
+function Encherir({ article, vendeur }) {
 
     const pfpImageExample = require('../static/images/pfp-image-example.jpeg');
     
@@ -17,6 +18,14 @@ function Encherir({ article, vendeur, nbLikes }) {
         }
     }, [])
     
+    const [nbLikesConst, setNbLikesConst] = useState(0);
+    useEffect(() => {
+        if (article) {
+          getNbLikeArticle(article.id).then((nbLikesRes) => {
+            if (nbLikesRes.nb) setNbLikesConst(nbLikesRes.nb)
+          });
+        }
+      }, [article]);
 
     const placeholderPrixForm = `${offreActuelle.montant + offreActuelle.montant*0.1}€ ou plus`;
     const propositionPrix1 = offreActuelle.montant + offreActuelle.montant*0.1;
@@ -24,9 +33,15 @@ function Encherir({ article, vendeur, nbLikes }) {
     const propositionPrix3 = offreActuelle.montant + offreActuelle.montant;
     const heroPrixActuel = parseFloat(offreActuelle.montant);
     const endDate = moment(article.createdAt).add(7, 'days');
-    
-
+    const [montantInput, setMontantInput] = useState('');
     const articleTags = {"col": article.couleurs.split(","), "mat": article.materiaux.split(","), "taille": article.taille};
+
+    const handleClickButtonProposition = (e) => {
+        setMontantInput(e);
+    }
+    const handleChangeMontantInput = (event) => {
+        setMontantInput(event.target.value);
+    }
 
     return (
 
@@ -43,7 +58,7 @@ function Encherir({ article, vendeur, nbLikes }) {
                     </span>
                 </div>
 
-                <div className="informations bg-gray-100 sm:w-5/6 w-full p-4 sm:px-9 px-4 sm:rounded-xl rounded-b-xl shadow-base shadow-gray-300">
+                <div className="informations bg-white sm:w-5/6 w-full p-4 sm:px-9 px-4 sm:rounded-xl rounded-b-xl shadow-base shadow-gray-300">
 
                         <div className="top flex justify-between items-start">
                             <div className="prix flex flex-col">
@@ -56,7 +71,7 @@ function Encherir({ article, vendeur, nbLikes }) {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                 </svg>
-                                <p className="font-gowun">{nbLikes}</p>
+                                <p className="font-gowun">{nbLikesConst}</p>
                             </button>
                         </div>  
 
@@ -72,11 +87,11 @@ function Encherir({ article, vendeur, nbLikes }) {
 
                         <div className="zone-enchere flex flex-col pt-6">
                             <div className="enchere-preparee w-full flex gap-4">
-                                <button className="bg-zinc-300 hover:bg-zinc-200 w-1/3 rounded-lg h-10 text-xl">{propositionPrix1}€</button>
-                                <button className="bg-zinc-400 hover:bg-zinc-300 w-1/3 rounded-lg h-10 text-xl">{propositionPrix2}€</button>
-                                <button className="bg-zinc-500 hover:bg-zinc-400 w-1/3 rounded-lg h-10 text-xl">{propositionPrix3}€</button>
+                                <button className="bg-zinc-300 hover:bg-zinc-200 w-1/3 rounded-lg h-10 text-xl" onClick={() => handleClickButtonProposition(propositionPrix1)}>{propositionPrix1}€</button>
+                                <button className="bg-zinc-400 hover:bg-zinc-300 w-1/3 rounded-lg h-10 text-xl" onClick={() => handleClickButtonProposition(propositionPrix2)}>{propositionPrix2}€</button>
+                                <button className="bg-zinc-500 hover:bg-zinc-400 w-1/3 rounded-lg h-10 text-xl" onClick={() => handleClickButtonProposition(propositionPrix3)}>{propositionPrix3}€</button>
                             </div>
-                            <input className="mt-3 bg-zinc-200 rounded-lg h-12 px-4 focus:outline-none hover:bg-zinc-200 text-xl" type="text" placeholder={placeholderPrixForm}/>
+                            <input className="mt-3 bg-zinc-200 rounded-lg h-12 px-4 focus:outline-none hover:bg-zinc-200 text-xl" type="number" placeholder={placeholderPrixForm} value={montantInput} onChange={handleChangeMontantInput}/>
                             <div className="enchere-ou-offre-maximale flex mt-3 gap-4">
                                 <button className="bg-zinc-300 hover:bg-zinc-200 w-full rounded-lg h-10 text-xl">Enchérir</button>
                             </div>
