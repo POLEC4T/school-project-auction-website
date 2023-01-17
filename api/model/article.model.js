@@ -79,13 +79,24 @@ module.exports = (sequelize, DataTypes, Model) => {
         taille: {
             //Les différents tags seront tous dans la même colonne, séparés par des virgules
             type: DataTypes.STRING,
+            allowNull: true,
+            isIn: {
+                args: [['0-4', '5-9', '10-14' , 'xs', 's', 'm', 'l', 'xl', 'xxl']],
+            },
+        },
+        categorie: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'autres',
+            isIn: {
+                args: [['haut', 'bas', 'autres']],
+            },
         },
         seuil_reserve: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
                 notNull : { msg: "attribut obligatoire"},
-                isEmpty: { msg: "attribut obligatoire"},
                 isSeuilValid(value){
                     if(value < this.prix){
                         throw new Error("Le prix de réserve doit être supérieur ou égal au prix de départ")

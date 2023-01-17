@@ -9,15 +9,6 @@ function NavBar() {
   const [isConnected, setIsConnected] = useState(false);
   const [valueInputRecherche, setValueInputRecherche] = useState("");
 
-  function handleChangeInputRecherche(e) {
-    setValueInputRecherche(e.target.value);
-  }
-
-  function handleSubmitRecherche(e) {
-    e.preventDefault();
-    return <ResultatsRecherche valueInputRecherche={valueInputRecherche} />;
-  }
-
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user) {
@@ -80,14 +71,11 @@ function NavBar() {
           <form
             action=""
             className="w-full"
-            onSubmit={() => handleSubmitRecherche}
           >
             <input
               type="text"
               placeholder="Rechercher"
               className="w-full rounded-r-xl bg-amber-50 focus:outline-none placeholder-zinc-800"
-              onChange={handleChangeInputRecherche}
-              value={valueInputRecherche}
             />
           </form>
         </div>
@@ -121,19 +109,19 @@ function NavBar() {
 
       <div className="categories w-full flex justify-around font-outfit">
         <NavLink
-          to="/article?cat=hauts"
+          to="/recherche?cat=haut"
           className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
         >
           Hauts
         </NavLink>
         <NavLink
-          to="/article?cat=bas"
+          to="/recherche?cat=bas"
           className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
         >
           Bas
         </NavLink>
         <NavLink
-          to="/article?cat=autres"
+          to="/recherche?cat=autres"
           className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
         >
           Autres

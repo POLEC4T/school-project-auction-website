@@ -18,6 +18,7 @@ function ResultatsRecherche() {
     taille: [],
     couleurs: [],
     materiaux: [],
+    categorie: [],
   });
 
   const location = useLocation();
@@ -25,7 +26,9 @@ function ResultatsRecherche() {
   const mat = query.get("mat");
   const col = query.get("col");
   const taille = query.get("taille");
+  const cat = query.get("cat");
 
+  // On pré-coche les filtres s'ils sont dans l'url
   useEffect(() => {
     if (mat) {
       setFilters({ ...filters, materiaux: [mat] });
@@ -40,6 +43,11 @@ function ResultatsRecherche() {
     if (taille) {
       setFilters({ ...filters, taille: [taille] });
       const checkbox = document.querySelector(`input[value=${taille}]`);
+      checkbox.checked = true;
+    }
+    if (cat) {
+      setFilters({ ...filters, categorie: [cat] });
+      const checkbox = document.querySelector(`input[value=${cat}]`);
       checkbox.checked = true;
     }
   }, [mat, col, taille]);
@@ -110,7 +118,7 @@ function ResultatsRecherche() {
   }
 
   function handleClickRemoveFilters() {
-    setFilters({ taille: [], couleurs: [], materiaux: [] });
+    setFilters({ taille: [], couleurs: [], materiaux: [], categorie: [] });
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox) => (checkbox.checked = false));
   }
@@ -283,6 +291,7 @@ function ResultatsRecherche() {
                 value="cachemire"
                 onChange={handleFilterChange}
               />
+              <CheckboxFiltre name="materiaux" value="cuir" onChange={handleFilterChange} />
               <CheckboxFiltre
                 name="materiaux"
                 value="coton"
@@ -311,6 +320,30 @@ function ResultatsRecherche() {
               <CheckboxFiltre
                 name="materiaux"
                 value="dentelle"
+                onChange={handleFilterChange}
+              />
+            </div>
+          </section>
+
+          {/*==================== CATEGORIES ==================== */}
+
+          <div class="w-full h-0.5 bg-gray-700"></div>
+          <section class="w-full flex flex-col gap-3">
+            <h2 class=" font-gowun text-xl ">Catégories</h2>
+            <div class="flex flex-col flex-wrap h-20">
+              <CheckboxFiltre
+                name="categorie"
+                value="haut"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="categorie"
+                value="bas"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="categorie"
+                value="autres"
                 onChange={handleFilterChange}
               />
             </div>

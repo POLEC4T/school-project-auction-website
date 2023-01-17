@@ -9,13 +9,14 @@ import { Link } from "react-router-dom";
 function Encherir({ article, vendeur }) {
   const pfpImageExample = require("../static/images/pfp-image-example.jpeg");
 
-  const [offreActuelle, setOffreActuelle] = useState(0.00);
+  const [offreActuelle, setOffreActuelle] = useState(0.0);
   useEffect(() => {
     if (article) {
-      getDerniereOffre(article.id)
-        .then((enchere) => {
-            enchere.message ? setOffreActuelle({montant: article.prix_depart}) : setOffreActuelle(enchere);
-        });
+      getDerniereOffre(article.id).then((enchere) => {
+        enchere.message
+          ? setOffreActuelle({ montant: article.prix_depart })
+          : setOffreActuelle(enchere);
+      });
     }
   }, [article]);
 
@@ -40,6 +41,7 @@ function Encherir({ article, vendeur }) {
     col: article.couleurs.split(","),
     mat: article.materiaux.split(","),
     taille: article.taille,
+    categorie: article.categorie,
   };
 
   const handleClickButtonProposition = (e) => {
@@ -76,7 +78,9 @@ function Encherir({ article, vendeur }) {
           <div className="top flex justify-between items-start">
             <div className="prix flex flex-col">
               <p className="font-chivo text-gray-500 text-lg">Offre actuelle</p>
-              {offreActuelle.montant && <p className="text-6xl">{offreActuelle.montant}€</p>}
+              {offreActuelle.montant && (
+                <p className="text-6xl">{offreActuelle.montant}€</p>
+              )}
               <p className="text-gray-500 text-lg">Avec prix de réserve</p>
             </div>
 
@@ -163,6 +167,15 @@ function Encherir({ article, vendeur }) {
                 }}
               >
                 #{articleTags.taille}
+              </Link>
+              <Link
+                className="bg-white px-2 rounded"
+                to={{
+                  pathname: "/recherche",
+                  search: `cat=${articleTags.categorie}`,
+                }}
+              >
+                #{articleTags.categorie}
               </Link>
               {articleTags.mat.map((materiau, i) => {
                 return (
