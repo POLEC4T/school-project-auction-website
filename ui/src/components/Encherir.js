@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import moment from 'moment';
 import Timer from './Timer';
 import { getNbLikeArticle } from '../services/ArticleService';
+import { Link } from 'react-router-dom';
 
 function Encherir({ article, vendeur }) {
 
@@ -99,12 +100,12 @@ function Encherir({ article, vendeur }) {
                             <p className="description text-justify mt-6">{article.description}</p>
                             
                             <div className="mt-3 flex gap-2 flex-wrap">
-                                <a className="bg-white px-2 rounded" href="">#{articleTags.taille}</a>
+                                <Link className="bg-white px-2 rounded" to={{pathname: '/recherche', search: `taille=${articleTags.taille}`}}>#{articleTags.taille}</Link>
                                 {articleTags.mat.map((materiau, i) => {
-                                    return <a key={i} className="bg-white px-2 rounded" href="">#{materiau}</a>
+                                    return <Link key={i} className="bg-white px-2 rounded" to={{pathname: '/recherche', search: `mat=${materiau}`}}>#{materiau}</Link>
                                 })}
                                 {articleTags.col.map((couleur, i) => {
-                                    return <a key={i} className="bg-white px-2 rounded" href="">#{couleur}</a>
+                                    return <Link key={i} className="bg-white px-2 rounded" to={{pathname: '/recherche', search: `col=${couleur}`}}>#{couleur}</Link>
                                 })}
                             </div>
                             

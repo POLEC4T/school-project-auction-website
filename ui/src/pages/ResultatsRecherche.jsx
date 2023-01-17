@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import FilAriane from "../components/FilAriane";
 import ArticleCompact from "../components/ArticleCompact";
@@ -19,6 +19,30 @@ function ResultatsRecherche() {
     couleurs: [],
     materiaux: [],
   });
+
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const mat = query.get("mat");
+  const col = query.get("col");
+  const taille = query.get("taille");
+
+  useEffect(() => {
+    if (mat) {
+      setFilters({ ...filters, materiaux: [mat] });
+      const checkbox = document.querySelector(`input[value=${mat}]`);
+      checkbox.checked = true;
+    }
+    if (col) {
+      setFilters({ ...filters, couleurs: [col] });
+      const checkbox = document.querySelector(`input[value=${col}]`);
+      checkbox.checked = true;
+    }
+    if (taille) {
+      setFilters({ ...filters, taille: [taille] });
+      const checkbox = document.querySelector(`input[value=${taille}]`);
+      checkbox.checked = true;
+    }
+  }, [mat, col, taille]);
 
   const chunkSize = 4;
   const chunks = Array.from(
