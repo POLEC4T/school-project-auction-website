@@ -48,3 +48,42 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening on port  ${port}`);
 });
+
+
+///////SERVER WEBSOCKET///////
+const {WebSocketServer} = require('ws');
+const http = require('http');
+const Url = require('url');
+
+const server = http.createServer(app);
+const wsServer = new WebSocketServer({server});
+const portws = 8000;
+server.listen(portws, () => {
+  console.log(`Websocket server listening on port  ${portws}`);
+}
+);
+
+const clients = {};
+
+wsServer.on('connection', (ws, req) => {
+  const params = Url.parse(req.url, true).query;
+  ws.id = params.id;//on récupère l'id de l'article dans la query string
+  const ip = req.socket.remoteAddress;
+  console.log('New client connected');
+  clients[ip] = ws;
+  ws.on('message', (message) => {
+    console.log('received: %s', message);
+    //on envoie le message à tous les clients qui sont connectés à cet article
+    for (let key in clients) {
+      if (clients[key].id === ws.id) {
+        console.log('send to client: %s', message.toString());
+        clients[key].send(message.toString());
+      }
+    }
+  });
+  ws.on('close', () => {
+    console.log('Client disconnected');
+    delete clients[ip];
+  });
+  }
+);

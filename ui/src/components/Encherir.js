@@ -1,15 +1,42 @@
 import React from "react";
 import { getDerniereOffre } from "../services/EnchereService";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import moment from "moment";
 import Timer from "./Timer";
 import { getNbLikeArticle } from "../services/ArticleService";
 import { Link } from "react-router-dom";
 
+const WS_URL = "ws://127.0.0.1:8000"; // à changer en prod
+
 function Encherir({ article, vendeur }) {
   const pfpImageExample = require("../static/images/pfp-image-example.jpeg");
 
   const [offreActuelle, setOffreActuelle] = useState(0.0);
+  const [message, setMessage] = useState("");
+
+  const url = WS_URL + "?id=" + article.id;
+
+  const ws = useRef(null);
+
+  //useEffect qui gère le websocket
+  useEffect(() => {
+    ws.current = new WebSocket(url);
+    ws.current.onopen = () => {
+      console.log("ws connected");
+    };
+    ws.current.onmessage = (e) => {
+      console.log(e.data);
+      setOffreActuelle({ montant: parseFloat(e.data) });
+      console.log(offreActuelle.montant);
+    };
+    ws.current.onclose = () => {
+      console.log("ws closed");
+    };
+    return () => {
+      ws.current.close();
+    };
+  }, [offreActuelle, url]);
+
   useEffect(() => {
     if (article) {
       getDerniereOffre(article.id).then((enchere) => {
@@ -49,6 +76,17 @@ function Encherir({ article, vendeur }) {
   };
   const handleChangeMontantInput = (event) => {
     setMontantInput(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (montantInput <= offreActuelle) {
+      setMessage("Votre offre doit être supérieure à l'offre actuelle");
+    } else {
+      setMessage("");
+      console.log("envoi montant : ", montantInput);
+      ws.current.send(montantInput);
+    }
   };
 
   return (
@@ -149,10 +187,12 @@ function Encherir({ article, vendeur }) {
               onChange={handleChangeMontantInput}
             />
             <div className="enchere-ou-offre-maximale flex mt-3 gap-4">
-              <button className="bg-zinc-300 hover:bg-zinc-200 w-full rounded-lg h-10 text-xl">
+              <button onClick={handleSubmit} className="bg-zinc-300 hover:bg-zinc-200 w-full rounded-lg h-10 text-xl">
                 Enchérir
               </button>
             </div>
+
+            {message && <p className="text-red-500 text-xl mt-3">{message}</p>}
 
             <p className="description text-justify mt-6">
               {article.description}
