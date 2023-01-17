@@ -37,8 +37,17 @@ class ArticleRepository {
                 return {};
             }
     }
- 
-        
+
+    async createArticle(article) {
+        try {
+            //console.log('article:::', article);
+            const newArticle = await this.db.articles.create(article);
+            return newArticle;
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+    }        
 }
 
 module.exports = new ArticleRepository();
