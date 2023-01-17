@@ -15,8 +15,15 @@ function Taille(props) {
         <option selected value="select">
           Selectionner une taille
         </option>
+        <option value="0-4">Jusqu'à 4 ans</option>
+        <option value="5-9">5 à 9 ans</option>
+        <option value="10-14">10 à 14 ans</option>
+        <option value="xs">XS</option>
         <option value="s">S</option>
         <option value="m">M</option>
+        <option value="l">L</option>
+        <option value="xl">XL</option>
+        <option value="xxl">XXL</option>
       </select>
     </div>
   );

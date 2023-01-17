@@ -30,8 +30,9 @@ function Categorie(props) {
         <option selected value="select">
           Selectionner une catégorie
         </option>
-        <option value="pull">Pull</option>
-        <option value="t-shirt">T-shirt</option>
+        <option value="haut">Haut</option>
+        <option value="bas">Bas</option>
+        <option value="autres">Autres</option>
       </select>
         {message.length > 0 && (
             <div class="text-red-500 text-xs">{message}</div>
