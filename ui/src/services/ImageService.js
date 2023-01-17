@@ -11,8 +11,9 @@ export async function getArticleImagesByArticleId(articleId) {
     return await response.json();
 }
 
-export async function uploadImage(file) {
+export async function uploadImage(file, articleId) {
     const formData = new FormData();
     formData.append('image', file);
+    formData.append('articleId', articleId);
     return axios.post('/api/image', formData, { headers: {'Content-Type': 'multipart/form-data'}});
 }

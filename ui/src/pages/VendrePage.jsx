@@ -76,12 +76,22 @@ function VendrePage() {
 
   const handlePrix_depart = (e) => {
     e.preventDefault();
+    //si le dernier caractères est un signe €, on l'enlève
+    if(e.target.value.slice(-1) === "€"){
+      setPrix_depart(e.target.value.slice(0, -1));
+    }else{
     setPrix_depart(e.target.value);
+    }
   };
 
   const handleSeuil = (e) => {
     e.preventDefault();
+    //si le dernier caractères est un signe €, on l'enlève
+    if(e.target.value.slice(-1) === "€"){
+      setSeuil(e.target.value.slice(0, -1));
+    }else{
     setSeuil(e.target.value);
+    }
   };
 
   const handleNextPage = (e) => {
@@ -125,11 +135,10 @@ const handleSubmit = (e) => {
   //TODO: send data to backend
   createArticle(article).then((response) => {
     //upload images
-    console.log(images)
+    console.log(response)
     images.forEach(image => {
       console.log(image[0]);
-      uploadImage(image[0]).then((response) => {
-        console.log(response);
+      uploadImage(image[0],response.data.vendeurId).then((response) => {
         navigate("/");
         window.location.reload();
       }
