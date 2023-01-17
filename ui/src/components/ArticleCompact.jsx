@@ -65,7 +65,7 @@ function ArticleCompact({article}){
                 <p class="font-chivo text-zinc-400 sm:text-lg text-xs">Offre Actuelle</p>
 
                 {offreActuelle&&
-                <p class="font-gowun sm:text-2xl text-md">{article.taille}€</p>
+                <p class="font-gowun sm:text-2xl text-md">{offreActuelle.montant}€</p>
                 }
             </div>
             <div class="temps_restant flex flex-col justify-items-end text-end">

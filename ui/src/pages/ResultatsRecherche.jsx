@@ -6,6 +6,7 @@ import ArticleCompact from "../components/ArticleCompact";
 import { getArticlesWithLeastTimeLeft } from "../services/AccueilService";
 import { useEffect, useState } from "react";
 import ProfileNav from "../components/ProfileNav";
+import CheckboxFiltre from "../components/CheckboxFiltre";
 
 function ResultatsRecherche() {
   const recherche = useParams().recherche;
@@ -13,7 +14,11 @@ function ResultatsRecherche() {
   const [topArticles, setTopArticles] = React.useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filters, setFilters] = useState({ taille: [], color: [], mats: [] });
+  const [filters, setFilters] = useState({
+    taille: [],
+    couleurs: [],
+    materiaux: [],
+  });
 
   const chunkSize = 4;
   const chunks = Array.from(
@@ -82,7 +87,7 @@ function ResultatsRecherche() {
   }
 
   function handleClickRemoveFilters() {
-    setFilters({ taille: [], color: [], mats: [] });
+    setFilters({ taille: [], couleurs: [], materiaux: [] });
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox) => (checkbox.checked = false));
   }
@@ -120,7 +125,7 @@ function ResultatsRecherche() {
             <h2 class=" font-gowun text-xl ">Taille</h2>
 
             <div class="flex flex-col flex-wrap h-20 justify-center items-center">
-              <label class="w-10 inline-flex items-center cursor-pointer">
+              <label class="inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
                   class="cursor-pointer"
@@ -128,9 +133,9 @@ function ResultatsRecherche() {
                   name="taille"
                   onChange={handleFilterChange}
                 />
-                <span class="select-none font-outfit ml-2">1-3 ans</span>
+                <span class="select-none font-outfit ml-2">0 à 3 ans</span>
               </label>
-              <label class="w-10 inline-flex items-center cursor-pointer">
+              <label class="inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
                   class="cursor-pointer"
@@ -138,9 +143,9 @@ function ResultatsRecherche() {
                   name="taille"
                   onChange={handleFilterChange}
                 />
-                <span class="select-none font-outfit ml-2">4-9 ans</span>
+                <span class="select-none font-outfit ml-2">4 à 9 ans</span>
               </label>
-              <label class="w-10 inline-flex items-center cursor-pointer">
+              <label class="  inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
                   class="cursor-pointer"
@@ -148,76 +153,39 @@ function ResultatsRecherche() {
                   name="taille"
                   onChange={handleFilterChange}
                 />
-                <span class="select-none font-outfit ml-2">10-14 ans</span>
-              </label>
-            </div>
-
-            <div class="flex flex-col flex-wrap h-20 justify-center items-center">
-              <label class="w-10 inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  name="taille"
-                  value="XS"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none font-outfit ml-2">XS</span>
-              </label>
-              <label class="w-10 inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  name="taille"
-                  value="S"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none font-outfit ml-2">S</span>
-              </label>
-              <label class="w-10 inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  value="M"
-                  name="taille"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none font-outfit ml-2">M</span>
-              </label>
-              <label class="w-10 inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  value="L"
-                  name="taille"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none font-outfit ml-2">L</span>
+                <span class="select-none font-outfit ml-2">10 à 14 ans</span>
               </label>
 
-              <label class="w-10 inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  value="XL"
-                  name="taille"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  XL
-                </span>
-              </label>
-              <label class="w-10 inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  value="XXL"
-                  name="taille"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  XXL
-                </span>
-              </label>
+              <CheckboxFiltre
+                name="taille"
+                value="XS"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="taille"
+                value="S"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="taille"
+                value="M"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="taille"
+                value="L"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="taille"
+                value="XL"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="taille"
+                value="XXL"
+                onChange={handleFilterChange}
+              />
             </div>
           </section>
 
@@ -228,54 +196,56 @@ function ResultatsRecherche() {
             <h2 class=" font-gowun text-xl ">Couleur</h2>
 
             <div class="flex flex-col flex-wrap h-24">
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer ">
-                <input type="checkbox" class="cursor-pointer" value="S" />
-                <span class="select-none font-outfit ml-2">Rouge</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="M" />
-                <span class="select-none font-outfit ml-2">Jaune</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="L" />
-                <span class="select-none font-outfit ml-2">Bleu</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="M" />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  Noir
-                </span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="Blanc" />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  Blanc
-                </span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer ">
-                <input type="checkbox" class="cursor-pointer" value="S" />
-                <span class="select-none font-outfit ml-2">Gris</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="M" />
-                <span class="select-none font-outfit ml-2">Beige</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="L" />
-                <span class="select-none font-outfit ml-2">Rose</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="M" />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  Violet
-                </span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="L" />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  Orange
-                </span>
-              </label>
+              <CheckboxFiltre
+                name="couleurs"
+                value="rouge"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="jaune"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="bleu"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="vert"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="blanc"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="gris"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="beige"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="noir"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="violet"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="couleurs"
+                value="orange"
+                onChange={handleFilterChange}
+              />
             </div>
           </section>
 
@@ -285,36 +255,41 @@ function ResultatsRecherche() {
           <section class="w-full flex flex-col gap-3">
             <h2 class=" font-gowun text-xl ">Matériaux</h2>
             <div class="flex flex-col flex-wrap h-20">
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer ">
-                <input type="checkbox" class="cursor-pointer" value="S" />
-                <span class="select-none font-outfit ml-2">Cachemire</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="M" />
-                <span class="select-none font-outfit ml-2">Coton</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="L" />
-                <span class="select-none font-outfit ml-2">laine</span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="M" />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  Lin
-                </span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="L" />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  Soie
-                </span>
-              </label>
-              <label class="w-10 inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" class="cursor-pointer" value="L" />
-                <span class="select-none tracking-widest font-outfit ml-2">
-                  Polyester
-                </span>
-              </label>
+              <CheckboxFiltre
+                name="materiaux"
+                value="cachemire"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="materiaux"
+                value="coton"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="materiaux"
+                value="laine"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="materiaux"
+                value="lin"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="materiaux"
+                value="soie"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="materiaux"
+                value="polyester"
+                onChange={handleFilterChange}
+              />
+              <CheckboxFiltre
+                name="materiaux"
+                value="dentelle"
+                onChange={handleFilterChange}
+              />
             </div>
           </section>
         </aside>
@@ -333,9 +308,13 @@ function ResultatsRecherche() {
           </div>
 
           <section class="flex justify-between gap-16 p-12 flex-wrap overflow-y-scroll">
-            {filteredArticles.map((article) => (
-              <ArticleCompact article={article} key={article.id} />
-            ))}
+            {filteredArticles.length === 0 ? (
+              <p>Aucun article ne correspond à votre recherche</p>
+            ) : (
+              filteredArticles.map((article) => (
+                <ArticleCompact article={article} key={article.id} />
+              ))
+            )}
           </section>
         </section>
       </main>
