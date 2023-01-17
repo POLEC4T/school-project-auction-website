@@ -30,13 +30,14 @@ function ArticleCompact({article}){
       }, [article]);
 
 
-    useEffect(() => {
+      useEffect(() => {
         if (article) {
-            getDerniereOffre(article.id).then((enchere) => {
-                setOffreActuelle(enchere);
-            })
+          getDerniereOffre(article.id)
+            .then((enchere) => {
+                enchere.message ? setOffreActuelle({montant: article.prix_depart}) : setOffreActuelle(enchere);
+            });
         }
-    }, [article])
+      }, [article]);
 
     useEffect(() => {
       if (article) {
