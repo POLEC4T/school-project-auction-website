@@ -123,10 +123,7 @@ const handleSubmit = (e) => {
   createArticle(article).then((response) => {
     //upload images
     images.forEach(image => {
-      const formData = new FormData()
-      formData.append("image", image)
-      formData.append("id", response.data.vendeurId)
-      uploadImage(formData).then((response) => {
+      uploadImage(image).then((response) => {
         console.log(response);
       }
       ).catch((error) => {

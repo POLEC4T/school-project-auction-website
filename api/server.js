@@ -14,10 +14,15 @@ db.sequelize.sync({force: false});
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(express.static(path.join(__dirname, "..", "ui", "build")));
 app.use(cors({ origin: true, credentials: true }));
 
 //routes
+app.use('/images', express.static('images'));
+
 app.get("/api", (req, res) => {
   res.json({ message: "L'API marche bien !" });
 });

@@ -17,8 +17,15 @@ class TodoController{
 
   uploadImage = (req,res) => {
     logger.info('imageController: uploadImage')
-
-    console.log(req.file);
+    console.log(req)
+    imageRepository.uploadImage('/images/' + req.file.filename, req.body.articleId).then((image) => {
+      if(!image){
+        return res.status(404).send({message: "Image non uploadée"});
+      }
+      return res.status(200).send(image);
+    }
+    )
+    res.send({message: req.file.filename});
   }
 
 
