@@ -17,7 +17,10 @@ module.exports = (app) => {
   app.get("/api/profil", [authJwt.verifyToken], userController.getProfileInfos);
 
 
-  //routes test
+  // Routes Test
+
+  app.put('/api/users/:id/solde', userController.updateSolde);
+  
   app.get('/api/users', userController.getUsers);
 
   app.get('/api/users/login/:login', userController.getUserByLogin);

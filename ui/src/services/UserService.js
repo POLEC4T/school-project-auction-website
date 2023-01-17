@@ -23,3 +23,16 @@ export function getVendre(){
 export function getProfileInfos(){
     return axios.get("/api/profil", { headers: authHeader() });
 }
+
+export function updateSolde(userId, newSolde) {
+    return axios.put(`/api/users/${userId}/solde`, { solde: newSolde })
+    .then(response => {
+        console.log('Solde updated successfully!');
+        return response.data;
+    })
+    .catch(error => {
+        console.log('Error updating solde:', error);
+        throw error;
+    });
+}
+

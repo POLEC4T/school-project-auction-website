@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import SignupPage from "./pages/SignupPage";
 import AccueilPage from "./pages/AccueilPage";
 import ResultatsRecherche from "./pages/ResultatsRecherche";
+import PaypalPage from "./pages/PaypalPage";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path="/vendre" element={<VendrePage />} />
           <Route path="/profil" element={<ProfilePage />} />
           <Route path="/inscription" element={<SignupPage />} />
+          <Route path="/paiement" element={<PaypalPage />} />
+
           <Route exact path="*" element={< NotFoundErrorPage/>} />
         </Routes>
       </div>

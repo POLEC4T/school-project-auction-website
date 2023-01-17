@@ -31,6 +31,7 @@ app.get("/api/users", userController.getUsers);
 
 app.get("/api/users/:login", userController.getUserByLogin);
 
+
 require("./routes/auth.route")(app);
 require("./routes/user.route")(app);
 require("./routes/article.route")(app);
