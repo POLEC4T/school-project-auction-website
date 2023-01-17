@@ -8,6 +8,7 @@ import { updateSolde } from "../services/UserService";
 import { Link, useRouteLoaderData } from 'react-router-dom';
 
 function PaypalPage() {
+  
   const [montant, setMontant] = useState(null);
   const [user, setUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
