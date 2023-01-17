@@ -30,13 +30,14 @@ function ArticleCompact({article}){
       }, [article]);
 
 
-    useEffect(() => {
+      useEffect(() => {
         if (article) {
-            getDerniereOffre(article.id).then((enchere) => {
-                setOffreActuelle(enchere);
-            })
+          getDerniereOffre(article.id)
+            .then((enchere) => {
+                enchere.message ? setOffreActuelle({montant: article.prix_depart}) : setOffreActuelle(enchere);
+            });
         }
-    }, [article])
+      }, [article]);
 
     useEffect(() => {
       if (article) {
@@ -50,7 +51,7 @@ function ArticleCompact({article}){
     
 
     return (
-        <Link to={`article/${article.id}`} class="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
+        <Link to={`/article/${article.id}`} class="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
 
         {imagesLoaded&&
 

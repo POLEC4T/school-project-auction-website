@@ -76,12 +76,21 @@ module.exports = (sequelize, DataTypes, Model) => {
         taille: {
             //Les différents tags seront tous dans la même colonne, séparés par des virgules
             type: DataTypes.STRING,
-        },
-        seuil_reserve: {
-            type: DataTypes.INTEGER,
+            allowNull: true,
+            isIn: {
+                args: [['0-4', '5-9', '10-14' , 'xs', 's', 'm', 'l', 'xl', 'xxl']],
+            },
         },
         categorie: {
             type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'autres',
+            isIn: {
+                args: [['haut', 'bas', 'autres']],
+            },
+        },
+        seuil_reserve: {
+            type: DataTypes.INTEGER,
         }
       }, 
       {
