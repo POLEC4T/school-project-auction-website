@@ -14,8 +14,11 @@ import PrixDepart from "../components/vente/PrixDepart";
 import PrixReserve from "../components/vente/PrixReserve";
 import { createArticle } from "../services/ArticleService";
 import {uploadImage} from "../services/ImageService";
+import { useNavigate } from "react-router-dom";
 
 function VendrePage() {
+  const navigate = useNavigate();
+
   //usestates
   const [vendeur, setVendeur] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -122,12 +125,17 @@ const handleSubmit = (e) => {
   //TODO: send data to backend
   createArticle(article).then((response) => {
     //upload images
+    console.log(images)
     images.forEach(image => {
-      uploadImage(image).then((response) => {
+      console.log(image[0]);
+      uploadImage(image[0]).then((response) => {
         console.log(response);
+        navigate("/");
+        window.location.reload();
       }
       ).catch((error) => {
         console.log(error);
+        setMessage("Une erreur est survenue, veuillez réessayer plus tard");
       }
       );
     });
