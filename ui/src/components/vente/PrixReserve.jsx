@@ -14,6 +14,9 @@ function PrixReserve(props) {
      if (!regex.test(props.value)) {
       setMessage("Le prix de réserve doit être un nombre positif, avec ou sans le signe € à la fin");
       }
+      else if(props.value < props.prix_reserve) {
+          setMessage("Le prix de réserve doit être supérieur au prix de départ");
+      }
       else {
           setMessage("");
       }

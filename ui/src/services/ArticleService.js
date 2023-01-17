@@ -12,5 +12,5 @@ export async function getNbLikeArticle(articleId) {
 }
 
 export async function createArticle(article) {
-    return axios.post('/api/article', {body: article}, { headers: authHeader() });
+    return axios.post('/api/article', {data: article}, { headers: authHeader() });
 }
