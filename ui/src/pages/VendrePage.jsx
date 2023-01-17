@@ -81,31 +81,6 @@ function VendrePage() {
     setSeuil(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const article = {
-      titre: titre,
-      description: description,
-      categorie: categorie,
-      taille: taille,
-      couleur: couleur,
-      materiaux: materiaux,
-      prix_depart: prix_depart
-    };
-    if (seuil !== 0) {
-      article.seuil = seuil;
-    }
-    //TODO: send data to backend
-    createArticle(article).then((response) => {
-      console.log(response);
-      uploadImage(response.data.id, images).then((response) => {
-        console.log(response);
-      }
-      );
-    });
-    console.log(article);
-  };
-
   const handleNextPage = (e) => {
     e.preventDefault();
     if (page < 3 && isPageValid) {
@@ -129,6 +104,40 @@ function VendrePage() {
     setIsPageValid(false);
   };
 }
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const article = {
+    titre: titre,
+    description: description,
+    categorie: categorie,
+    taille: taille,
+    couleur: couleur,
+    materiaux: materiaux,
+    prix_depart: prix_depart
+  };
+  if (seuil !== 0) {
+    article.seuil = seuil;
+  }
+  //TODO: send data to backend
+  createArticle(article).then((response) => {
+    //upload images
+    images.forEach(image => {
+      const formData = new FormData()
+      formData.append("image", image)
+      formData.append("id", response.data.vendeurId)
+      uploadImage(formData).then((response) => {
+        console.log(response);
+      }
+      ).catch((error) => {
+        console.log(error);
+      }
+      );
+    });
+
+  });
+  console.log(article);
+};
 
   //useEffect
   //verifier le droit d'accès à la page

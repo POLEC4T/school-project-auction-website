@@ -45,6 +45,7 @@ class TodoController {
         return res.status(404).send({message: "Article non créé"});
       }
       article.setVendeur(id);
+      article.vendeurId = id;
       return res.send(article);
     }
   ).catch((err) => {

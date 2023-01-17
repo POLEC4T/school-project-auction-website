@@ -31,6 +31,7 @@ require("./routes/user.route")(app);
 require("./routes/article.route")(app);
 require('./routes/enchere.route')(app);
 require('./routes/accueil.route')(app);
+require('./routes/images.route')(app);
 
 //utile pour la mise en production
 //cas où la route n'est pas un endpoint de l'API -> accès au frontend
