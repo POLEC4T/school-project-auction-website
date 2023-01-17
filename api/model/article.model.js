@@ -91,6 +91,37 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         seuil_reserve: {
             type: DataTypes.INTEGER,
+        },
+        
+        statut: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "En cours",
+            // check if status is valid
+            validate: {
+                notNull: { msg: "le status de l'enchère est obligatoire"},
+                isIn: {
+                    args: [['En cours', 'Finie', 'Annulée', 'Livrée', 'En attente de livraison']],
+                }
+              }
+        },
+
+        gagnant: { // id de l'utilisateur gagnant
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: null,
+            validate: {
+                isInt: true,
+            }
+          },
+
+        dateLivraison: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: null,
+            validate: {
+                isDate: true,
+            }
         }
       }, 
       {
