@@ -17,7 +17,7 @@ function RefusedAccess(props) {
             <NavBar/>
             <div className="flex flex-col justify-center items-center font-outfit pt-20 text-center">
                 
-                <h1 className="font-gowun sm:text-8xl text-6xl">Accès refusé</h1>
+                
                 <p className="sm:text-3xl text-xl mt-10">{props.message}</p>
 
                 

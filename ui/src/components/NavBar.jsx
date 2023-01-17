@@ -178,7 +178,7 @@ function NavBar() {
                       </svg>
                       Solde : {userData.solde}€
 
-                      {userData.roleId === 1 &&
+                      {userData.roleId === 2 &&
 
                         <>
 
@@ -316,19 +316,19 @@ function NavBar() {
       </nav>
       <div className="categories w-full flex justify-around font-outfit">
         <NavLink
-          to="/articles?category=tops"
+          to="/recherche?cat=haut"
           className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
         >
           Hauts
         </NavLink>
         <NavLink
-          to="/articles?category=bottoms"
+          to="/recherche?cat=bas"
           className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
         >
           Bas
         </NavLink>
         <NavLink
-          to="/articles?category=others"
+          to="/recherche?cat=autres"
           className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
         >
           Autres

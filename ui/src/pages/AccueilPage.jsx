@@ -114,28 +114,48 @@ function AccueilPage() {
           <div className="h-0.5 bg-zinc-800 w-full"></div>
         </div>
 
-                <div className="tendances articles-container flex flex-col sm:mt-8 mt-0 gap-8"> 
+        <div className="tendances articles-container flex flex-col sm:mt-8 mt-0 gap-8">
+          {chunks}
+        </div>
 
-
-                    {chunks}                
-
-
-                     
-                </div>
-
-                <div className="button-afficher-plus w-full flex justify-center sm:mt-10 mt-5" >
-                    {topArticles&&
-                        <button className="fleche bg-zinc-800 rounded-full w-36 text-white flex items-center font-outfit justify-around p-2 hover:bg-zinc-600" onClick={handleClick}>
-                        
-                                {buttonState === "Afficher moins" ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="white" class="w-6 h-6 rotate-180">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="white" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            )}
+        <div className="button-afficher-plus w-full flex justify-center sm:mt-10 mt-5">
+          {topArticles && (
+            <button
+              className="fleche bg-zinc-800 rounded-full w-36 text-white flex items-center font-outfit justify-around p-2 hover:bg-zinc-600"
+              onClick={handleClick}
+              disabled={numArticles >= topArticles.length}
+            >
+              {buttonState === "Afficher moins" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="3"
+                  stroke="white"
+                  class="w-6 h-6 rotate-180"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="3"
+                  stroke="white"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              )}
 
               {buttonState}
             </button>
@@ -157,37 +177,60 @@ function AccueilPage() {
             </button>
           </div>
 
-                    {topArticles&&
-
-                    <div className="sm:flex hidden fin_proche sm:flex-col flex-row sm:gap-5 gap-0 text-white sm:w-1/2 w-full">
-
-                        <section className="top w-full font-outfit sm:h-60 h-30  rounded-xl bg-black bg-center bg-no-repeat bg-100" style={{backgroundImage: `url(${imagesSelection[0]})`}}>
-                            <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
-                                <p className="font-chivo text-3xl"><Timer endDate={moment(topArticles[0].createdAt).add(7, 'days')} /></p>
-                                <p className="mt-5 text-2xl text-center">{topArticles[0].titre}</p>
-                                <button className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0">Details</button>
-                            </div>
-                        </section> 
-
-                        <section className="top w-full font-outfit sm:h-60 h-30  rounded-xl bg-black bg-center bg-no-repeat bg-100" style={{backgroundImage: `url(${imagesSelection[1]})`}}>
-                            <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
-                                <p className="font-chivo text-3xl"><Timer endDate={moment(topArticles[1].createdAt).add(7, 'days')} /></p>
-                                <p className="mt-5 text-2xl text-center">{topArticles[1].titre}</p>
-                                <button className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0">Details</button>
-                            </div>
-                        </section> 
-                    </div>
-                    }
-
-                        
-                    
+          {topArticles && (
+            <div className="sm:flex hidden fin_proche sm:flex-col flex-row sm:gap-5 gap-0 text-white sm:w-1/2 w-full">
+              <section
+                className="top w-full font-outfit sm:h-60 h-30  rounded-xl bg-black bg-center bg-no-repeat bg-100"
+                style={{ backgroundImage: `url(${imagesSelection[1]})` }}
+              >
+                <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
+                  <p className="font-chivo text-3xl">
+                    <Timer
+                      endDate={moment(topArticles[0].createdAt).add(7, "days")}
+                    />
+                  </p>
+                  <p className="mt-5 text-2xl text-center">
+                    {topArticles[0].titre}
+                  </p>
+                  <Link
+                    to={`/article/${topArticles[0].id}`}
+                    className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0"
+                  >
+                    Details
+                  </Link>
                 </div>
-                
-                <div className="ligne w-full h-5 sm:mt-8 mt-5 flex flex-row items-center font-gowun">
-                    <div className="h-0.5 bg-zinc-800 w-1/12"></div>  
-                    <p className="px-2 sm:text-2xl text-sm">Catégories</p>         
-                    <div className="h-0.5 bg-zinc-800 w-full"></div>  
+              </section>
+
+              <section
+                className="top w-full font-outfit sm:h-60 h-30  rounded-xl bg-black bg-center bg-no-repeat bg-100"
+                style={{ backgroundImage: `url(${imagesSelection[0]})` }}
+              >
+                <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
+                  <p className="font-chivo text-3xl">
+                    <Timer
+                      endDate={moment(topArticles[1].createdAt).add(7, "days")}
+                    />
+                  </p>
+                  <p className="mt-5 text-2xl text-center">
+                    {topArticles[1].titre}
+                  </p>
+                  <Link
+                    to={`/article/${topArticles[1].id}`}
+                    className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0"
+                  >
+                    Details
+                  </Link>
                 </div>
+              </section>
+            </div>
+          )}
+        </div>
+
+        <div className="ligne w-full h-5 sm:mt-8 mt-5 flex flex-row items-center font-gowun">
+          <div className="h-0.5 bg-zinc-800 w-1/12"></div>
+          <p className="px-2 sm:text-2xl text-sm">Catégories</p>
+          <div className="h-0.5 bg-zinc-800 w-full"></div>
+        </div>
 
         <div className="categories className bg-half flex flex-row flex-wrap justify-around text-zinc-800 sm:mt-10 sm:my-5 my-5 sm:text-3xl text-xl">
           <div className="t_shirt sm:w-80 w-40 z-10">
