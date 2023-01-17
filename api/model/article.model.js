@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes, Model) => {
             allowNull: false,
             validate: {
                 notNull: { msg: "Le titre est obligatoire"},
-                isEmpty: { msg: "Le titre ne doit pas être vide"}
             }
         },
         prix_depart: {
@@ -54,7 +53,6 @@ module.exports = (sequelize, DataTypes, Model) => {
             allowNull: false,
             validate: {
                 notNull : { msg: "attribut obligatoire"},
-                isEmpty: { msg: "attribut obligatoire"},
                 isCouleursValid(value){
                     if(value.split(',').length == 0){
                         throw new Error("Vous devez spécifier au moins une couleur")
@@ -68,7 +66,6 @@ module.exports = (sequelize, DataTypes, Model) => {
             allowNull: false,
             validate: {
                 notNull : { msg: "attribut obligatoire"},
-                isEmpty: { msg: "attribut obligatoire"},
                 isMateriauxValid(value){
                     if(value.split(',').length == 0){
                         throw new Error("Vous devez spécifier au moins un matériau")
@@ -82,18 +79,12 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         seuil_reserve: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            validate: {
-                notNull : { msg: "attribut obligatoire"},
-                isEmpty: { msg: "attribut obligatoire"},
-                isSeuilValid(value){
-                    if(value < this.prix){
-                        throw new Error("Le prix de réserve doit être supérieur ou égal au prix de départ")
-                    }
-                }
-            }
+        },
+        categorie: {
+            type: DataTypes.STRING,
         }
-      }, {
+      }, 
+      {
         // autres options du modèle
         sequelize, // instance de connexion
         modelName: 'article' // nom du modèle

@@ -11,7 +11,7 @@ function NavBar() {
 
     useEffect(() => {
         const user = AuthService.getCurrentUser();
-        if (user) {
+        if (user && user.accessToken) {
             setIsConnected(true);
         }else{
             setIsConnected(false);

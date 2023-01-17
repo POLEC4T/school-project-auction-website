@@ -21,7 +21,7 @@ signup = (req, res) => {
       user.prenom = req.body.prenom
       user.siren = req.body.siren
     }
-    UserRepository.createUser(user).then((role) => {
+    UserRepository.createUser(user).then((user) => {
         res.status(200).json({ message: "L'utilisateur a été créé avec succès !" });
       })
       .catch(err => {

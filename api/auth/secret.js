@@ -1,1 +1,1 @@
-module.exports = 'clePrivee'
+module.exports = 'clePrivee123Soleilcloth2you'
