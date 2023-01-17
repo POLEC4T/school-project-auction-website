@@ -50,7 +50,7 @@ function ArticleCompact({article}){
     
 
     return (
-        <Link to={`article/${article.id}`} class="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
+        <Link to={`/article/${article.id}`} class="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
 
         {imagesLoaded&&
 
@@ -65,7 +65,7 @@ function ArticleCompact({article}){
                 <p class="font-chivo text-zinc-400 sm:text-lg text-xs">Offre Actuelle</p>
 
                 {offreActuelle&&
-                <p class="font-gowun sm:text-2xl text-md">{offreActuelle.montant}€</p>
+                <p class="font-gowun sm:text-2xl text-md">{article.taille}€</p>
                 }
             </div>
             <div class="temps_restant flex flex-col justify-items-end text-end">
