@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, "..", "ui", "build")));
 app.use(cors({ origin: true, credentials: true }));
 
 //routes
+
 app.get("/api", (req, res) => {
   res.json({ message: "L'API marche bien !" });
 });
@@ -25,6 +26,7 @@ app.get("/api", (req, res) => {
 app.get("/api/users", userController.getUsers);
 
 app.get("/api/users/:login", userController.getUserByLogin);
+
 
 require("./routes/auth.route")(app);
 require("./routes/user.route")(app);

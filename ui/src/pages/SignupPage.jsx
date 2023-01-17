@@ -31,6 +31,7 @@ function SignupPage() {
   const [eyeConf, setEyeConf] = useState("closed");
 
   // fonction pour gérer l'affichage du mot de passe
+  
 const handleEye = (e) => {
   if(eye === "closed"){
       setEye("open");

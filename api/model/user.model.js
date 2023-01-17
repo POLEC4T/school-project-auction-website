@@ -88,6 +88,11 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         date_naiss: {
           type: DataTypes.DATE,
+        },
+        solde: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          defaultValue: 0
         }
       }, {
         // autres options du modèle
