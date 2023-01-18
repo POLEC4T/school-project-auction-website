@@ -66,64 +66,7 @@ server.listen(portws, () => {
 
 const clients = {};
 const secret = require('./auth/secret');
-
-async function addEnchere(montant, userId, articleId){
-      // d'abord, on crée une transaction:
-      const t = await db.sequelize.transaction();
-
-      try {
-  
-        //on récupère la dernière enchère
-        const lastEnchere = await db.encheres.findOne({
-          where: {
-            articleId: articleId
-          },
-          order: [
-            ['createdAt', 'DESC']
-          ],
-          transaction: t
-        });
-
-        //on vérifie que le montant de l'enchère est supérieur à la dernière enchère
-        if(montant <= lastEnchere.montant){
-          throw new Error('Le montant de l\'enchère doit être supérieur à la dernière enchère');
-        }
-
-        //on vérifie que l'utilisateur a un solde suffisant
-        const user = await db.users.findOne({
-          where: {
-            id: userId
-          },
-          transaction: t
-        });
-
-        if(montant > user.solde){
-          throw new Error('Vous n\'avez pas assez d\'argent sur votre compte');
-        }
-          //on ajoute l'enchère en base de données
-          const enchere = await db.encheres.create({
-            montant: montant,
-          }, { transaction: t });
-
-          //on ajoute l'association entre l'enchère et l'utilisateur
-          await enchere.setUser(userId, { transaction: t });
-
-          //on ajoute l'association entre l'enchère et l'article
-          await enchere.setArticle(articleId, { transaction: t });
-
-        // Si l'exécution arrive jusqu'ici, la transaction a été validée
-        // et les modifications apportées à la base de données seront définitives.
-        await t.commit();
-        return montant;
-  
-      } catch (error) {
-  
-        //Si une erreur est survenue, annule la transaction.
-        console.log(error);
-        await t.rollback();
-        throw error;
-  }
-}
+const wsController = require('./controller/websocket.controller');
 
 // Generates unique userid for every user.
 const generateUniqueID = () => {
@@ -158,7 +101,7 @@ wsServer.on('connection', (ws, req) => {
     console.log('received: %s', message);
     //On rentre la nouvelle enchère en base de données
     //on met en place une transaction pour la prog concurrente
-    addEnchere(message.toString(), ws.clientId, ws.articleId)
+    wsController.addEnchere(message.toString(), ws.clientId, ws.articleId)
     .then((message) => {
       console.log('Enchère ajoutée en base de données');
       //on envoie le message à tous les clients qui sont connectés à cet article
