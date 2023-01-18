@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 import ProfileNav from "../components/ProfileNav";
 import CheckboxFiltre from "../components/CheckboxFiltre";
 
+
 function ResultatsRecherche() {
-  const recherche = useParams().recherche;
   const [numArticles, setNumArticles] = React.useState(12);
   const [topArticles, setTopArticles] = React.useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
   const [filters, setFilters] = useState({
     taille: [],
     couleurs: [],
@@ -27,6 +29,7 @@ function ResultatsRecherche() {
   const col = query.get("col");
   const taille = query.get("taille");
   const cat = query.get("cat");
+  const recherche = query.get("recherche");
 
   // On pré-coche les filtres s'ils sont dans l'url
   useEffect(() => {
@@ -97,6 +100,20 @@ function ResultatsRecherche() {
     Object.keys(filters).forEach((key) => {
       if (filters[key].length !== 0) {
         if (!filters[key].includes(article[key])) {
+          matches = false;
+        }
+      }
+      if (recherche) {
+        if (
+          !article.titre
+            .toLowerCase()
+            .includes(recherche.toLowerCase().trim())
+          ||
+          !article.description
+            .toLowerCase()
+            .includes(recherche.toLowerCase().trim())
+
+        ) {
           matches = false;
         }
       }
