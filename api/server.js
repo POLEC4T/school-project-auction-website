@@ -50,7 +50,7 @@ app.listen(port, () => {
 });
 
 
-///////SERVER WEBSOCKET///////
+///////SERVEUR WEBSOCKET///////
 const {WebSocketServer} = require('ws');
 const http = require('http');
 const Url = require('url');
@@ -158,18 +158,20 @@ wsServer.on('connection', (ws, req) => {
     console.log('received: %s', message);
     //On rentre la nouvelle enchère en base de données
     //on met en place une transaction pour la prog concurrente
-    addEnchere(message.toString(), ws.clientId, ws.articleId).then((message) => {
+    addEnchere(message.toString(), ws.clientId, ws.articleId)
+    .then((message) => {
       console.log('Enchère ajoutée en base de données');
       //on envoie le message à tous les clients qui sont connectés à cet article
       for (let key in clients) {
         console.log('client id: %s', clients[key].clientId);
         if (clients[key].articleId === ws.articleId) {
           console.log('send to client: %s', message.toString());
-          clients[key].send(message.toString());
+          clients[key].send(JSON.stringify({prix : message.toString()}));
         }
       }
     }).catch((err) => {
       console.log(err);
+      ws.send(JSON.stringify({error : err.message}));
     });
   });
   ws.on('close', () => {

@@ -26,8 +26,12 @@ function Encherir({ article, vendeur }) {
       console.log("ws connected");
     };
     ws.current.onmessage = (e) => {
-      console.log("reçu : " + e.data);
-      setOffreActuelle({ montant: parseFloat(e.data) });
+      const response = JSON.parse(e.data);
+      if(response.prix){
+        setOffreActuelle({ montant: parseFloat(response.prix) });
+      }else if(response.error){
+        setMessage(response.error);
+      }
     };
     ws.current.onclose = () => {
       console.log("ws closed");
