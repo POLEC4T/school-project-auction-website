@@ -19,4 +19,8 @@ module.exports = (app) => {
 
   app.post("/api/article", [authJwt.verifyToken, authJwt.isVendeur], articleController.createArticle);
 
+  app.put("/api/article/:id/statut", articleController.updateStatutArticle);
+
+  app.put("/api/article/:id/dateLivraison", articleController.updateDateLivraisonArticle);
+
 };
