@@ -3,7 +3,7 @@ const articleRepository = require("../repository/article.repository");
 
 class TodoController {
   getArticle = (req,res) => {
-    logger.info("ArticleController: getArticle");
+    // logger.info("ArticleController: getArticle");
     articleRepository.getArticle(req.params.id).then((article) => {
       if(!article){
         return res.status(404).send({message: "Article non trouvé"});
@@ -14,7 +14,7 @@ class TodoController {
   };
 
   getNbLikeArticle = (req,res) => {
-    logger.info("ArticleController: getNbLikeArticle");
+    // logger.info("ArticleController: getNbLikeArticle");
     articleRepository.getNbLikeArticle(req.params.id).then((nbLike) => {
       if(!nbLike){
         return res.status(404).send({message: "Article non trouvé"});

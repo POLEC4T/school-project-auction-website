@@ -12,7 +12,7 @@ class ArticleRepository {
         try {
             const article = await this.db.articles.findOne({
                 where: {
-                    id: id
+                    id : id
                 },
             });
             return article;
@@ -30,7 +30,7 @@ class ArticleRepository {
                         articleId: id
                     },
                 });
-                console.log('nbLike:::', nbLike);
+                // console.log('nbLike:::', nbLike);
                 return nbLike;
             } catch (err) {
                 console.log(err);
