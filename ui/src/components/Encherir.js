@@ -6,6 +6,8 @@ import Timer from "./Timer";
 import { getNbLikeArticle } from "../services/ArticleService";
 import { Link } from "react-router-dom";
 import AuthService from "../services/AuthService";
+import Modal from "../components/Modal";
+
 
 const WS_URL = "ws://127.0.0.1:8000"; // à changer en prod
 
@@ -14,6 +16,7 @@ function Encherir({ article, vendeur }) {
 
   const [offreActuelle, setOffreActuelle] = useState(0.0);
   const [message, setMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const url = WS_URL + "?id=" + article.id + "&token=" + AuthService.getCurrentUser().accessToken;
 
@@ -89,6 +92,7 @@ function Encherir({ article, vendeur }) {
     } else {
       setMessage("");
       console.log("envoi montant : ", montantInput);
+      setIsOpen(false);
       ws.current.send(montantInput);
     }
   };
@@ -191,10 +195,17 @@ function Encherir({ article, vendeur }) {
               onChange={handleChangeMontantInput}
             />
             <div className="enchere-ou-offre-maximale flex mt-3 gap-4">
-              <button onClick={handleSubmit} className="bg-zinc-300 hover:bg-zinc-200 w-full rounded-lg h-10 text-xl">
+              <button onClick={() => setIsOpen(true) } className="bg-zinc-300 hover:bg-zinc-200 w-full rounded-lg h-10 text-xl">
                 Enchérir
               </button>
             </div>
+
+            <Modal open={isOpen} onClose={() => setIsOpen(false)} onConfirm={handleSubmit}>
+                    
+                    Vous êtes sur le point de faire une offre sur cet article.<br />
+                     <span className="mt-10 font-bold">Montant : {montantInput}€</span>
+                  
+                </Modal>
 
             {message && <p className="text-red-500 text-xl mt-3">{message}</p>}
 
