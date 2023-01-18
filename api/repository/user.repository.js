@@ -133,11 +133,6 @@ class UserRepository {
                 const articles = await this.db.articles.findAll({
                     where: {
                         vendeurId: userId,
-                        [Op.or]: [
-                            { statut: "Finie" },
-                            { statut: "Livrée" },
-                            { statut: "En attente de livraison" }
-                        ]
                     }
                 });
                 return articles;

@@ -4,10 +4,13 @@ import { useState, useEffect } from "react";
 import { getUserById } from "../services/UserService";
 import { getArticleImagesByArticleId } from "../services/ImageService";
 import Modal from "./Modal";
+import { getDerniereOffre } from "../services/EnchereService";
+
 import {
   updateDateLivraisonArticle,
   updateStatutArticle,
 } from "../services/ArticleService";
+import Timer from "./Timer";
 
 function HistoriqueElement({ article, roleId }) {
   const [vendeur, setVendeur] = useState(null);
@@ -15,9 +18,17 @@ function HistoriqueElement({ article, roleId }) {
   const [image, setImage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [gagnant, setGagnant] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [offreActuelle, setOffreActuelle] = useState(null);
 
   useEffect(() => {
-    if (article && roleId == 1) {
+    if (article) {
+      setEndDate(moment(article.createdAt).add(7, "days"));
+    }
+  }, [article]);
+
+  useEffect(() => {
+    if (article && roleId === 1) {
       getUserById(article.gagnant)
         .then((response) => {
           if (response.message) {
@@ -31,7 +42,6 @@ function HistoriqueElement({ article, roleId }) {
         });
     }
   }, [article]);
-
 
   useEffect(() => {
     if (article) {
@@ -57,6 +67,16 @@ function HistoriqueElement({ article, roleId }) {
     }
   }, [article]);
 
+  useEffect(() => {
+    if (article) {
+      getDerniereOffre(article.id).then((enchere) => {
+        enchere.message
+          ? setOffreActuelle({ montant: article.prix_depart })
+          : setOffreActuelle(enchere);
+      });
+    }
+  }, [article]);
+
   const handleConfirm = (e) => {
     const dateLivraison = new Date();
     const statut = "Livrée";
@@ -68,7 +88,7 @@ function HistoriqueElement({ article, roleId }) {
 
   return (
     <>
-      {article && roleId == 2 ? (
+      {article && roleId === 2 ? (
         <>
           <div class="histo1 my-10 text-zinc-800 rounded-xl w-full font-outfit">
             <div class="infos-livraison border-2 border-zinc-800 text-xl flex sm:flex-row flex-col justify-between pl-4 p-2 rounded-t-xl text-lg font-chivo text-start">
@@ -140,25 +160,55 @@ function HistoriqueElement({ article, roleId }) {
           {article && (
             <div class="histo1 my-10 text-zinc-800 rounded-xl w-full font-outfit">
               <div class="infos-livraison border-2 border-zinc-800 text-xl flex sm:flex-row flex-col justify-between pl-4 p-2 rounded-t-xl text-lg font-chivo text-start">
-                <h3>Vendu le : {moment(article.expires).format("YYYY-MM-DD")}</h3>
-                <h3>Livrée le : {" "}
-                {article.dateLivraison != null
-                  ? moment(article.dateLivraison).format("YYYY-MM-DD")
-                  : "En cours de livraison"}</h3>
+                {article.statut === "En cours" ? (
+                  <h3 className="flex gap-1">Fini dans : {endDate && <Timer endDate={endDate} />}</h3>
+                ) : (
+                  <h3>
+                    Vendu le : {moment(article.expires).format("YYYY-MM-DD")}
+                  </h3>
+                )}
+
+                {article.statut !== "En cours" ? (
+                  <h3>
+                    Livrée le :{" "}
+                    {article.dateLivraison != null
+                      ? moment(article.dateLivraison).format("YYYY-MM-DD")
+                      : "En cours de livraison"}
+                  </h3>
+                ) : null}
+
                 <h3>Statut : {article.statut}</h3>
               </div>
 
               <div class="details-commande bg-zinc-800 flex sm:flex-row flex-col text-3xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-amber-50">
                 <img
                   class="h-28 rounded-full sm:ml-10"
-                  src={image&&image}
+                  src={image && image}
                   alt="cardigan-coloré"
                 />
 
                 <div class="details flex sm:flex-row flex-col sm:gap-8 gap-0 items-center sm:justify-between justify-around sm:text-3xl text-xl w-full sm:ml-10 ml-0">
-                  <h3>{article.titre}</h3>
-                  <h3>{article.prix_vente}€</h3>
-                  <h3>Vendu à {gagnant&&gagnant.login}</h3>
+                  <h3 className="w-1/3 text-center">{article.titre}</h3>
+                  <h3 className="w-1/3 text-center">
+                    {article.statut === "En cours" && offreActuelle
+                      ? offreActuelle.montant
+                      : article.prix_vente}
+                    €
+                  </h3>
+                  {gagnant &&
+                  (article.statut === "Finie") |
+                    (article.statut === "En attente de livraison") |
+                    (article.statut === "Livrée") ? (
+                    <>
+                      <h3 className="w-1/3 text-center">
+                        Vendu à {gagnant.login}{" "}
+                      </h3>
+                    </>
+                  ) : (
+                    <>
+                      <h3>En vente</h3>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
