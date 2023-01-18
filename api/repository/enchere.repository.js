@@ -16,6 +16,9 @@ class EnchereRepository {
                 where: {
                     articleId: articleId
                 },
+                order: [
+                    ['createdAt', 'DESC']
+                  ],
             });
             return enchere;
         } catch (err) {
