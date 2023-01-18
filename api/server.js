@@ -125,6 +125,14 @@ async function addEnchere(montant, userId, articleId){
   }
 }
 
+// Generates unique userid for every user.
+const generateUniqueID = () => {
+
+	const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+
+	return s4() + '-' + s4() + '-' + s4();
+};
+
 wsServer.on('connection', (ws, req) => {
   const params = Url.parse(req.url, true).query;
   ws.articleId = params.id;//on récupère l'id de l'article dans la query string
@@ -142,9 +150,10 @@ wsServer.on('connection', (ws, req) => {
     }
   });
 
-  const ip = req.socket.remoteAddress;
+  const uid = generateUniqueID();
   console.log('New client connected');
-  clients[ip] = ws;
+  clients[uid] = ws;
+  console.log('clients: %s', Object.keys(clients));
   ws.on('message', (message) => {
     console.log('received: %s', message);
     //On rentre la nouvelle enchère en base de données
@@ -165,7 +174,7 @@ wsServer.on('connection', (ws, req) => {
   });
   ws.on('close', () => {
     console.log('Client disconnected');
-    delete clients[ip];
+    delete clients[uid];
   });
   }
 );
