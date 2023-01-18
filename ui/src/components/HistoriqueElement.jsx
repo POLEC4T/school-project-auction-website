@@ -103,7 +103,7 @@ function HistoriqueElement({ article, roleId }) {
               </h3>
               <h3>Statut : {article.statut} </h3>
             </div>
-            <div class="details-commande bg-zinc-800 flex sm:flex-row flex-col text-2xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-amber-50">
+            <div class="details-commande bg-zinc-800 flex sm:flex-row flex-col text-2xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-orange-200">
               <div class="gestion-small flex sm:mt-0 mt-5">
                 <img
                   class="h-32 rounded-[50%] sm:ml-10 ml-0"
@@ -121,7 +121,7 @@ function HistoriqueElement({ article, roleId }) {
                 {article.statut !== "Livrée" && (
                   <>
                     <button
-                      class="bg-amber-50 text-zinc-800 px-2 py-1 rounded-xl hover:bg-amber-100"
+                      class="bg-orange-50 text-zinc-800 px-2 py-1 rounded-xl hover:bg-orange-100"
                       onClick={() => setIsOpen(true)}
                     >
                       Confirmer réception
@@ -139,14 +139,14 @@ function HistoriqueElement({ article, roleId }) {
                   </>
                 )}
                 <button
-                  class="bg-amber-50 text-zinc-800 opacity-30 px-2 py-1 rounded-xl hover:bg-amber-100"
+                  class="bg-orange-50 text-zinc-800 opacity-30 px-2 py-1 rounded-xl hover:bg-orange-100"
                   disabled
                 >
                   Faire une réclamation
                 </button>
                 <button
                   name="notation-vendeur"
-                  class="bg-amber-50 text-zinc-800 px-2 opacity-30 py-1 rounded-xl hover:bg-amber-100"
+                  class="bg-orange-50 text-zinc-800 px-2 opacity-30 py-1 rounded-xl hover:bg-orange-100"
                   disabled
                 >
                   Noter le vendeur
@@ -180,7 +180,7 @@ function HistoriqueElement({ article, roleId }) {
                 <h3>Statut : {article.statut}</h3>
               </div>
 
-              <div class="details-commande bg-zinc-800 flex sm:flex-row flex-col text-3xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-amber-50">
+              <div class="details-commande bg-zinc-800 flex sm:flex-row flex-col text-3xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-orange-200">
                 <img
                   class="h-28 rounded-full sm:ml-10"
                   src={image && image}

@@ -265,7 +265,7 @@ const handleSubmit = (e) => {
                     value={prix_depart}
                   />
                   <PrixReserve onChange={handleSeuil} value={seuil} prix_depart={prix_depart} />
-                  <button class="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 sm:text-lg text-sm hover:bg-zinc-600 mt-16" onClick={handleSubmit}>
+                  <button class="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg mt-5 sm:text-lg text-sm hover:bg-zinc-600 mt-16" onClick={handleSubmit}>
                     Mettre en ligne
                   </button>
                 </>

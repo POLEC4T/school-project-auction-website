@@ -13,13 +13,13 @@ function Modal({open, children, onClose, onConfirm}) {
 
         <div className="boutons font-outfit flex w-full sm:px-28 px-4 justify-center gap-8 mt-12">
           <button
-            className="bg-zinc-800 text-amber-50 sm:text-xl text-md p-1 w-1/2 rounded"
+            className="bg-zinc-800 text-orange-200 sm:text-xl text-md p-1 w-1/2 rounded"
             onClick={onClose}
           >
             Annuler
           </button>
           <button
-            className="bg-zinc-800 text-amber-50 sm:text-xl text-md p-1 w-1/2 rounded"
+            className="bg-zinc-800 text-orange-200 sm:text-xl text-md p-1 w-1/2 rounded"
             onClick={onConfirm}
           >
             Confirmer

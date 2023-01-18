@@ -411,7 +411,7 @@ const handleEyeConf = (e) => {
               <p className="text-red-500 text-sm text-center mt-2">{message}</p>
               <div className="choix w-full flex flex-row justify-between sm:gap-2 gap-2">
                 <button
-                  className="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 sm:text-md text-sm hover:bg-zinc-600 w-1/2"
+                  className="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg mt-5 sm:text-md text-sm hover:bg-zinc-600 w-1/2"
                   onClick={(e) => handleRegisterAcheteur(e)}
                 >
                   S'inscrire en tant qu'acheteur
@@ -503,7 +503,7 @@ const handleEyeConf = (e) => {
 
               <div className="choix w-full flex flex-row justify-around mt-5">
                 <button
-                  className="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 text-md hover:bg-zinc-600"
+                  className="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg mt-5 text-md hover:bg-zinc-600"
                   onClick={(e) => handleRegisterVendeur(e)}
                 >
                   S'inscrire en tant que vendeur · euse
