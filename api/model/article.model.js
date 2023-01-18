@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes, Model) => {
             allowNull: false,
             validate: {
                 notNull: { msg: "Le titre est obligatoire"},
-                isEmpty: { msg: "Le titre ne doit pas être vide"}
             }
         },
         prix_depart: {
@@ -25,6 +24,17 @@ module.exports = (sequelize, DataTypes, Model) => {
                 isPrixValid(value){
                     if(value <= 0){
                         throw new Error("Le prix de départ doit être supérieur à 0")
+                    }
+                }
+            }
+        },
+        prix_vente: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+            validate: {
+                isPrixValid(value){
+                    if(value <= 0 && value < this.prix_depart){
+                        throw new Error("Le prix de vente doit être supérieur à 0")
                     }
                 }
             }
@@ -40,6 +50,7 @@ module.exports = (sequelize, DataTypes, Model) => {
                 notNull: { msg: "La date de création ne doit pas être nulle"}
             }
         },
+
         expires: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -54,7 +65,6 @@ module.exports = (sequelize, DataTypes, Model) => {
             allowNull: false,
             validate: {
                 notNull : { msg: "attribut obligatoire"},
-                isEmpty: { msg: "attribut obligatoire"},
                 isCouleursValid(value){
                     if(value.split(',').length == 0){
                         throw new Error("Vous devez spécifier au moins une couleur")
@@ -68,7 +78,6 @@ module.exports = (sequelize, DataTypes, Model) => {
             allowNull: false,
             validate: {
                 notNull : { msg: "attribut obligatoire"},
-                isEmpty: { msg: "attribut obligatoire"},
                 isMateriauxValid(value){
                     if(value.split(',').length == 0){
                         throw new Error("Vous devez spécifier au moins un matériau")
@@ -79,21 +88,55 @@ module.exports = (sequelize, DataTypes, Model) => {
         taille: {
             //Les différents tags seront tous dans la même colonne, séparés par des virgules
             type: DataTypes.STRING,
+            allowNull: true,
+            isIn: {
+                args: [['0-4', '5-9', '10-14' , 'xs', 's', 'm', 'l', 'xl', 'xxl']],
+            },
+        },
+        categorie: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'autres',
+            isIn: {
+                args: [['haut', 'bas', 'autres']],
+            },
         },
         seuil_reserve: {
             type: DataTypes.INTEGER,
+        },
+        
+        statut: {
+            type: DataTypes.STRING,
             allowNull: false,
+            defaultValue: "En cours",
+            // check if status is valid
             validate: {
-                notNull : { msg: "attribut obligatoire"},
-                isEmpty: { msg: "attribut obligatoire"},
-                isSeuilValid(value){
-                    if(value < this.prix){
-                        throw new Error("Le prix de réserve doit être supérieur ou égal au prix de départ")
-                    }
+                notNull: { msg: "le status de l'enchère est obligatoire"},
+                isIn: {
+                    args: [['En cours', 'Finie', 'Annulée', 'Livrée', 'En attente de livraison']],
                 }
+              }
+        },
+
+        gagnant: { // id de l'utilisateur gagnant
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: null,
+            validate: {
+                isInt: true,
+            }
+          },
+
+        dateLivraison: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: null,
+            validate: {
+                isDate: true,
             }
         }
-      }, {
+      }, 
+      {
         // autres options du modèle
         sequelize, // instance de connexion
         modelName: 'article' // nom du modèle

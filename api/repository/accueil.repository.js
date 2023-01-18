@@ -18,7 +18,7 @@ class AccueilRepository {
                 return new Date(a.expires) - new Date(b.expires);
             }); */
 
-            return sortedArticles.slice(0, 24);
+            return sortedArticles;
 
         } catch (err) {
             console.log(err);

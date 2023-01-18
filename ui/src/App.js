@@ -8,6 +8,8 @@ import VendrePage from "./pages/VendrePage";
 import ProfilePage from "./pages/ProfilePage";
 import SignupPage from "./pages/SignupPage";
 import AccueilPage from "./pages/AccueilPage";
+import ResultatsRecherche from "./pages/ResultatsRecherche";
+import PaypalPage from "./pages/PaypalPage";
 
 function App() {
   return (
@@ -15,11 +17,14 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<AccueilPage />} />
+          <Route path="/recherche/:recherche?" element={<ResultatsRecherche />} />
           <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="/connexion" element={<LoginPage />} />
-          <Route path="/inscription" element={<SignupPage />} />
           <Route path="/vendre" element={<VendrePage />} />
           <Route path="/profil" element={<ProfilePage />} />
+          <Route path="/inscription" element={<SignupPage />} />
+          <Route path="/paiement" element={<PaypalPage />} />
+
           <Route exact path="*" element={< NotFoundErrorPage/>} />
         </Routes>
       </div>

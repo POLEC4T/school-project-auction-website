@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes, Model) => {
           validate: {
             notEmpty: { msg: "le login ne doit pas être vide"},
             notNull: { msg: "le login est obligatoire"}
-          }
+          } 
         },
         nom: {
           type: DataTypes.STRING,
@@ -67,13 +67,14 @@ module.exports = (sequelize, DataTypes, Model) => {
           allowNull: false,
           defaultValue: 0
         },
+        
         //éléments de personnalisation
         banniere: {
           type: DataTypes.STRING
         },
         couleur: {
           type: DataTypes.STRING,
-          defaultValue: 'black'
+          defaultValue: 'white'
         },
         num_siren: {
           type: DataTypes.INTEGER,
@@ -87,8 +88,18 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         date_naiss: {
           type: DataTypes.DATE,
+        },
+        solde: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          defaultValue: 0
+        },
+        description: {
+          type: DataTypes.STRING,
+          allowNull: true
         }
-      }, {
+      },
+       {
         // autres options du modèle
         defaultScope: {
           attributes: { exclude: ['password'] } //exclure le password par défaut

@@ -17,12 +17,19 @@ module.exports = (app) => {
   app.get("/api/profil", [authJwt.verifyToken], userController.getProfileInfos);
 
 
-  //routes test
+  // Routes Test
+
+  app.put('/api/users/:id/solde', userController.updateSolde);
+  
   app.get('/api/users', userController.getUsers);
 
   app.get('/api/users/login/:login', userController.getUserByLogin);
 
   app.get('/api/users/id/:id', userController.getUserById);
+
+  app.get('/api/users/:id/encheregagnee', userController.getArticlesWonbyUserId);
+
+  app.get('/api/users/:id/encherevendue', userController.getArticlesSoldbyUserId);
 
 
 };

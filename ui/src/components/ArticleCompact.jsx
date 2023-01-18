@@ -17,11 +17,13 @@ function ArticleCompact({article}){
     const [error, setError] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
+
     
      useEffect(() => {
         if (article) {
           getArticleImagesByArticleId(article.id).then((images) => {
             if(images && images.length > 0) {
+            
               setImage(images[0].url);
               setImagesLoaded(true);
             }
@@ -30,13 +32,14 @@ function ArticleCompact({article}){
       }, [article]);
 
 
-    useEffect(() => {
+      useEffect(() => {
         if (article) {
-            getDerniereOffre(article.id).then((enchere) => {
-                setOffreActuelle(enchere);
-            })
+          getDerniereOffre(article.id)
+            .then((enchere) => {
+                enchere.message ? setOffreActuelle({montant: article.prix_depart}) : setOffreActuelle(enchere);
+            });
         }
-    }, [article])
+      }, [article]);
 
     useEffect(() => {
       if (article) {
@@ -50,11 +53,11 @@ function ArticleCompact({article}){
     
 
     return (
-        <Link to={`article/${article.id}`} class="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
+        <Link to={`/article/${article.id}`} class="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
 
         {imagesLoaded&&
 
-        <div className="image w-full h-full bg-cover bg-no-repeat bg-center bg-article rounded-t flex items-center justify-center" style={{backgroundImage: `url(${image})`}}>
+        <div className="image w-full h-full bg-cover bg-no-repeat bg-center bg-inverse rounded-t flex items-center justify-center" style={{backgroundImage: `url(${image})`}}>
           <p className="font-outfit text-2xl">{article.titre}</p>
         </div>
 

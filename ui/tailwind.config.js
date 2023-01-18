@@ -26,8 +26,9 @@ module.exports = {
         },
         backgroundImage: {
             'hero': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/fond-login.jpg)',
-            'banniere' : 'url(./static/images/banniere-profil.jpg)',
+            'banniere' : 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(./static/images/banniere-profil.jpg)',
             'intro': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/image_intro.jpg)',
+            'vente': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./static/images/fond-vente.jpg)'
         },
         colors: {
             'goldenyellow':  '#D09C16'

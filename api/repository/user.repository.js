@@ -1,5 +1,6 @@
 const db = require('../config/db.config').connect();
 const roleModel = db.roles;
+const Op = db.Sequelize.Op;
 
 class UserRepository {
 
@@ -9,7 +10,6 @@ class UserRepository {
     }
 
     async getUsers() {
-        
         try {
             const users = await this.db.users.findAll({
               });              
@@ -101,8 +101,48 @@ class UserRepository {
         } catch (err) {
             console.log(err);
             return {};
+        }  
+}
+
+        async updateSolde(id, solde) {
+            try {
+                await this.db.users.update({ solde: solde }, { where: { id: id } });
+                return { message: "Solde updated successfully!" };
+            } catch (err) {
+                console.log(err);
+                throw err;
+            }
         }
-    }
+
+        async getArticlesWonbyUserId(userId) {
+            try {
+            const articles = await this.db.articles.findAll({
+                where: {
+                gagnant: userId
+                }
+            });
+            return articles;
+            } catch (err) {
+            console.log(err);
+            return [];
+            }
+        }
+
+        async getArticlesSoldbyUserId(userId) {
+            try {
+                const articles = await this.db.articles.findAll({
+                    where: {
+                        vendeurId: userId,
+                    }
+                });
+                return articles;
+            } catch (err) {
+                console.log(err);
+                return [];
+            }
+        }
+        
+  
 
     
 

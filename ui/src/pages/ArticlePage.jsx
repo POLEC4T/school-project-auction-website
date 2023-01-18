@@ -21,9 +21,11 @@ function PageArticle() {
 
   const idPassed = useParams().id;
 
+
+
   useEffect(() => {
     getArticle(idPassed).then((response) => {
-      if (response.message === 'Article non trouvé') {
+      if (response.message) {
         setError(response.message);
         setIsLoading(false);
       } else {
@@ -41,7 +43,6 @@ function PageArticle() {
       getArticleImagesByArticleId(article.id).then((images) => {
         setImages(images.map(image => ({image: image.url, caption: ""})));
         setImagesLoaded(true);
-        
       });
     }
   }, [article]);
