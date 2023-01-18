@@ -5,6 +5,7 @@ import moment from "moment";
 import Timer from "./Timer";
 import { getNbLikeArticle } from "../services/ArticleService";
 import { Link } from "react-router-dom";
+import AuthService from "../services/AuthService";
 
 const WS_URL = "ws://127.0.0.1:8000"; // à changer en prod
 
@@ -14,7 +15,7 @@ function Encherir({ article, vendeur }) {
   const [offreActuelle, setOffreActuelle] = useState(0.0);
   const [message, setMessage] = useState("");
 
-  const url = WS_URL + "?id=" + article.id;
+  const url = WS_URL + "?id=" + article.id + "&token=" + AuthService.getCurrentUser().accessToken;
 
   const ws = useRef(null);
 
@@ -25,9 +26,8 @@ function Encherir({ article, vendeur }) {
       console.log("ws connected");
     };
     ws.current.onmessage = (e) => {
-      console.log(e.data);
+      console.log("reçu : " + e.data);
       setOffreActuelle({ montant: parseFloat(e.data) });
-      console.log(offreActuelle.montant);
     };
     ws.current.onclose = () => {
       console.log("ws closed");
@@ -80,8 +80,8 @@ function Encherir({ article, vendeur }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (montantInput <= offreActuelle) {
-      setMessage("Votre offre doit être supérieure à l'offre actuelle");
+    if (montantInput < propositionPrix1) {
+      setMessage("Vous devez ajouter au moins 10% de l'offre actuelle (soit " + propositionPrix1 + "€)");
     } else {
       setMessage("");
       console.log("envoi montant : ", montantInput);
