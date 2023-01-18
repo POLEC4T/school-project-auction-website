@@ -13,8 +13,22 @@ export async function getUserByLogin(login) {
 
 export async function getUserById(id) {
     const response = await fetch(`/api/users/id/${id}`);
+   return await response.json();
+   
+}
+
+export async function getArticlesWonbyUserId(id) {
+    const response = await fetch(`/api/users/${id}/encheregagnee`);   
     return await response.json();
 }
+
+export async function getArticlesSoldbyUserId(id){
+    const response = await fetch("/api/users/1/encherevendue"); 
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
 
 export function getVendre(){
     return axios.get("/api/vendre", { headers: authHeader() });

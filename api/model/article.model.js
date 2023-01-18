@@ -28,6 +28,17 @@ module.exports = (sequelize, DataTypes, Model) => {
                 }
             }
         },
+        prix_vente: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+            validate: {
+                isPrixValid(value){
+                    if(value <= 0 && value < this.prix_depart){
+                        throw new Error("Le prix de vente doit être supérieur à 0")
+                    }
+                }
+            }
+        },
         description: {
             type: DataTypes.STRING,
         },
@@ -39,6 +50,7 @@ module.exports = (sequelize, DataTypes, Model) => {
                 notNull: { msg: "La date de création ne doit pas être nulle"}
             }
         },
+
         expires: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -91,6 +103,37 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         seuil_reserve: {
             type: DataTypes.INTEGER,
+        },
+        
+        statut: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "En cours",
+            // check if status is valid
+            validate: {
+                notNull: { msg: "le status de l'enchère est obligatoire"},
+                isIn: {
+                    args: [['En cours', 'Finie', 'Annulée', 'Livrée', 'En attente de livraison']],
+                }
+              }
+        },
+
+        gagnant: { // id de l'utilisateur gagnant
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: null,
+            validate: {
+                isInt: true,
+            }
+          },
+
+        dateLivraison: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: null,
+            validate: {
+                isDate: true,
+            }
         }
       }, 
       {

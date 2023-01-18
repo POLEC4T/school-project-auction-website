@@ -54,6 +54,28 @@ class TodoController {
 )
 };
 
+updateStatutArticle = (req,res) => {
+  logger.info("ArticleController: updateStatutArticle");
+  articleRepository.updateStatutArticle(req.params.id, req.body.statut).then((article) => {
+    if(!article){
+      return res.status(404).send({message: "Article non trouvé"});
+    }
+    return res.send(article);
+  }
+  )
+};
+
+updateDateLivraisonArticle = (req,res) => {
+  logger.info("ArticleController: updateDateLivraisonArticle");
+  articleRepository.updateDateLivraisonArticle(req.params.id, req.body.dateLivraison).then((article) => {
+    if(!article){
+      return res.status(404).send({message: "Article non trouvé"});
+    }
+    return res.send(article);
+  }
+  )
+};
+
 
 
 

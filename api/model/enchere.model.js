@@ -22,8 +22,11 @@ module.exports = (sequelize, DataTypes, Model) => {
             validate: {
                 notNull: { msg: "le montant de l'enchère est obligatoire"},
             }
-        }
-      }, {
+        },
+        
+        },
+    
+      {
         // autres options du modèle
         sequelize, // instance de connexion
         modelName: 'enchere' // nom du modèle

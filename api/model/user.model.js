@@ -74,7 +74,7 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         couleur: {
           type: DataTypes.STRING,
-          defaultValue: 'black'
+          defaultValue: 'white'
         },
         num_siren: {
           type: DataTypes.INTEGER,
@@ -93,8 +93,13 @@ module.exports = (sequelize, DataTypes, Model) => {
           type: DataTypes.INTEGER,
           allowNull: false,
           defaultValue: 0
+        },
+        description: {
+          type: DataTypes.STRING,
+          allowNull: true
         }
-      }, {
+      },
+       {
         // autres options du modèle
         defaultScope: {
           attributes: { exclude: ['password'] } //exclure le password par défaut

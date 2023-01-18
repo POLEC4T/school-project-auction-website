@@ -17,11 +17,13 @@ function ArticleCompact({article}){
     const [error, setError] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
+
     
      useEffect(() => {
         if (article) {
           getArticleImagesByArticleId(article.id).then((images) => {
             if(images && images.length > 0) {
+            
               setImage(images[0].url);
               setImagesLoaded(true);
             }

@@ -17,6 +17,7 @@ function AccueilPage() {
   const imgTshirt = require("../static/images/image_t_shirt.webp");
   const imgPantalon = require("../static/images/image_pantalon.webp");
   const imgShop = require("../static/images/shop.png");
+  const imgEcharpe = require("../static/images/category-autres-radial.png");
 
   const [numArticles, setNumArticles] = useState(4);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -233,45 +234,38 @@ function AccueilPage() {
         </div>
 
         <div className="categories className bg-half flex flex-row flex-wrap justify-around text-zinc-800 sm:mt-10 sm:my-5 my-5 sm:text-3xl text-xl">
-          <div className="t_shirt sm:w-80 w-40 z-10">
+          <Link className="t_shirt sm:w-80 w-40 z-10" to={{ pathname: '/recherche', search: 'cat=haut' }}>
             <img
               className="rounded-full drop-shadow-lg"
               src={imgTshirt}
               alt="image_t-shirt"
             />
             <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-amber-50">
-              T-shirt
+              Haut
             </h1>
-          </div>
+          </Link>
 
-          <div className="pull sm:w-80 w-40 z-10">
-            <img
-              className="rounded-full drop-shadow-lg"
-              src={imgPull}
-              alt="image_pull"
-            />
-            <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-amber-50">
-              Pull
-            </h1>
-          </div>
-
-          <div className="short sm:w-80 w-40 z-10 sm:mt-0 mt-3">
+          <Link className="short sm:w-80 w-40 z-10 sm:mt-0 mt-3" to={{ pathname: '/recherche', search: 'cat=bas' }}>
             <img
               className="rounded-full drop-shadow-lg"
               src={imgShort}
               alt="image_short_et_jupe"
             />
-            <h1 className="text-center sm:mt-2 mt-1 font-gowun">Short</h1>
-          </div>
+            <h1 className="text-center sm:mt-2 mt-1 font-gowun">Bas</h1>
+          </Link>
 
-          <div className="pantalon sm:w-80 w-40 z-10 sm:mt-0 mt-3">
+          <Link className="pull sm:w-80 w-40 z-10" to='/recherche?cat=autres'>
             <img
               className="rounded-full drop-shadow-lg"
-              src={imgPantalon}
-              alt="image_pantalon"
+              src={imgEcharpe}
+              alt="echarpe noire bouton category"
             />
-            <h1 className="text-center sm:mt-2 mt-1 font-gowun">Pantalon</h1>
-          </div>
+            <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-amber-50">
+              Autres
+            </h1>
+          </Link>
+
+
         </div>
       </main>
       <Footer />

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import AuthService from "../services/AuthService";
 import { Link } from "react-router-dom";
 import { getUserById } from "../services/UserService";
+import SearchBar from "./SearchBar";
 
 function NavBar() {
   const logoCloth2you = require("../static/images/logo.png");
@@ -22,9 +23,7 @@ function NavBar() {
       getUserById(user.id)
         .then((response) => {
           setUserData(response);
-          if (response.pdp !== null)
-            setAvatar(require(`${response.pdp}`));
-          
+          if (response.pdp !== null) setAvatar(require(`${response.pdp}`));
         })
         .catch((error) => console.log(error));
     }
@@ -87,30 +86,7 @@ function NavBar() {
           Vendre
         </NavLink>
 
-        <div className="recherche bg-amber-50 w-1/2 h-1/2 rounded-xl flex items-center ease-in duration-100 sm:max-w-48">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 mx-1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-
-          <form action="recherche.html" className="w-full">
-            <input
-              type="text"
-              placeholder="Rechercher"
-              className="w-full rounded-r-xl bg-amber-50 focus:outline-none placeholder-zinc-800"
-            />
-          </form>
-        </div>
+        <SearchBar />
 
         {isConnected && user ? (
           <>
@@ -177,118 +153,111 @@ function NavBar() {
                         />
                       </svg>
                       Solde : {userData.solde}€
-
-                      {userData.roleId === 2 &&
-
+                      {userData.roleId === 2 && (
                         <>
-
                           <Link
-                          to="/paiement"
-                          className="ajout_solde bg-amber-50 hover:bg-amber-100 text-zinc-800 rounded ml-2 px-2"
+                            to="/paiement"
+                            className="ajout_solde bg-amber-50 hover:bg-amber-100 text-zinc-800 rounded ml-2 px-2"
                           >
-                          Ajouter des crédits
+                            Ajouter des crédits
                           </Link>
-
                         </>
- 
-                      
-                      }
-
+                      )}
                     </span>
 
-                    {userData.roleId === 2&&
-
+                    {userData.roleId === 2 && (
                       <>
+                        <div className="sep h-px w-full bg-amber-50 my-4"></div>
 
-                    <div className="sep h-px w-full bg-amber-50 my-4"></div>
+                        <span className="favoris flex items-center mx-auto">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="white"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="w-6 h-6 mr-2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                            />
+                          </svg>
+                          Favoris
+                        </span>
 
-                    <span className="favoris flex items-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="white"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="white"
-                        class="w-6 h-6 mr-2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                        />
-                      </svg>
-                      Favoris
-                    </span>
+                        <div className="sep h-px w-full bg-amber-50 my-4"></div>
 
-                    <div className="sep h-px w-full bg-amber-50 my-4"></div>
+                        <span className="historique flex items-center mx-auto">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
+                            />
+                          </svg>
+                          Historique des commandes
+                        </span>
 
-                    <span className="historique flex items-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-6 h-6 mr-2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
-                        />
-                      </svg>
-                      Historique des commandes
-                    </span>
+                        <div className="sep h-px w-full bg-amber-50 my-4"></div>
 
-                    <div className="sep h-px w-full bg-amber-50 my-4"></div>
+                        <span className="historique flex items-center mx-auto">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+                            />
+                          </svg>
+                          Guide d'achat
+                        </span>
+                      </>
+                    )}
 
-                    <span className="historique flex items-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-6 h-6 mr-2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-                        />
-                      </svg>
-                      Guide d'achat
-                    </span>
+                    {userData.roleId === 1 && (
+                      <>
+                        <div className="sep h-px w-full bg-amber-50 my-4"></div>
 
-                    </>
-
-                    }
-
-                    <div className="sep h-px w-full bg-amber-50 my-4"></div>
-
-                    <span className="historique flex items-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-6 h-6 mr-2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
-                        />
-                      </svg>
-                      Historique des ventes
-                    </span>
+                        <span className="historique flex items-center mx-auto">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
+                            />
+                          </svg>
+                          Historique des ventes
+                        </span>
+                      </>
+                    )}
 
                     <div className="sep h-px w-full bg-amber-50 my-4"></div>
 
                     <button
                       onClick={handleLogout}
-                      className="ajout_solde border-2 border-amber-50 text-white hover:bg-amber-50 hover:text-zinc-800 text-amber-50 px-2 rounded mx-auto"
+                      className="ajout_solde border-2 border-amber-50 hover:bg-amber-50 hover:text-zinc-800 text-amber-50 px-2 rounded mx-auto"
                     >
                       Déconnexion
                     </button>
