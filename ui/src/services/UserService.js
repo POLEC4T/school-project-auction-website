@@ -13,6 +13,12 @@ export async function getUserByLogin(login) {
 
 export async function getUserById(id) {
     const response = await fetch(`/api/users/id/${id}`);
+   return await response.json();
+   
+}
+
+export async function getArticlesWonbyUserId(id) {
+    const response = await fetch(`/api/users/${id}/encheregagnee`);   
     return await response.json();
 }
 

@@ -60,6 +60,18 @@ class TodoController{
         return res.status(500).send({ message: "Error updating solde" });
       });
   }
+
+  getArticlesWonbyUserId = (req, res) => {
+    logger.info('Controller: getArticlesWonbyUserId')
+    userRepository.getArticlesWonbyUserId(req.params.id)
+      .then(data => {
+        return res.status(200).send(data);
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(500).send({ message: "Error retrieving articles won by user" });
+      });
+  }
   
 }
 
