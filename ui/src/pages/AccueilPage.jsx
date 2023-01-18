@@ -234,7 +234,10 @@ function AccueilPage() {
         </div>
 
         <div className="categories className bg-half flex flex-row flex-wrap justify-around text-zinc-800 sm:mt-10 sm:my-5 my-5 sm:text-3xl text-xl">
-          <Link className="t_shirt sm:w-80 w-40 z-10" to={{ pathname: '/recherche', search: 'cat=haut' }}>
+          <Link
+            className="t_shirt sm:w-80 w-40 z-10"
+            to={{ pathname: "/recherche", search: "cat=haut" }}
+          >
             <img
               className="rounded-full drop-shadow-lg"
               src={imgTshirt}
@@ -245,27 +248,28 @@ function AccueilPage() {
             </h1>
           </Link>
 
-          <Link className="short sm:w-80 w-40 z-10 sm:mt-0 mt-3" to={{ pathname: '/recherche', search: 'cat=bas' }}>
+          <Link
+            className="short sm:w-80 w-40 z-10"
+            to={{ pathname: "/recherche", search: "cat=bas" }}
+          >
             <img
               className="rounded-full drop-shadow-lg"
               src={imgShort}
               alt="image_short_et_jupe"
             />
-            <h1 className="text-center sm:mt-2 mt-1 font-gowun">Bas</h1>
+            <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-amber-50">Bas</h1>
           </Link>
 
-          <Link className="pull sm:w-80 w-40 z-10" to='/recherche?cat=autres'>
+          <Link className="pull sm:w-80 w-40 z-10" to="/recherche?cat=autres">
             <img
               className="rounded-full drop-shadow-lg"
               src={imgEcharpe}
               alt="echarpe noire bouton category"
             />
-            <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-amber-50">
+            <h1 className="text-center sm:mt-2 mt-1 font-gowun text-zinc-800">
               Autres
             </h1>
           </Link>
-
-
         </div>
       </main>
       <Footer />

@@ -60,7 +60,9 @@ function PageArticle() {
           <div className="text-center">Loading...</div>
         ) : (
           error ? (
+            
             <NotFoundErrorPage />
+
           ) : (
             <>
               <NavBar/>
