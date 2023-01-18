@@ -18,12 +18,13 @@ function Encherir({ article, vendeur }) {
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const url = WS_URL + "?id=" + article.id + "&token=" + AuthService.getCurrentUser().accessToken;
 
   const ws = useRef(null);
 
   //useEffect qui gère le websocket
   useEffect(() => {
+    if (AuthService.getCurrentUser() === null) return;
+    const url = WS_URL + "?id=" + article.id + "&token=" + AuthService.getCurrentUser().accessToken;
     ws.current = new WebSocket(url);
     ws.current.onopen = () => {
       console.log("ws connected");
@@ -42,7 +43,7 @@ function Encherir({ article, vendeur }) {
     return () => {
       ws.current.close();
     };
-  }, [offreActuelle, url]);
+  }, [offreActuelle, article]);
 
   useEffect(() => {
     if (article) {
