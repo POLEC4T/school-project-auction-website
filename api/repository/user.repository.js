@@ -1,5 +1,6 @@
 const db = require('../config/db.config').connect();
 const roleModel = db.roles;
+const Op = db.Sequelize.Op;
 
 class UserRepository {
 
@@ -125,7 +126,27 @@ class UserRepository {
             console.log(err);
             return [];
             }
-  }
+        }
+
+        async getArticlesSoldbyUserId(userId) {
+            try {
+                const articles = await this.db.articles.findAll({
+                    where: {
+                        vendeurId: userId,
+                        [Op.or]: [
+                            { statut: "Finie" },
+                            { statut: "Livrée" },
+                            { statut: "En attente de livraison" }
+                        ]
+                    }
+                });
+                return articles;
+            } catch (err) {
+                console.log(err);
+                return [];
+            }
+        }
+        
   
 
     

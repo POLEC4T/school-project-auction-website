@@ -22,6 +22,14 @@ export async function getArticlesWonbyUserId(id) {
     return await response.json();
 }
 
+export async function getArticlesSoldbyUserId(id){
+    const response = await fetch("/api/users/1/encherevendue"); 
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+
 export function getVendre(){
     return axios.get("/api/vendre", { headers: authHeader() });
 }

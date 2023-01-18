@@ -29,5 +29,7 @@ module.exports = (app) => {
 
   app.get('/api/users/:id/encheregagnee', userController.getArticlesWonbyUserId);
 
+  app.get('/api/users/:id/encherevendue', userController.getArticlesSoldbyUserId);
+
 
 };

@@ -72,6 +72,18 @@ class TodoController{
         return res.status(500).send({ message: "Error retrieving articles won by user" });
       });
   }
+
+  getArticlesSoldbyUserId = (req, res) => {
+    logger.info('Controller: getArticlesSoldbyUserId')
+    userRepository.getArticlesSoldbyUserId(req.params.id)
+      .then(data => {
+        return res.status(200).send(data);
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(500).send({ message: "Error retrieving articles sold by user" });
+      });
+  }
   
 }
 
