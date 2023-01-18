@@ -288,7 +288,7 @@ function NavBar() {
 
                     <button
                       onClick={handleLogout}
-                      className="ajout_solde border-2 border-amber-50 text-white hover:bg-amber-50 hover:text-zinc-800 text-amber-50 px-2 rounded mx-auto"
+                      className="ajout_solde border-2 border-amber-50 hover:bg-amber-50 hover:text-zinc-800 text-amber-50 px-2 rounded mx-auto"
                     >
                       Déconnexion
                     </button>
