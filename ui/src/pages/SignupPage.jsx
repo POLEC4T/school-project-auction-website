@@ -57,6 +57,7 @@ const handleEyeConf = (e) => {
 
   const handlePreviousPage = (e) => {
     e.preventDefault();
+    setMessage("");
     setPage(1);
   };
 

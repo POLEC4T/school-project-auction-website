@@ -19,12 +19,13 @@ function Encherir({ article, vendeur }) {
   const [offreActuelle, setOffreActuelle] = useState(0.0);
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   const ws = useRef(null);
 
   //useEffect qui gère le websocket
   useEffect(() => {
-    if (AuthService.getCurrentUser() === null) return;
+    if (!user) return;
     const url =
       WS_URL +
       "?id=" +
@@ -72,7 +73,6 @@ function Encherir({ article, vendeur }) {
 
   /* RECUPERATION DE L'USER */
 
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
