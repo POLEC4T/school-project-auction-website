@@ -486,7 +486,7 @@ function ResultatsRecherche() {
                     const start = i * 4;
                     return (
                       <div
-                        className="flex flex-row mt-10 justify-around sm:gap-6 gap-0 sm:flex-no-wrap flex-wrap"
+                        className="flex flex-row mt-10 sm:gap-6 gap-0 sm:flex-no-wrap flex-wrap"
                         key={i}
                       >
                         {Array.from({ length: 4 }, (_, j) => {
