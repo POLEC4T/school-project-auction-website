@@ -34,7 +34,7 @@ function PrixReserve(props) {
         Je souhaite fixer un prix de réserve
       </div>
 
-        {prix_reserve && (
+        {prix_reserve ? (
             <div class="prix_reserve mb-2 mt-8 w-5/6">
                 <h2 class="font-gowun text-2xl font-bold">Prix de réserve :</h2>
 
@@ -68,6 +68,15 @@ function PrixReserve(props) {
                 {message && (
                 <p class="text-red-600 text-sm">{message}</p>)}
             </div>
+        ) : (
+          <div class="flex flex-row items-center justify-center px-3 py-5 sm:px-20 sm:py-10">
+          <p class="text-gray-800">
+            Lorsque votre article sera mis en vente, l'enchère durera 7
+            jours. Vous pouvez choisir de mettre un prix de réserve
+            pour votre article. Si le prix de réserve n'est pas atteint
+            à la fin de l'enchère, l'article ne sera pas vendu.
+          </p>
+        </div>
         )}
     </>
   );

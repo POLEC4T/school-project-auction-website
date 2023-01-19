@@ -189,7 +189,7 @@ const handleSubmit = (e) => {
         setIsPageValid(true);
       }
     } else if (page === 3) {
-      if (prix_depart !== 0) {
+      if (prix_depart > 0) {
         setIsPageValid(true);
       }
     } else {

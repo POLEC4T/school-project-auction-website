@@ -10,6 +10,8 @@ function PrixDepart(props) {
             setMessage("Le prix de départ est obligatoire");
         } else if (!regex.test(props.value)) {
         setMessage("Le prix de départ doit être un nombre positif, avec ou sans le signe € à la fin");
+        }else if (props.value <= 0){
+            setMessage("Le prix de départ doit être supérieur à 0");
         }
         else {
             setMessage("");
