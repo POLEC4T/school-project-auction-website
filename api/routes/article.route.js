@@ -23,4 +23,6 @@ module.exports = (app) => {
 
   app.put("/api/article/:id/dateLivraison", articleController.updateDateLivraisonArticle);
 
+  app.get('/api/user/likedarticles', [authJwt.verifyToken, authJwt.isAcheteur], articleController.getLikedArticles);
+
 };

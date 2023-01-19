@@ -1,13 +1,13 @@
-import React from 'react';
-import Encherir from '../components/Encherir';
-import { useState, useEffect } from 'react';
+import React from 'react'
+import Encherir from '../components/Encherir'
+import { useState, useEffect } from 'react'
 import { getArticle, getNbLikeArticle } from '../services/ArticleService'
 import { getUserById } from '../services/UserService'
-import { getArticleImagesByArticleId } from '../services/ImageService';
-import ImageCarousel from '../components/ImageCarousel';
+import { getArticleImagesByArticleId } from '../services/ImageService'
+import ImageCarousel from '../components/ImageCarousel'
 import NavBar from '../components/NavBar'
-import NotFoundErrorPage from './NotFoundErrorPage';
-import { useParams } from 'react-router-dom';
+import NotFoundErrorPage from './NotFoundErrorPage'
+import { useParams } from 'react-router-dom'
 
 function PageArticle() {
 
@@ -23,29 +23,32 @@ function PageArticle() {
 
 
 
-  useEffect(() => {
-    getArticle(idPassed).then((response) => {
-      if (response.message) {
-        setError(response.message);
-        setIsLoading(false);
-      } else {
-        setArticle(response);
-        setIsLoading(false);
-      }
-    })
-    .catch(() => {
-      setError('Error connecting to server. Please try again later.');
-    });
-  }, [idPassed]);
+    useEffect(() => {
+        getArticle(idPassed)
+            .then((response) => {
+                if (response.message) {
+                    setError(response.message)
+                    setIsLoading(false)
+                } else {
+                    setArticle(response)
+                    setIsLoading(false)
+                }
+            })
+            .catch(() => {
+                setError('Error connecting to server. Please try again later.')
+            })
+    }, [idPassed])
 
-  useEffect(() => {
-    if (article) {
-      getArticleImagesByArticleId(article.id).then((images) => {
-        setImages(images.map(image => ({image: image.url, caption: ""})));
-        setImagesLoaded(true);
-      });
-    }
-  }, [article]);
+    useEffect(() => {
+        if (article) {
+            getArticleImagesByArticleId(article.id).then((images) => {
+                setImages(
+                    images.map((image) => ({ image: image.url, caption: '' }))
+                )
+                setImagesLoaded(true)
+            })
+        }
+    }, [article])
 
   useEffect(() => {
     if (article) {
@@ -81,4 +84,4 @@ function PageArticle() {
   );
 }
 
-export default PageArticle;
+export default PageArticle
