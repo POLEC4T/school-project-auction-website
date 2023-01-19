@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { getUserById } from "../services/UserService";
 import SearchBar from "./SearchBar";
 
-function NavBar() {
-  const logoCloth2you = require("../static/images/logo.png");
+function NavBar({fixed}) {
+  const logoCloth2you = require("../static/images/logo-outline.png");
   const imageProfil = require("../static/images/pfp-image-example.jpeg");
 
   const [isConnected, setIsConnected] = useState(false);
@@ -58,14 +58,15 @@ function NavBar() {
 
   return (
     <div>
-      <nav className="h-16 bg-zinc-800 w-full flex justify-around items-center font-outfit gap-2">
+      <nav className={`sm:h-20 h-16 bg-zinc-800 w-full flex flex-row justify-around items-center font-outfit gap-2 text-xl ${fixed && fixed === true ? 'fixed z-[1000]' : ''}`}>
         <NavLink
           style={{ backgroundColor: "rgb(39, 39, 42)" }}
           to="/"
-          className="logo flex h-full items-center active:bg-non"
+          className="logo flex flex-row h-full items-center"
         >
           <img src={logoCloth2you} alt="logo" className="h-1/2 mx-1 mr-3" />
-          <h2 className="font-gowun text-2xl text-white sm:block hidden">
+
+          <h2 className="text-3xl text-orange-200 md:block hidden">
             cloth2you
           </h2>
         </NavLink>
@@ -73,7 +74,7 @@ function NavBar() {
         <NavLink
           style={{ backgroundColor: "rgb(39, 39, 42)" }}
           to="/profil"
-          className="text-amber-50 hover:text-amber-100 lg:block hidden"
+          className="text-orange-50 hover:text-orange-100 lg:block hidden"
         >
           Profil
         </NavLink>
@@ -81,7 +82,7 @@ function NavBar() {
         <NavLink
           style={{ backgroundColor: "rgb(39, 39, 42)" }}
           to="/vendre"
-          className="text-amber-50 hover:text-amber-100 lg:block hidden"
+          className="text-orange-50 hover:text-orange-100 lg:block hidden"
         >
           Vendre
         </NavLink>
@@ -96,7 +97,7 @@ function NavBar() {
                 alt="photo de profil"
                 className="h-1/3 w-1/3 rounded-full"
               />
-              <p className="text-amber-50">{user.login}</p>
+              <p className="text-orange-50">{user.login}</p>
             </div>
 
             <button className="burger ml-10" onClick={handleBurger}>
@@ -134,9 +135,9 @@ function NavBar() {
             </button>
 
             {burgerShow && (
-              <div className="burger-menu bg-zinc-800 w-full md:w-1/2 lg:w-1/4 mt-16 z-50 absolute top-0 right-0 rounded-b-sm">
+              <div className="burger-menu bg-zinc-800 w-full md:w-1/2 lg:w-1/4 sm:mt-20 mt-16 z-50 absolute top-0 right-0 rounded-b-sm">
                 <div className="burger-menu-content flex flex-col justify-center items-center">
-                  <div className="text-white text-center my-5 text-lg ">
+                  <div className="text-white text-center my-5 text-xl">
                     <span className="credits flex">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +158,7 @@ function NavBar() {
                         <>
                           <Link
                             to="/paiement"
-                            className="ajout_solde bg-amber-50 hover:bg-amber-100 text-zinc-800 rounded ml-2 px-2"
+                            className="ajout_solde bg-orange-50 hover:bg-orange-100 text-zinc-800 rounded ml-2 px-2"
                           >
                             Ajouter des crédits
                           </Link>
@@ -167,7 +168,7 @@ function NavBar() {
 
                     {userData.roleId === 2 && (
                       <>
-                        <div className="sep h-px w-full bg-amber-50 my-4"></div>
+                        <div className="sep h-px w-full bg-orange-50 my-4"></div>
 
                         <span className="favoris flex items-center mx-auto">
                           <svg
@@ -187,7 +188,7 @@ function NavBar() {
                           Favoris
                         </span>
 
-                        <div className="sep h-px w-full bg-amber-50 my-4"></div>
+                        <div className="sep h-px w-full bg-orange-50 my-4"></div>
 
                         <span className="historique flex items-center mx-auto">
                           <svg
@@ -207,9 +208,9 @@ function NavBar() {
                           Historique des commandes
                         </span>
 
-                        <div className="sep h-px w-full bg-amber-50 my-4"></div>
+                        <div className="sep h-px w-full bg-orange-50 my-4"></div>
 
-                        <span className="historique flex items-center mx-auto">
+                        <NavLink className="historique flex items-center mx-auto" to="/profil">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -225,13 +226,37 @@ function NavBar() {
                             />
                           </svg>
                           Guide d'achat
-                        </span>
+                        </NavLink>
+
+                        <div className="sep h-px w-full bg-orange-50 my-4"></div>
+
+                        <NavLink
+                          style={{ backgroundColor: "rgb(39, 39, 42)" }}
+                          to="/profil"
+                          className="flex items-center mx-auto"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="w-6 h-6 mr-2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                          </svg>
+                          Profil
+                        </NavLink>
                       </>
                     )}
 
                     {userData.roleId === 1 && (
                       <>
-                        <div className="sep h-px w-full bg-amber-50 my-4"></div>
+                        <div className="sep h-px w-full bg-orange-50 my-4"></div>
 
                         <span className="historique flex items-center mx-auto">
                           <svg
@@ -250,14 +275,67 @@ function NavBar() {
                           </svg>
                           Historique des ventes
                         </span>
+
+                        <div className="sep h-px w-full bg-orange-50 my-4"></div>
+
+                        <NavLink
+                          style={{ backgroundColor: "rgb(39, 39, 42)" }}
+                          to="/profil"
+                          className="flex items-center mx-auto"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                          </svg>
+                          Profil
+                        </NavLink>
+
+                        <div className="sep h-px w-full bg-orange-50 my-4"></div>
+
+                        <NavLink
+                          style={{ backgroundColor: "rgb(39, 39, 42)" }}
+                          to="/vendre"
+                          className="flex items-center mx-auto"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
+                            />
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M6 6h.008v.008H6V6z"
+                            />
+                          </svg>
+                          Vendre
+                        </NavLink>
                       </>
                     )}
 
-                    <div className="sep h-px w-full bg-amber-50 my-4"></div>
+                    <div className="sep h-px w-full bg-orange-50 my-4"></div>
 
                     <button
                       onClick={handleLogout}
-                      className="ajout_solde border-2 border-amber-50 hover:bg-amber-50 hover:text-zinc-800 text-amber-50 px-2 rounded mx-auto"
+                      className="ajout_solde text-orange-50 border-2 border-orange-50 hover:bg-orange-50 hover:text-zinc-800 text-orange-200 px-2 rounded mx-auto"
                     >
                       Déconnexion
                     </button>
@@ -267,40 +345,49 @@ function NavBar() {
             )}
           </>
         ) : (
-          <div className="connexion-inscription w-48 flex mr-2">
+          <div className="connexion-inscription w-60 flex mr-2">
             <NavLink
               to="/connexion"
-              className="text-amber-50 rounded-l-md w-1/2 text-center sm:text-lg text-sm"
+              className="text-orange-200 rounded-l-md w-1/2 text-center sm:text-xl text-md px-2 py-1"
             >
               Connexion
             </NavLink>
             <NavLink
               to="/inscription"
-              className="text-black bg-amber-50 rounded-r-md w-1/2 text-center sm:text-lg text-sm"
+              className="text-zinc-800 bg-orange-50 rounded-r-md w-1/2 text-center sm:text-xl text-md px-2 py-1"
             >
               Inscription
             </NavLink>
           </div>
         )}
       </nav>
-      <div className="categories w-full flex justify-around font-outfit">
+      <div className="categories h-10 w-full flex justify-around items-center font-outfit text-xl">
         <NavLink
+          style={{ backgroundColor: "rgb(255, 247, 237)" }}
           to="/recherche?cat=haut"
-          className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
+          className="w-1/3 h-full "
         >
-          Hauts
+          <div className="text-center h-full ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center">
+            Autres
+          </div>
         </NavLink>
         <NavLink
+          style={{ backgroundColor: "rgb(255, 247, 237)" }}
           to="/recherche?cat=bas"
-          className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
+          className="w-1/3 h-full "
         >
-          Bas
+          <div className="text-center h-full ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center">
+            Autres
+          </div>
         </NavLink>
         <NavLink
+          style={{ backgroundColor: "rgb(255, 247, 237)" }}
           to="/recherche?cat=autres"
-          className="bg-amber-50 w-1/3 text-center ease-in-out duration-300 hover:bg-amber-100"
+          className="w-1/3 h-full "
         >
-          Autres
+          <div className="text-center h-full ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center">
+            Autres
+          </div>
         </NavLink>
       </div>
     </div>

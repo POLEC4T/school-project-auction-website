@@ -30,7 +30,7 @@ function SearchBar() {
 
     return (
 
-        <div className="recherche bg-amber-50 w-1/2 h-1/2 rounded-xl flex items-center ease-in duration-100 sm:max-w-48">
+        <div className="recherche bg-orange-50 w-1/2 h-1/2 rounded-xl flex items-center ease-in duration-100 sm:max-w-48">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -46,15 +46,20 @@ function SearchBar() {
                 />
             </svg>
 
-            <form className="w-full flex" onSubmit={handleSubmitSearch}>
+            <form className="w-full flex h-full" onSubmit={handleSubmitSearch}>
                 <input
                     type="text"
-                    placeholder="Rechercher"
-                    className="w-full rounded-r-xl bg-amber-50 focus:outline-none placeholder-zinc-800"
+                    placeholder="..."
+                    className="w-full rounded-r-xl bg-orange-50 focus:outline-none placeholder-zinc-800"
                     value={searchValue}
                     onChange={e => handleChangeSearch(e.target.value)}
                 />
-                <button type="submit" className='mr-2 hover:text-zinc-800'>Rechercher</button>
+                <button type="submit" className='bg-zinc-800 text-orange-50 sm:px-4 px-1 border-2 border-orange-50 rounded-r-xl hover:bg-zinc-600 sm:text-lg text-xs '>
+
+
+                    Rechercher
+                    
+                </button>
             </form>
         </div>
     )

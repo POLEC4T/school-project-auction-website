@@ -23,7 +23,7 @@ export async function getArticlesWonbyUserId(id) {
 }
 
 export async function getArticlesSoldbyUserId(id){
-    const response = await fetch("/api/users/1/encherevendue"); 
+    const response = await fetch(`/api/users/${id}/encherevendue`); 
     const data = await response.json();
     console.log(data);
     return data;

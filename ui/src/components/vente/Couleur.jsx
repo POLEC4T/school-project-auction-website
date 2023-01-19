@@ -18,17 +18,17 @@ function Couleur(props) {
   };
   
   return (
-    <div class="couleur sm:mt-8 mt-12 w-5/6">
-      <h2 class="font-gowun text-xl font-bold">Couleurs :</h2>
+    <div class="couleur mt-8 w-5/6">
+      <h2 class="font-gowun sm:text-2xl text-xl font-bold">Couleurs :</h2>
       <input
         onChange={props.onChange}
         onBlur={handleBlur}
         value={props.value}
         type="text"
         placeholder="exemple : rouge,bleu,jaune"
-        class="placeholder-zinc-600 h-8 w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2"
+        class="placeholder-zinc-600 sm:h-12 h-10 w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2 sm:text-xl text-md"
       />
-      <div class="sm:text-xs text-xs flex flex-row items-center">
+      <div class="sm:text-lg text-xs flex flex-row items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

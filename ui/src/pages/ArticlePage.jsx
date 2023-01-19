@@ -57,16 +57,18 @@ function PageArticle() {
   }, [article]);
   
   return (
-    <div className="bg-zinc-100 h-screen">
+    <div className="bg-zinc-100 h-screen bg-monogram">
         {isLoading ? (
           <div className="text-center">Loading...</div>
         ) : (
           error ? (
+            
             <NotFoundErrorPage />
+
           ) : (
             <>
               <NavBar/>
-              <main className='contenu sm:mt-16 mt-0 flex flex-row flex-wrap font-outfit w-screen'>
+              <main className='contenu sm:mt-16 mt-0 flex flex-row flex-wrap font-outfit w-screen bg-halfhome'>
                 <section className="gauche sm:w-1/2 w-full flex justify-center mt-10 mb-10">
                   {imagesLoaded && <ImageCarousel images={images}/>}
                 </section>

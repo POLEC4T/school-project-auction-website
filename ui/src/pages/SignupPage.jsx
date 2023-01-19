@@ -217,7 +217,7 @@ const handleEyeConf = (e) => {
         </Link>
       </nav>
       <div className="w-full h-full flex justify-center text-zinc-800 sm:mt-0 mt-10">
-        <div className="etape bg-white w-[600px] sm:h-full h-5/6 sm:rounded-xl rounded-0 flex flex-row justify-between">
+        <div className="etape bg-white w-[800px] sm:h-full h-5/6 sm:rounded-xl rounded-0 flex flex-row justify-between">
           <button
             className="back sm:px-5 px-1"
             onClick={(e) => handlePreviousPage(e)}
@@ -238,16 +238,16 @@ const handleEyeConf = (e) => {
             </svg>
           </button>
           {page === 1 ? (
-            <div className="haut flex flex-col items-center pt-2 px-5">
-              <h2 className="opacity-100 font-gowun text-4xl">Inscription</h2>
+            <div className="haut flex flex-col items-center pt-5 px-5">
+              <h2 className="opacity-100 font-gowun text-7xl">Inscription</h2>
 
-              <button className="google-connexion mt-8 h-10 sm:w-2/3 w-full border-2 border-zinc-800 flex flex-row items-center rounded-xl justify-between">
+              <button className="google-connexion mt-8 h-16 sm:w-2/3 w-full border-2 border-zinc-800 flex flex-row items-center rounded-xl justify-between opacity-30" disabled>
                 <img
                   className="h-full pl-4 py-2"
                   src={googleLogo}
                   alt="google-logo"
                 />
-                <p className="sm:pr-5 pr-7 ml-2 sm:text-lg text-sm ">
+                <p className="sm:pr-5 pr-7 ml-2 sm:text-3xl text-md">
                   S'inscrire avec Google
                 </p>
               </button>
@@ -261,27 +261,27 @@ const handleEyeConf = (e) => {
 
               <input
                 type="text"
-                placeholder="email"
-                className="placeholder-zinc-600 mt-8 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                placeholder="email (exemple@cloth2you.com)"
+                className="placeholder-zinc-600 mt-8 h-12 text-2xl w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
                 value={email}
                 onChange={(e) => onChangeEmail(e)}
               />
               <input
                 type="text"
                 placeholder="pseudo"
-                className="placeholder-zinc-600 mt-5 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                className="placeholder-zinc-600 mt-5 h-12 text-2xl w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
                 value={pseudo}
                 onChange={(e) => onChangePseudo(e)}
               />
 
-              <div className="mdp border-2 mt-5 h-8 rounded-xl border-zinc-800 flex flex-row w-full">
+              <div className="mdp border-2 mt-5 h-12 text-2xl rounded-xl border-zinc-800 flex flex-row w-full">
 
               {eye === "closed" ? (
 
                 <input
                   type="password"
                   placeholder="mot de passe"
-                  className="placeholder-zinc-600  w-full rounded-xl focus:outline-none pl-2"
+                  className="placeholder-zinc-600 w-full rounded-xl focus:outline-none pl-2"
                   value={password}
                   onChange={(e) => onChangePassword(e)}
                 />
@@ -291,7 +291,7 @@ const handleEyeConf = (e) => {
                 <input
                   type="text"
                   placeholder="mot de passe"
-                  className="placeholder-zinc-600  w-full rounded-xl focus:outline-none pl-2"
+                  className="placeholder-zinc-600 w-full rounded-xl focus:outline-none pl-2"
                   value={password}
                   onChange={(e) => onChangePassword(e)}
 
@@ -330,7 +330,7 @@ const handleEyeConf = (e) => {
                       } 
                 </button>
               </div>
-              <div className="mdp border-2 mt-5 h-8 rounded-xl border-zinc-800 flex flex-row w-full">
+              <div className="mdp border-2 mt-5 mt-5 h-12 text-2xl rounded-xl border-zinc-800 flex flex-row w-full">
               {eyeConf === "closed" ? (
 
                   <input
@@ -394,7 +394,7 @@ const handleEyeConf = (e) => {
                   className="accent-zinc-800"
                   onChange={(e) => handleCguChange(e)}
                 />
-                <p className="text-justify text-xs" disabled>
+                <p className="text-justify text-lg" disabled>
                   En cochant cette case, vous acceptez les termes et conditions
                   de cloth2you, les{" "}
                   <Link href="/cgu" className="underline">
@@ -409,22 +409,22 @@ const handleEyeConf = (e) => {
               </div>
 
               <p className="text-red-500 text-sm text-center mt-2">{message}</p>
-              <div className="choix w-full flex flex-row justify-between sm:gap-2 gap-2">
+              <div className="choix w-full h-12 flex flex-row sm:text-lg text-md justify-between sm:gap-2 gap-2">
                 <button
-                  className="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 sm:text-md text-sm hover:bg-zinc-600 w-1/2"
+                  className="bg-zinc-800 text-orange-200 h-full px-3 py-1 rounded-lg mt-5 hover:bg-zinc-600 w-1/2"
                   onClick={(e) => handleRegisterAcheteur(e)}
                 >
                   S'inscrire en tant qu'acheteur
                 </button>
                 <button
-                  className="text-zinc-800 border-2 border-zinc-800 px-3 py-1 rounded-lg mt-5 sm:text-md text-sm hover:text-zinc-600 w-1/2"
+                  className="text-zinc-800 border-2 h-full border-zinc-800 px-3 py-1 rounded-lg mt-5 hover:text-zinc-600 w-1/2"
                   onClick={(e) => handleNextPage(e)}
                 >
                   Je souhaite vendre mes créations
                 </button>
               </div>
 
-              <h2 className="mt-4  text-center">
+              <h2 className="mt-6 text-center">
                 Vous avez déjà un compte,{" "}
                 <Link className="underline" to="/connexion">
                   se connecter
@@ -436,8 +436,8 @@ const handleEyeConf = (e) => {
 
             
           ) : (
-            <div className="haut flex flex-col items-center pt-2 px-5">
-              <h2 className="opacity-100 font-gowun text-4xl">Inscription</h2>
+            <div className="haut flex flex-col items-center pt-5 px-5">
+              <h2 className="opacity-100 font-gowun text-7xl">Inscription</h2>
 
               <div className="ligne w-full flex flex-row overflow-hidden mt-8">
                 <img className="w-1/4" src={ligne1} alt="" />
@@ -446,7 +446,7 @@ const handleEyeConf = (e) => {
                 <img className="w-1/4" src={ligne2} alt="" />
               </div>
 
-              <p className="text-sm text-center mt-8">
+              <p className="text-lg text-center mt-8">
                 En vous inscrivant en tant que vendeur·euse sur cloth2you, vous
                 devez avoir un statut entrepreneurial,{" "}
                 <a href="" className="underline">
@@ -458,21 +458,21 @@ const handleEyeConf = (e) => {
               <input
                 type="text"
                 placeholder="nom"
-                className="placeholder-zinc-600 mt-8 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                className="placeholder-zinc-600 mt-8 h-12 text-2xl w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
                 value={nom}
                 onChange={(e) => onChangeNom(e)}
               />
               <input
                 type="text"
                 placeholder="prénom"
-                className="placeholder-zinc-600 mt-4 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                className="placeholder-zinc-600 mt-4 h-12 text-2xl w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
                 value={prenom}
                 onChange={(e) => onChangePrenom(e)}
               />
               <input
                 type="text"
                 placeholder="numéro SIREN"
-                className="placeholder-zinc-600 mt-4 h-8 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                className="placeholder-zinc-600 mt-4 h-12 text-2xl w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
                 value={siren}
                 onChange={(e) => onChangeSiren(e)}
               />
@@ -485,25 +485,25 @@ const handleEyeConf = (e) => {
                   className="accent-zinc-800"
                   onChange={(e) => handleCguChange(e)}
                 />
-                <p className="text-justify text-xs" disabled>
+                <p className="text-justify text-lg" disabled>
                   En cochant cette case, vous acceptez les termes et conditions
                   de cloth2you, les{" "}
                   <Link to="/cgu" className="underline">
                     conditions générales d'utilisation
                   </Link>{" "}
                   et la{" "}
-                  <Link href="" className="underline">
+                  <Link to="/politiqueconf" className="underline">
                     politique de confidentialité
                   </Link>{" "}
                   et avoir au moins 18 ans.
                 </p>
               </div>
 
-              <p className="text-red-500 text-sm">{message}</p>
+              <p className="text-red-500 text-center mt-5 text-lg">{message}</p>
 
               <div className="choix w-full flex flex-row justify-around mt-5">
                 <button
-                  className="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 text-md hover:bg-zinc-600"
+                  className="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg mt-5 text-2xl hover:bg-zinc-600"
                   onClick={(e) => handleRegisterVendeur(e)}
                 >
                   S'inscrire en tant que vendeur · euse
