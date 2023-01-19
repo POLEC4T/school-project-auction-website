@@ -12,6 +12,11 @@ class ArticleRepository {
                     id: id,
                 },
             })
+            //on vérifie si la date + 7 jours est dépassée
+            if (article.createdAt < new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)) {
+                article.statut = 'Finie'
+                await article.save()
+            }
             return article
         } catch (err) {
             console.log(err)
