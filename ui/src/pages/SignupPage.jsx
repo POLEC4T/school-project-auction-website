@@ -64,6 +64,7 @@ const handleEyeConf = (e) => {
     e.preventDefault();
     if (page === 1 && formValid === true) {
       setPage(2);
+      setMessage("");
     } else {
       setMessage("Veuillez remplir tous les champs correctement");
     }
