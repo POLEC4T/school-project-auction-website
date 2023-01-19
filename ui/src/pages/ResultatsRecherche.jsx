@@ -452,7 +452,7 @@ function ResultatsRecherche() {
               </svg>
             </button>
 
-            <select  className="select-tri cursor-pointer bg-zinc-800 rounded-lg text-orange-50 sm:text-2xl text-lg sm:h-16 h-10 text-center focus:outline-none hover:bg-zinc-600 sm:pt-0 pt-10">
+            <select  className="select-tri cursor-pointer bg-zinc-800 rounded-lg text-orange-50 sm:text-2xl text-lg sm:h-16 h-10 text-center focus:outline-none hover:bg-zinc-600 sm:pt-0 pt-10" disabled>
               <option value="prix-croissant">Prix croissant</option>
               <option value="prix-decroissant">Prix décroissant</option>
               <option value="temps-croissant">Temps restant croissant</option>

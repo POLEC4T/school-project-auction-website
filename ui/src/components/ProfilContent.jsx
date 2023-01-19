@@ -8,7 +8,9 @@ function ProfilContent({ user }) {
   );
   const [isOpen, setIsOpen] = useState(false);
 
-  if (user.pdp !== null) setAvatar(require(`${user.pdp}`));
+  useEffect(() => {
+    if(user.pdp !== null) setAvatar(`${user.pdp}`);
+  }, [user]);
 
   return (
     <>
@@ -163,7 +165,7 @@ function ProfilContent({ user }) {
             <div class="profil flex flex-row">
               <img
                 class="sm:w-24 w-16 sm:h-24 h-16 rounded-full"
-                src={avatar}
+                src={avatar && avatar}
                 alt="photo de profil"
               />
 

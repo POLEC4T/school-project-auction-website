@@ -21,8 +21,6 @@ function PageArticle() {
 
   const idPassed = useParams().id;
 
-
-
     useEffect(() => {
         getArticle(idPassed)
             .then((response) => {
