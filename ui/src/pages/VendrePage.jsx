@@ -137,8 +137,7 @@ const handleSubmit = (e) => {
     //upload images
     console.log(response)
     images.forEach(image => {
-      console.log(image[0]);
-      uploadImage(image[0],response.data.vendeurId).then((response) => {
+      uploadImage(image[0],response.data.id).then((response) => {
         navigate("/");
         window.location.reload();
       }
@@ -190,7 +189,7 @@ const handleSubmit = (e) => {
         setIsPageValid(true);
       }
     } else if (page === 3) {
-      if (prix_depart !== 0) {
+      if (prix_depart > 0) {
         setIsPageValid(true);
       }
     } else {
@@ -216,8 +215,8 @@ const handleSubmit = (e) => {
     return (
       <>
         <NavBar />
-        <main class="main-container flex flex-row items-center justify-center font-outfit h-screen w-screen bg-zinc-800 bg-vente bg-cover bg-100 overflow-hidden sm:px-48 px-0 py-24">
-          <div class="etape bg-white w-full h-full rounded-xl flex flex-row justify-between translate-y-[-40px]">
+        <main class="main-container flex flex-row items-center fixed justify-center font-outfit h-screen w-screen bg-zinc-800 bg-vente bg-auto bg-100 overflow-hidden">
+          <div class="etape bg-white sm:w-3/4 w-full h-3/4 sm:rounded-xl rounded-none flex flex-row justify-between translate-y-[-40px]">
             <button class="precedent sm:px-5 px-1" onClick={handlePreviousPage}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -236,7 +235,7 @@ const handleSubmit = (e) => {
             </button>
 
             <div class="formulaire mt-5 flex flex-col items-center w-full">
-              <h2 class="font-gowun sm:text-4xl text-2xl">
+              <h2 class="font-gowun text-center sm:text-5xl text-3xl">
                 Mise aux enchères ({page}/3)
               </h2>
 
@@ -265,7 +264,7 @@ const handleSubmit = (e) => {
                     value={prix_depart}
                   />
                   <PrixReserve onChange={handleSeuil} value={seuil} prix_depart={prix_depart} />
-                  <button class="bg-zinc-800 text-amber-50 px-3 py-1 rounded-lg mt-5 sm:text-lg text-sm hover:bg-zinc-600 mt-16" onClick={handleSubmit}>
+                  <button class="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg sm:mt-6 mt-2 sm:text-2xl text-sm hover:bg-zinc-600 mt-16" onClick={handleSubmit}>
                     Mettre en ligne
                   </button>
                 </>
@@ -296,7 +295,7 @@ const handleSubmit = (e) => {
   } else {
     return (
       <>
-        <RefusedAccess message="Vous devez être vendeur pour accéder à cette page" />
+        <RefusedAccess message="Vous devez être vendeur · euse pour accéder à cette page" />
       </>
     );
   }

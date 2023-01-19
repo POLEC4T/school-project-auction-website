@@ -90,7 +90,7 @@ module.exports = (sequelize, DataTypes, Model) => {
           type: DataTypes.DATE,
         },
         solde: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.FLOAT,
           allowNull: false,
           defaultValue: 0
         },

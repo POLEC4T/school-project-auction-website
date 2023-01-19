@@ -5,16 +5,17 @@ import FilAriane from "../components/FilAriane";
 import ArticleCompact from "../components/ArticleCompact";
 import { getArticlesWithLeastTimeLeft } from "../services/AccueilService";
 import { useEffect, useState } from "react";
-import ProfileNav from "../components/ProfileNav";
 import CheckboxFiltre from "../components/CheckboxFiltre";
 
-
 function ResultatsRecherche() {
+  
+  const imageFiltreTaille = require("../static/images/image-filtre-taille.png");
+
   const [numArticles, setNumArticles] = React.useState(12);
   const [topArticles, setTopArticles] = React.useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [openFiltres, setOpenFiltres] = useState(false);
 
   const [filters, setFilters] = useState({
     taille: [],
@@ -55,30 +56,6 @@ function ResultatsRecherche() {
     }
   }, [mat, col, taille]);
 
-  const chunkSize = 4;
-  const chunks = Array.from(
-    { length: Math.ceil(numArticles / chunkSize) },
-    (_, i) => {
-      const start = i * chunkSize;
-      return (
-        <div
-          className="flex flex-row justify-around sm:gap-2 gap-0 sm:flex-no-wrap flex-wrap"
-          key={i}
-        >
-          {Array.from({ length: chunkSize }, (_, j) => {
-            const index = start + j;
-            if (index < numArticles && topArticles && topArticles[index]) {
-              return (
-                <ArticleCompact key={index} article={topArticles[index]} />
-              );
-            }
-            return null;
-          })}
-        </div>
-      );
-    }
-  );
-
   useEffect(() => {
     getArticlesWithLeastTimeLeft()
       .then((response) => {
@@ -94,6 +71,7 @@ function ResultatsRecherche() {
         setError("Error connecting to server. Please try again later.");
       });
   }, []);
+  
 
   const filteredArticles = topArticles.filter((article) => {
     let matches = true;
@@ -107,12 +85,10 @@ function ResultatsRecherche() {
         if (
           !article.titre
             .toLowerCase()
-            .includes(recherche.toLowerCase().trim())
-          ||
+            .includes(recherche.toLowerCase().trim()) ||
           !article.description
             .toLowerCase()
             .includes(recherche.toLowerCase().trim())
-
         ) {
           matches = false;
         }
@@ -142,20 +118,25 @@ function ResultatsRecherche() {
 
   return (
     <>
-      <NavBar />
-      <main class="flex">
-        <aside class="w-1/4 bg-zinc-400 flex items-center flex-col gap-3 p-4 justify-top">
+      <NavBar fixed={true} />
+      <main className="flex sm:flex-row flex-col font-outfit">
+        <aside
+          className={`bg-zinc-200 text-zinc-800 sm:w-[400px] w-full flex flex-col ${
+            openFiltres || window.innerWidth > 768
+              ? "sm:fixed block h-screen sm:mt-10 mt-0 sm:block"
+              : "hidden"
+          }`}
+        >
           <button
-            class="rounded-xl bg-black text-white w-1/2 h-10 font-gowun flex justify-around items-center "
-            onClick={() => handleClickRemoveFilters()}
+            className="bg-zinc-800 text-orange-50 border-2 border-zinc-800 text-xl py-2 px-4 rounded-lg mx-4 mt-12 mb-2 flex flex-row justify-center items-center gap-2 sm:w-3/4 sm:translate-x-8 translate-x-0"
+            onClick={handleClickRemoveFilters}
           >
-            Effacer les filtres
             <svg
-              class="w-5 h-5"
+              className="w-6 h-6 ml-2"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke="currentColor"
             >
               <path
@@ -164,232 +145,377 @@ function ResultatsRecherche() {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
+            Effacer les filtres
           </button>
+
+          <button
+            className="bg-zinc-200 text-zinc-800 border-2 border-zinc-800 text-xl py-2 px-4 rounded-lg mx-4 flex flex-row justify-center items-center gap-2 sm:hidden block"
+            onClick={() => setOpenFiltres(false)}
+          >
+            Fermer les filtres{" "}
+          </button>
+
+          {/*==================== CATEGORIES ==================== */}
+
+          <section className="categories flex flex-col sm:my-4 sm:my-2 my-1 px-4 py-5">
+            <h2 className="text-3xl flex flex-row">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-8 h-8 mr-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 6h.008v.008H6V6z"
+                />
+              </svg>
+              Catégories
+            </h2>
+            <div className="check text-xl flex flex-row mt-4 justify-center">
+              <div className="gauche">
+                <CheckboxFiltre
+                  name="categorie"
+                  value="haut"
+                  onChange={handleFilterChange}
+                />
+              </div>
+              <div className="middle mx-10">
+                <CheckboxFiltre
+                  name="categorie"
+                  value="bas"
+                  onChange={handleFilterChange}
+                />
+              </div>
+              <div className="droite">
+                {" "}
+                <CheckboxFiltre
+                  name="categorie"
+                  value="autres"
+                  onChange={handleFilterChange}
+                />
+              </div>
+            </div>
+          </section>
 
           {/* ====================== TAILLE ======================= */}
 
-          <div class="w-full h-0.5 bg-gray-700"></div>
-          <section class="w-full flex flex-col gap-3">
-            <h2 class=" font-gowun text-xl ">Taille</h2>
+          <div className="bg-zinc-800 w-3/4 h-px mx-auto sm:my-2 my-1"></div>
 
-            <div class="flex flex-col flex-wrap h-20 justify-center items-center">
-              <label class="inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  value="1-3"
-                  name="taille"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none font-outfit ml-2">0 à 3 ans</span>
-              </label>
-              <label class="inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  value="4-9"
-                  name="taille"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none font-outfit ml-2">4 à 9 ans</span>
-              </label>
-              <label class="  inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="cursor-pointer"
-                  value="10-14"
-                  name="taille"
-                  onChange={handleFilterChange}
-                />
-                <span class="select-none font-outfit ml-2">10 à 14 ans</span>
-              </label>
+          <section className="taille flex flex-col px-4 py-5">
+            <h2 className="text-3xl flex flex-row">
+              <img
+                src={imageFiltreTaille && imageFiltreTaille}
+                alt="filtre_taille"
+                className="h-8 w-8 mr-2"
+              />
+              Taille
+            </h2>
 
-              <CheckboxFiltre
-                name="taille"
-                value="XS"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="taille"
-                value="S"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="taille"
-                value="M"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="taille"
-                value="L"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="taille"
-                value="XL"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="taille"
-                value="XXL"
-                onChange={handleFilterChange}
-              />
+            <div className="check text-xl flex flex-row mt-4 justify-center">
+              <div className="droite flex flex-col">
+                <CheckboxFiltre
+                  name="taille"
+                  value="0-4 ans"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="taille"
+                  value="5-9 ans"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="taille"
+                  value="10-14 ans"
+                  onChange={handleFilterChange}
+                />
+              </div>
+
+              <div className="middle flex flex-col mx-7">
+                <CheckboxFiltre
+                  name="taille"
+                  value="XS"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="taille"
+                  value="S"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="taille"
+                  value="M"
+                  onChange={handleFilterChange}
+                />
+              </div>
+              <div className="droite flex flex-col mx-6">
+                <CheckboxFiltre
+                  name="taille"
+                  value="L"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="taille"
+                  value="XL"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="taille"
+                  value="XXL"
+                  onChange={handleFilterChange}
+                />
+              </div>
             </div>
           </section>
 
           {/* ======================== COULEURS =========================== */}
 
-          <div class="w-full h-0.5 bg-gray-700"></div>
-          <section class="w-full flex flex-col gap-3">
-            <h2 class=" font-gowun text-xl ">Couleur</h2>
+          <div className="bg-zinc-800 w-3/4 h-px mx-auto sm:my-2 my-1"></div>
+          <section className="couleurs flex flex-col px-4 py-5">
+            <h2 className="text-3xl flex flex-row">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-8 w-8 mr-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z"
+                />
+              </svg>
+              Couleurs
+            </h2>
 
-            <div class="flex flex-col flex-wrap h-24">
-              <CheckboxFiltre
-                name="couleurs"
-                value="rouge"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="jaune"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="bleu"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="vert"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="blanc"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="gris"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="beige"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="noir"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="violet"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="couleurs"
-                value="orange"
-                onChange={handleFilterChange}
-              />
+            <div className="check text-xl flex flex-row mt-4 justify-center">
+              <div className="gauche flex flex-col">
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="rouge"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="jaune"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="bleu"
+                  onChange={handleFilterChange}
+                />
+              </div>
+
+              <div className="milieu flex flex-col mx-12">
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="blanc"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="gris"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="vert"
+                  onChange={handleFilterChange}
+                />
+              </div>
+
+              <div className="droite flex flex-col">
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="noir"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="violet"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="couleurs"
+                  value="orange"
+                  onChange={handleFilterChange}
+                />
+              </div>
             </div>
           </section>
 
           {/*==================== MATERIAUX ==================== */}
 
-          <div class="w-full h-0.5 bg-gray-700"></div>
-          <section class="w-full flex flex-col gap-3">
-            <h2 class=" font-gowun text-xl ">Matériaux</h2>
-            <div class="flex flex-col flex-wrap h-20">
-              <CheckboxFiltre
-                name="materiaux"
-                value="cachemire"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre name="materiaux" value="cuir" onChange={handleFilterChange} />
-              <CheckboxFiltre
-                name="materiaux"
-                value="coton"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="materiaux"
-                value="laine"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="materiaux"
-                value="lin"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="materiaux"
-                value="soie"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="materiaux"
-                value="polyester"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="materiaux"
-                value="dentelle"
-                onChange={handleFilterChange}
-              />
-            </div>
-          </section>
+          <div className="bg-zinc-800 w-3/4 h-px mx-auto sm:my-2 my-1"></div>
+          <section className="materiaux flex flex-col px-4 py-5">
+            <h2 className="text-3xl flex flex-row">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-8 h-8 mr-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"
+                />
+              </svg>
+              Matériaux
+            </h2>
 
-          {/*==================== CATEGORIES ==================== */}
-
-          <div class="w-full h-0.5 bg-gray-700"></div>
-          <section class="w-full flex flex-col gap-3">
-            <h2 class=" font-gowun text-xl ">Catégories</h2>
-            <div class="flex flex-col flex-wrap h-20">
-              <CheckboxFiltre
-                name="categorie"
-                value="haut"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="categorie"
-                value="bas"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="categorie"
-                value="autres"
-                onChange={handleFilterChange}
-              />
+            <div className="check text-xl flex flex-row mt-4 justify-center">
+              <div className="gauche">
+                <CheckboxFiltre
+                  name="materiaux"
+                  value="cachemire"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="materiaux"
+                  value="cuir"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="materiaux"
+                  value="coton"
+                  onChange={handleFilterChange}
+                />
+              </div>
+              <div className="milieu mx-6">
+                <CheckboxFiltre
+                  name="materiaux"
+                  value="laine"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="materiaux"
+                  value="lin"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="materiaux"
+                  value="soie"
+                  onChange={handleFilterChange}
+                />
+              </div>
+              <div className="droite">
+                <CheckboxFiltre
+                  name="materiaux"
+                  value="polyester"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="materiaux"
+                  value="dentelle"
+                  onChange={handleFilterChange}
+                />
+              </div>
             </div>
           </section>
         </aside>
-        <section class="p-16 w-full ">
-          <div class="flex justify-between items-center">
+
+        <section className="flex flex-col w-full sm:pl-100 pl-0 sm:pt-20 pt-0 sm:pr-16 pr-0">
+          <div className="flex flex-row justify-between sm:pt-0 pt-12 sm:pr-0 pr-5">
             <FilAriane />
-            <div class="bg-zinc-200 p-2 rounded shadow-lg">
-              <p>Trier par</p>
-              <select class="bg-zinc-200">
-                <option value="option1">Prix croissant</option>
-                <option value="option2">Prix décroissant</option>
-                <option value="option3">Temps restant croissant</option>
-                <option value="option4">Temps restant décroissant</option>
-              </select>
-            </div>
+
+            <button
+              className="openFiltre sm:hidden block"
+              onClick={() => setOpenFiltres(true)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-8 h-8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+
+            <select  className="select-tri cursor-pointer bg-zinc-800 rounded-lg text-orange-50 sm:text-2xl text-lg sm:h-16 h-10 text-center focus:outline-none hover:bg-zinc-600 sm:pt-0 pt-10" disabled>
+              <option value="prix-croissant">Prix croissant</option>
+              <option value="prix-decroissant">Prix décroissant</option>
+              <option value="temps-croissant">Temps restant croissant</option>
+              <option value="temps-decroissant">Temps restant décroissant</option>
+            </select>
           </div>
 
-          <section class="flex justify-between gap-16 p-12 flex-wrap overflow-y-scroll">
+          <section className="flex sm:pt-10 pt-0">
             {filteredArticles.length === 0 ? (
-              <p>Aucun article ne correspond à votre recherche</p>
+              <p className="flex items-center justify-center text-4xl">
+                Aucun article ne correspond à votre recherche
+              </p>
             ) : (
-              filteredArticles.map((article) => (
-                <ArticleCompact article={article} key={article.id} />
-              ))
+              <div>
+                {Array.from(
+                  { length: Math.ceil(filteredArticles.length / 4) },
+                  (_, i) => {
+                    const start = i * 4;
+                    return (
+                      <div
+                        className="flex flex-row mt-10 sm:gap-6 gap-0 sm:flex-no-wrap flex-wrap"
+                        key={i}
+                      >
+                        {Array.from({ length: 4 }, (_, j) => {
+                          const index = start + j;
+                          if (index < filteredArticles.length) {
+                            return (
+                              <ArticleCompact
+                                key={index}
+                                article={filteredArticles[index]}
+                              />
+                            );
+                          }
+                          return null;
+                        })}
+                      </div>
+                    );
+                  }
+                )}
+              </div>
             )}
           </section>
         </section>
+
+        <a
+          href="#"
+          className="h-10 w-10 fixed right-3 bottom-5 bg-zinc-800 rounded-full flex items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="white"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.5 15.75l7.5-7.5 7.5 7.5"
+            />
+          </svg>
+        </a>
       </main>
     </>
   );

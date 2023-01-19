@@ -10,7 +10,7 @@ function ProfileNav(props){
 
     if(props.role === "ROLE_VENDEUR"){
         return(
-            <nav class="flex flex-row font-gowun w-full text-white h-8 gap-0.5 sm:text-lg text-sm ">
+            <nav class="flex flex-row font-gowun w-full text-white h-10 gap-0.5 sm:text-2xl text-md ">
             <button class="bg-zinc-700 hover:bg-zinc-500 flex justify-center w-1/2 items-center ease-in duration-100" value="profil" onClick={(e)=>handleButtonClick(e)}>
                 profil
             </button>
@@ -21,7 +21,7 @@ function ProfileNav(props){
         )
     }else if(props.role === "ROLE_ACHETEUR"){
         return(
-            <nav class="flex flex-row font-gowun w-full text-white h-8 gap-0.5 sm:text-lg text-sm ">
+            <nav class="flex flex-row font-gowun w-full text-white h-10 gap-0.5 sm:text-2xl text-md ">
             <button class="bg-zinc-700 hover:bg-zinc-500 flex justify-center w-1/3 items-center ease-in duration-100" value="profil" onClick={(e)=>handleButtonClick(e)}>
                 profil
             </button>

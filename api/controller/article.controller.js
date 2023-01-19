@@ -76,6 +76,23 @@ updateDateLivraisonArticle = (req,res) => {
   )
 };
 
+getLikedArticles = (req, res) => {
+  let token = req.headers.authorization.split(' ')[1]
+  let decoded = jwt.decode(token, secret)
+  const id = decoded.id;
+  articleRepository
+      .getLikedArticles(id)
+      .then((articles) => {
+          if (!articles) {
+              return res.status(404).send({ message: 'Articles non trouvés' })
+          }
+          return res.send(articles)
+      })
+      .catch((err) => {
+          return res.status(500).send({ message: err.message })
+      })
+
+};
 
 
 

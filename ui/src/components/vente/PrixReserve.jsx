@@ -28,15 +28,15 @@ function PrixReserve(props) {
       <div class="choix_reserve w-5/6 mt-8 flex items-center">
         <input
           type="checkbox"
-          class="mr-2 accent-zinc-800"
+          class="mr-2 accent-zinc-800 h-5 w-5 accent-zinc-800 focus:outline-none"
           onChange={handleCheckbox}
         />
         Je souhaite fixer un prix de réserve
       </div>
 
-        {prix_reserve && (
-            <div class="prix_reserve sm:mt-8 mt-12 w-5/6">
-                <h2 class="font-gowun text-xl font-bold">Prix de réserve :</h2>
+        {prix_reserve ? (
+            <div class="prix_reserve mb-2 mt-8 w-5/6">
+                <h2 class="font-gowun text-2xl font-bold">Prix de réserve :</h2>
 
                 <input
                     onChange={props.onChange}
@@ -44,9 +44,9 @@ function PrixReserve(props) {
                     value={props.value}
                 type="text"
                 placeholder="exemple : 60€"
-                class="placeholder-zinc-600 h-8 w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2"
+                class="placeholder-zinc-600 h-12 sm:text-xl text-md w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2"
                 />
-                <div class="sm:text-xs text-xs flex flex-row items-center mt-1">
+                <div class="sm:text-lg text-xs flex flex-row items-center mt-1">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -66,8 +66,17 @@ function PrixReserve(props) {
                 assurance, si les enchères ne décollent pas
                 </div>
                 {message && (
-                <p class="text-red-600 text-xs">{message}</p>)}
+                <p class="text-red-600 text-sm">{message}</p>)}
             </div>
+        ) : (
+          <div class="flex flex-row items-center justify-center px-3 py-5 sm:px-20 sm:py-10">
+          <p class="text-gray-800">
+            Lorsque votre article sera mis en vente, l'enchère durera 7
+            jours. Vous pouvez choisir de mettre un prix de réserve
+            pour votre article. Si le prix de réserve n'est pas atteint
+            à la fin de l'enchère, l'article ne sera pas vendu.
+          </p>
+        </div>
         )}
     </>
   );

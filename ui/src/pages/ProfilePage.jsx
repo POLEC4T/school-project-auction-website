@@ -13,7 +13,7 @@ function ProfilePage() {
   const [isConnected, setIsConnected] = useState(null);
   const [role, setRole] = useState(null);
   const [data, setData] = useState(null);
-  const [banniere, setBanniere] = useState();
+  const [banniere, setBanniere] = useState(require("../static/images/banniere-profil.jpg"));
   const [avatar, setAvatar] = useState(
     require("../static/images/default-avatar.png")
   );
@@ -57,7 +57,7 @@ function ProfilePage() {
 
               <button
                 name="personnaliser"
-                className="sm:text-xl text-sm text-zinc-800 bg-amber-50 hover:bg-amber-100 absolute sm:top-5 top-2 sm:right-5 right-2 rounded-xl px-4 py-1"
+                className="sm:text-xl text-sm text-zinc-800 bg-orange-50 hover:bg-orange-100 absolute sm:top-5 top-2 sm:right-5 right-2 rounded-xl px-4 py-1"
               >
                 personnaliser
               </button>
@@ -99,8 +99,6 @@ function ProfilePage() {
                             return <Historique user={data}/>;
                         case 'favoris':
                             return <Favoris user={data}/>;
-                        default:
-                            return <ProfilContent user={data} />;
                     }
                 })()}
 

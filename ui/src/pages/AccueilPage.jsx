@@ -96,14 +96,13 @@ function AccueilPage() {
     <div>
       <NavBar />
 
-      <div className="test absolute h-96 bg-zinx-80"></div>
       <main className="main-container bg-zinc-50 flex flex-col sm:p-5 p-0">
         <section className="top sm:h-60 h-30 relative flex flex-col justify-center items-center sm:rounded-xl rounded-none bg-intro bg-center bg-no-repeat bg-100 w-full">
-          <h1 className="font-gowun sm:text-5xl text-3xl text-amber-50 font-square sm:mt-0 mt-5">
+          <h1 className="font-gowun sm:text-5xl text-3xl text-orange-200 font-square sm:mt-0 mt-5">
             Développer la mode, une enchère à la fois
           </h1>
           <NavLink to="/vendre">
-            <button className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 sm:text-xl text-sm sm:mb-0 mb-5 font-outfit">
+            <button className="bg-orange-50 hover:bg-orange-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 sm:text-xl text-sm sm:mb-0 mb-5 font-outfit">
               Mettre aux enchères
             </button>
           </NavLink>
@@ -122,7 +121,7 @@ function AccueilPage() {
         <div className="button-afficher-plus w-full flex justify-center sm:mt-10 mt-5">
           {topArticles && (
             <button
-              className="fleche bg-zinc-800 rounded-full w-36 text-white flex items-center font-outfit justify-around p-2 hover:bg-zinc-600"
+              className="fleche bg-zinc-800 rounded-full w-48 text-xl text-white flex items-center font-outfit justify-around p-2 hover:bg-zinc-600"
               onClick={handleClick}
               disabled={numArticles >= topArticles.length}
             >
@@ -182,7 +181,7 @@ function AccueilPage() {
             <div className="sm:flex hidden fin_proche sm:flex-col flex-row sm:gap-5 gap-0 text-white sm:w-1/2 w-full">
               <section
                 className="top w-full font-outfit sm:h-60 h-30  rounded-xl bg-black bg-center bg-no-repeat bg-100"
-                style={{ backgroundImage: `url(${imagesSelection[1]})` }}
+                style={{ backgroundImage: `url(${imagesSelection[0]})` }}
               >
                 <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
                   <p className="font-chivo text-3xl">
@@ -195,7 +194,7 @@ function AccueilPage() {
                   </p>
                   <Link
                     to={`/article/${topArticles[0].id}`}
-                    className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0"
+                    className="bg-orange-50 hover:bg-orange-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0"
                   >
                     Details
                   </Link>
@@ -204,7 +203,7 @@ function AccueilPage() {
 
               <section
                 className="top w-full font-outfit sm:h-60 h-30  rounded-xl bg-black bg-center bg-no-repeat bg-100"
-                style={{ backgroundImage: `url(${imagesSelection[0]})` }}
+                style={{ backgroundImage: `url(${imagesSelection[1]})` }}
               >
                 <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
                   <p className="font-chivo text-3xl">
@@ -217,7 +216,7 @@ function AccueilPage() {
                   </p>
                   <Link
                     to={`/article/${topArticles[1].id}`}
-                    className="bg-amber-50 hover:bg-amber-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0"
+                    className="bg-orange-50 hover:bg-orange-100 text-zinc-800 py-1 px-2 rounded-lg mt-5 text-xl mb-0"
                   >
                     Details
                   </Link>
@@ -227,45 +226,49 @@ function AccueilPage() {
           )}
         </div>
 
-        <div className="ligne w-full h-5 sm:mt-8 mt-5 flex flex-row items-center font-gowun">
+        <div className="ligne w-full h-5 sm:mt-8 mt-2 flex flex-row items-center font-gowun">
           <div className="h-0.5 bg-zinc-800 w-1/12"></div>
-          <p className="px-2 sm:text-2xl text-sm">Catégories</p>
+            <p className="px-2 sm:text-2xl text-sm">Catégories</p>
           <div className="h-0.5 bg-zinc-800 w-full"></div>
         </div>
 
         <div className="categories className bg-half flex flex-row flex-wrap justify-around text-zinc-800 sm:mt-10 sm:my-5 my-5 sm:text-3xl text-xl">
-          <Link className="t_shirt sm:w-80 w-40 z-10" to={{ pathname: '/recherche', search: 'cat=haut' }}>
+          <Link
+            className="t_shirt sm:w-80 w-40 z-10"
+            to={{ pathname: "/recherche", search: "cat=haut" }}
+          >
             <img
               className="rounded-full drop-shadow-lg"
               src={imgTshirt}
               alt="image_t-shirt"
             />
-            <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-amber-50">
+            <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-orange-200">
               Haut
             </h1>
           </Link>
 
-          <Link className="short sm:w-80 w-40 z-10 sm:mt-0 mt-3" to={{ pathname: '/recherche', search: 'cat=bas' }}>
+          <Link
+            className="short sm:w-80 w-40 z-10"
+            to={{ pathname: "/recherche", search: "cat=bas" }}
+          >
             <img
               className="rounded-full drop-shadow-lg"
               src={imgShort}
               alt="image_short_et_jupe"
             />
-            <h1 className="text-center sm:mt-2 mt-1 font-gowun">Bas</h1>
+            <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-orange-200">Bas</h1>
           </Link>
 
-          <Link className="pull sm:w-80 w-40 z-10" to='/recherche?cat=autres'>
+          <Link className="pull sm:w-80 w-40 z-10" to="/recherche?cat=autres">
             <img
               className="rounded-full drop-shadow-lg"
               src={imgEcharpe}
               alt="echarpe noire bouton category"
             />
-            <h1 className="text-center sm:mt-2 mt-1 font-gowun sm:text-zinc-800 text-amber-50">
+            <h1 className="text-center sm:mt-2 mt-1 font-gowun text-zinc-800">
               Autres
             </h1>
           </Link>
-
-
         </div>
       </main>
       <Footer />

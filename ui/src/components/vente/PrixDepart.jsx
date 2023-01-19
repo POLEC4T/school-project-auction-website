@@ -10,6 +10,8 @@ function PrixDepart(props) {
             setMessage("Le prix de départ est obligatoire");
         } else if (!regex.test(props.value)) {
         setMessage("Le prix de départ doit être un nombre positif, avec ou sans le signe € à la fin");
+        }else if (props.value <= 0){
+            setMessage("Le prix de départ doit être supérieur à 0");
         }
         else {
             setMessage("");
@@ -18,16 +20,16 @@ function PrixDepart(props) {
 
   return (
     <div class="prix mt-12 w-5/6">
-      <h2 class="font-gowun text-xl font-bold">Prix de départ :</h2>
+      <h2 class="font-gowun text-2xl font-bold">Prix de départ :</h2>
       <input
         onChange={props.onChange}
         onBlur={handleBlur}
         value={props.value}
         type="text"
         placeholder="exemple : 30€"
-        class="placeholder-zinc-600 h-8 w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2"
+        class="placeholder-zinc-600 h-12 text-xl w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2"
       />
-      <div class="sm:text-xs text-xs flex flex-row items-center mt-1">
+      <div class="sm:text-lg text-sm flex flex-row items-center mt-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
