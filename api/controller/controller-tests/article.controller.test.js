@@ -131,10 +131,6 @@ describe('Test ArticleController', () => {
             // on restaure le stub sinon pour éviter les effets de bord
             ArticleControllerStub.restore();
 
-
-
-            
-        
         });
     });
 });
