@@ -1,28 +1,27 @@
-const db = require('../config/db.config').connect();
-const logger = require('../logger/api.logger');
-
+const db = require('../config/db.config').connect()
+const logger = require('../logger/api.logger')
 
 class EnchereRepository {
-
-
     constructor() {
-        this.db = db;
+        this.db = db
     }
 
     async getDerniereOffre(articleId) {
-
         try {
             const enchere = await this.db.encheres.findOne({
                 where: {
-                    articleId: articleId
+                    articleId: articleId,
                 },
+                order: [
+                    ['createdAt', 'DESC']
+                  ],
             });
             return enchere;
         } catch (err) {
-            console.log(err);
-            return {};
+            console.log(err)
+            return {}
         }
     }
 }
 
-module.exports = new EnchereRepository();
+module.exports = new EnchereRepository()

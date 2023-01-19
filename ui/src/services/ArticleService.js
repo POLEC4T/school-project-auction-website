@@ -38,3 +38,9 @@ export async function updateDateLivraisonArticle(articleId, dateLivraison) {
         throw error;
     });
 }
+
+export async function getLikedArticles() {
+    console.log('headers', authHeader());
+    const response = await axios.get('/api/user/likedarticles', { headers: authHeader() });
+    return await response.data;
+}

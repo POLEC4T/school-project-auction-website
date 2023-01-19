@@ -368,7 +368,7 @@ function NavBar({fixed}) {
           className="w-1/3 h-full "
         >
           <div className="text-center h-full ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center">
-            Autres
+            Haut
           </div>
         </NavLink>
         <NavLink
@@ -377,7 +377,7 @@ function NavBar({fixed}) {
           className="w-1/3 h-full "
         >
           <div className="text-center h-full ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center">
-            Autres
+            Bas
           </div>
         </NavLink>
         <NavLink

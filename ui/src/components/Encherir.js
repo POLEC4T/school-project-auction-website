@@ -1,17 +1,56 @@
 import React from "react";
 import { getDerniereOffre } from "../services/EnchereService";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import moment from "moment";
 import Timer from "./Timer";
 import { getNbLikeArticle } from "../services/ArticleService";
 import { Link } from "react-router-dom";
 import AuthService from "../services/AuthService";
+import Modal from "../components/Modal";
+import { getUserById } from "../services/UserService";
+import { isArticleLikedByUser, createLike, removeLike } from "../services/LikeService";
+const WS_URL = "ws://127.0.0.1:8000"; // à changer en prod
+
 
 function Encherir({ article, vendeur }) {
 
   const pfpImageExample = require("../static/images/pfp-image-example.jpeg");
 
   const [offreActuelle, setOffreActuelle] = useState(0.0);
+  const [message, setMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const ws = useRef(null);
+
+  //useEffect qui gère le websocket
+  useEffect(() => {
+    if (AuthService.getCurrentUser() === null) return;
+    const url =
+      WS_URL +
+      "?id=" +
+      article.id +
+      "&token=" +
+      AuthService.getCurrentUser().accessToken;
+    ws.current = new WebSocket(url);
+    ws.current.onopen = () => {
+      console.log("ws connected");
+    };
+    ws.current.onmessage = (e) => {
+      const response = JSON.parse(e.data);
+      if (response.prix) {
+        setOffreActuelle({ montant: parseFloat(response.prix) });
+      } else if (response.error) {
+        setMessage(response.error);
+      }
+    };
+    ws.current.onclose = () => {
+      console.log("ws closed");
+    };
+    return () => {
+      ws.current.close();
+    };
+  }, [offreActuelle, article]);
+
   useEffect(() => {
     if (article) {
       getDerniereOffre(article.id).then((enchere) => {
@@ -31,8 +70,6 @@ function Encherir({ article, vendeur }) {
     }
   }, [article]);
 
-  
-
   /* RECUPERATION DE L'USER */
 
   const [user, setUser] = useState(null);
@@ -45,7 +82,34 @@ function Encherir({ article, vendeur }) {
       console.error("User non trouvé");
     }
   }, []);
-      
+
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      getUserById(user.id).then((user) => {
+        setUserData(user);
+      });
+    }
+  }, [user]);
+
+  const [likeStroke, setLikeStroke] = useState("black");
+  const [likeFill, setLikeFill] = useState("none");
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user && article) {
+      isArticleLikedByUser(article.id).then((isLiked) => {
+        console.log("isLiked", isLiked)
+        isLiked.liked ? setLikeStroke("red") : setLikeStroke("black");
+        isLiked.liked ? setLikeFill("red") : setLikeFill("none");
+        isLiked.liked ? setIsArticleLiked(true) : setIsArticleLiked(false);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [article]);
+
   const placeholderPrixForm = `${
     offreActuelle.montant + offreActuelle.montant * 0.1
   }€ ou plus`;
@@ -60,12 +124,43 @@ function Encherir({ article, vendeur }) {
     taille: article.taille,
     categorie: article.categorie,
   };
+  const [isArticleLiked, setIsArticleLiked] = useState(false);
+  function handleClickLike() {
+    setIsArticleLiked(!isArticleLiked);
+    if (isArticleLiked) {
+      removeLike(article.id);
+      setLikeFill("none");
+      setLikeStroke("black");
+      setNbLikesConst(nbLikesConst - 1);
+    } else {
+      createLike(article.id);
+      setLikeFill("red");
+      setLikeStroke("red");
+      setNbLikesConst(nbLikesConst + 1);
+    }
+  }
 
   const handleClickButtonProposition = (e) => {
     setMontantInput(e);
   };
   const handleChangeMontantInput = (event) => {
     setMontantInput(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (montantInput < propositionPrix1) {
+      setMessage(
+        "Vous devez ajouter au moins 10% de l'offre actuelle (soit " +
+          propositionPrix1 +
+          "€)"
+      );
+    } else {
+      setMessage("");
+      console.log("envoi montant : ", montantInput);
+      setIsOpen(false);
+      ws.current.send(montantInput);
+    }
   };
 
   return (
@@ -98,16 +193,18 @@ function Encherir({ article, vendeur }) {
               {offreActuelle.montant && (
                 <p className="sm:text-9xl text-9xl">{offreActuelle.montant}€</p>
               )}
-             {article.seuil_reserve != null ? <p className="text-gray-400 text-xl">Avec prix de réserve</p> : null}
+              {article.seuil_reserve != null ? (
+                <p className="text-gray-400 text-xl">Avec prix de réserve</p>
+              ) : null}
             </div>
 
-            <button className="bouton-jaime flex items-center gap-1 bg-white px-2 rounded">
+            <button className="bouton-jaime flex items-center gap-1 bg-white px-2 rounded" onClick={handleClickLike}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                fill={likeFill}
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="black"
+                stroke={likeStroke}
                 className="w-4 h-4"
               >
                 <path
@@ -137,11 +234,12 @@ function Encherir({ article, vendeur }) {
                   <p className="text-4xl mr-2 text-gray-400">+ Voir profil</p>
                 </Link>
               ) : (
-              <Link to={`/publicprofil/${vendeur.id}`}
-                className="flex items-center ml-5 text-gray-500 text-xl hover:text-gray-400"
-              >
-                <p className="text-xl mr-2 text-gray-400">+  Voir profil</p>
-              </Link>
+                <Link
+                  to={`/publicprofil/${vendeur.id}`}
+                  className="flex items-center ml-5 text-gray-500 text-xl hover:text-gray-400"
+                >
+                  <p className="text-xl mr-2 text-gray-400">+ Voir profil</p>
+                </Link>
               )}
             </div>
           </div>
@@ -175,10 +273,35 @@ function Encherir({ article, vendeur }) {
               onChange={handleChangeMontantInput}
             />
             <div className="enchere-ou-offre-maximale flex mt-3 gap-4">
-              <button className="bg-zinc-800 hover:bg-zinc-600 w-full rounded-lg h-12 text-2xl text-orange-200">
-                Enchérir
-              </button>
+              {userData && userData.roleId === 2 ? (
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className="bg-zinc-800 hover:bg-zinc-600 w-full rounded-lg h-12 text-2xl text-orange-200"
+                  disabled={montantInput === ""}
+                >
+                  Enchérir
+                </button>
+              ) : (
+                <Link
+                  to="/connexion"
+                  className="bg-zinc-800 hover:bg-zinc-600 flex items-center justify-center w-full rounded-lg h-12 sm:text-2xl text-lg text-orange-200"
+                >
+                  Se connecter en tant qu'acheteur pour enchérir
+                </Link>
+              )}
             </div>
+
+            <Modal
+              open={isOpen}
+              onClose={() => setIsOpen(false)}
+              onConfirm={handleSubmit}
+            >
+              Vous êtes sur le point de faire une offre sur cet article.
+              <br />
+              <span className="mt-10 font-bold">Montant : {montantInput}€</span>
+            </Modal>
+
+            {message && <p className="text-red-500 text-xl mt-3">{message}</p>}
 
             <p className="description text-justify text-2xl mt-6">
               {article.description}
