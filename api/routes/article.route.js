@@ -19,4 +19,6 @@ module.exports = (app) => {
 
   app.post("/api/article", [authJwt.verifyToken, authJwt.isVendeur], articleController.createArticle);
 
+  app.get('/api/user/likedarticles', [authJwt.verifyToken, authJwt.isAcheteur], articleController.getLikedArticles);
+
 };
