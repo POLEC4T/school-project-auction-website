@@ -13,7 +13,7 @@ function ProfilePage() {
   const [isConnected, setIsConnected] = useState(null);
   const [role, setRole] = useState(null);
   const [data, setData] = useState(null);
-  const [banniere, setBanniere] = useState();
+  const [banniere, setBanniere] = useState(require("../static/images/banniere-profil.jpg"));
   const [avatar, setAvatar] = useState(
     require("../static/images/default-avatar.png")
   );
