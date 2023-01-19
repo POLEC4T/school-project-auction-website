@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { getUserById } from "../services/UserService";
+import { getUserById, getArticleEnVente } from "../services/UserService";
 import ModalInfo from "./ModalInfo";
+import ArticleCompact  from "./ArticleCompact";
 
 function ProfilContent({ user }) {
+
   const [avatar, setAvatar] = useState(
     require("../static/images/default-avatar.png")
   );
   const [isOpen, setIsOpen] = useState(false);
+  
 
   useEffect(() => {
-    if(user.pdp !== null) setAvatar(`${user.pdp}`);
+    if (user.pdp !== null) setAvatar(`${user.pdp}`);
   }, [user]);
 
   return (
@@ -150,13 +153,10 @@ function ProfilContent({ user }) {
                   : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione molestias suscipit quo facere ipsum, iste ipsam. Consequuntur officiis ratione et deleniti ducimus esse repudiandae, saepe quis non labore voluptate excepturi"}
               </p>
             </div>
-
-            <div class="middle3 mt-10 flex flex-row justify-end">
-              <button class="bg-zinc-200 pl-2 w-48 text-xl rounded flex flex-col text-start">
-                <p class="text-gray-400">Trier par</p>
-                <p>Tri choisi</p>
-              </button>
-            </div>
+            <div>
+              
+                
+              </div>
           </section>
         </>
       ) : (
