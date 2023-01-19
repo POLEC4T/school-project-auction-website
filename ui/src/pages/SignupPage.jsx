@@ -48,8 +48,6 @@ const handleEyeConf = (e) => {
   }
 };
 
-
-
   //fonctions pour gérer les changements des champs du formulaire et les boutons cliqués
   const handleCguChange = (e) => {
     setCguChecked(e.target.checked);
