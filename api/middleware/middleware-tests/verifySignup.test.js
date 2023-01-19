@@ -148,14 +148,14 @@ describe('Tests VerifySignup', () => {
             setTimeout(() => {
                 // vérification des résultats
                 sinon.assert.calledWith(mockResponse.status, 400);
-                sinon.assert.calledWith(mockResponse.send, {message: "Failed! Role does not exist = "});
+                sinon.assert.calledWith(mockResponse.send, {message: "Failed! Role does not exist"});
             }, 1000);
 
             
         });
     });
 
-    
+
 
 });
 

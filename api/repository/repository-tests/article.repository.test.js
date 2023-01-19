@@ -126,17 +126,36 @@ describe('Test ArticleRepository', () => {
         // Test pour vérifier que la méthode met à jour le status d'un article avec l'ID donné
         it('devrait mettre à jour le status d\'un article avec l\'ID donné', async () => {
             // récupération du status de l'article avec l'ID 1
-            const statusArticlId1 = (await articleRepository.getArticle(1)).status;
+            // création d'un article de test pour le test qui a seulement les champs obligatoires
+            const article = {
+                id: 100,
+                titre: 'testUpdateStatusArticle',
+                prix_depart: 10,
+                prix_vente: 20,
+                createdAt: new Date(),
+                expires: new Date(),
+                couleurs: 'test',
+                materiaux: 'test',
+                updatedAt: new Date(),
+            }
 
-            const id = 1;
+            // on supprime l'article de test si il existe déjà
+            if (articleRepository.getArticleByTitle(article.titre)) {
+                await articleRepository.deleteArticleByTitle(article.titre);
+            }
+
+            // Création d'un article de test pour le test
+            await articleRepository.createArticle(article);
+            
             const status = 'testUpdateStatusArticle';
             // Mise à jour du status de l'article
-            await articleRepository.updateStatutArticle(id, status);
+            await articleRepository.updateStatutArticle(article.id, status);
             // Vérifie qu'il y a une correspondance stricte entre le status de l'article retourné et le status donné
-            const article = await articleRepository.getArticle(id);
-            assert.strictEqual(article.status, status);
-            // on rétablit le status de l'article
-            await articleRepository.updateStatutArticle(id, statusArticlId1);
+            const articleCreated = await articleRepository.getArticle(id);
+            assert.strictEqual(articleCreated.status, status);
+            // on suppression de l'article de test
+            articleRepository.deleteArticleByTitle(article.titre);
+
         });
     });
 
