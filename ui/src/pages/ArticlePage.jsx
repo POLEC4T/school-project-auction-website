@@ -41,6 +41,7 @@ function PageArticle() {
 
     useEffect(() => {
         if (article) {
+          console.log(article.id);
             getArticleImagesByArticleId(article.id).then((images) => {
                 setImages(
                     images.map((image) => ({ image: image.url, caption: '' }))
