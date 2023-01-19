@@ -17,7 +17,7 @@ describe('Test ArticleRepository', () => {
             const id = -1;
             const article = await articleRepository.getArticle(id);
             // Vérifie qu'il y a une correspondance stricte entre l'objet retourné et un objet vide {}
-            assert.deepStrictEqual(article, null);    
+            assert.deepStrictEqual(article, {});    
         });
     })
 
@@ -42,7 +42,6 @@ describe('Test ArticleRepository', () => {
             // Création d'un article de test pour le test
             await articleRepository.createArticle(article);
             const articlecreated = await articleRepository.getArticleByTitle(title);
-            console.log(" coucoucouuuuu : " + articlecreated);
             // Suppression de l'article de test
             await articleRepository.deleteArticleByTitle(title);
             // Vérifie qu'il n'y a pas d'article avec le titre donné
@@ -147,17 +146,64 @@ describe('Test ArticleRepository', () => {
             // Création d'un article de test pour le test
             await articleRepository.createArticle(article);
             
-            const status = 'testUpdateStatusArticle';
+            const status = 'En attente de livraison';
             // Mise à jour du status de l'article
             await articleRepository.updateStatutArticle(article.id, status);
             // Vérifie qu'il y a une correspondance stricte entre le status de l'article retourné et le status donné
-            const articleCreated = await articleRepository.getArticle(id);
-            assert.strictEqual(articleCreated.status, status);
+            const articleCreated = await articleRepository.getArticle(article.id);
+            assert.strictEqual(articleCreated.statut, status);
             // on suppression de l'article de test
             articleRepository.deleteArticleByTitle(article.titre);
 
         });
+
     });
+
+    describe('Tests updateDateLivraisonArticle', () => {
+        // Test pour vérifier que la méthode met à jour la date de livraison d'un article avec l'ID donné
+        it('devrait mettre à jour la date de livraison d\'un article avec l\'ID donné', async () => {
+            // récupération du status de l'article avec l'ID 1
+            // création d'un article de test pour le test qui a seulement les champs obligatoires
+            const article = {
+                id: 100,
+                titre: 'testUpdateDateLivraisonArticle',
+                prix_depart: 10,
+                prix_vente: 20,
+                createdAt: new Date(),
+                expires: new Date(),
+                couleurs: 'test',
+                materiaux: 'test',
+                updatedAt: new Date(),
+            }
+
+            // on supprime l'article de test si il existe déjà
+            if (articleRepository.getArticleByTitle(article.titre)) {
+                await articleRepository.deleteArticleByTitle(article.titre);
+            }
+
+            // Création d'un article de test pour le test
+            await articleRepository.createArticle(article);
+
+            const dateLivraison = new Date();
+            // Mise à jour du status de l'article
+            await articleRepository.updateDateLivraisonArticle(article.id, dateLivraison);
+            // Vérifie qu'il y a une correspondance stricte entre le status de l'article retourné et le status donné
+            const articleCreated = await articleRepository.getArticle(article.id);
+            
+
+            // vérifie que la date de livraison est bien une date et non un string
+            assert.strictEqual(articleCreated.dateLivraison instanceof Date, true);
+
+            // vérifie que la date de livraison est bien la date que l'on a donné
+            assert.strictEqual(articleCreated.dateLivraison.getTime(), dateLivraison.getTime());
+
+            // on suppression de l'article de test
+            articleRepository.deleteArticleByTitle(article.titre);
+
+        });
+
+    });
+
 
 
 });
