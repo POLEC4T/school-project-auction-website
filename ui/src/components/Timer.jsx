@@ -2,9 +2,8 @@ import React from "react";
 import Countdown from "react-countdown";
 
 function Timer({ endDate, full }) {
+  
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
-
-    console.log(full)
 
     if (completed) {
       return <span>Enchère terminée !</span>;
