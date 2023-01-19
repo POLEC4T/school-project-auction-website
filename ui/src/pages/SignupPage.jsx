@@ -161,7 +161,7 @@ const handleEyeConf = (e) => {
         e.preventDefault();
         AuthService.registerAcheteur(pseudo, email, password)
           .then(() => {
-            navigate("/"); //redirection vers la page d'accueil
+            navigate("/connexion"); //redirection vers la page d'accueil
             window.location.reload();
           })
           .catch((err) => {
