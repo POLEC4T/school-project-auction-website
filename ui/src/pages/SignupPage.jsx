@@ -261,7 +261,7 @@ const handleEyeConf = (e) => {
 
               <input
                 type="text"
-                placeholder="email"
+                placeholder="email (exemple@cloth2you.com)"
                 className="placeholder-zinc-600 mt-8 h-12 text-2xl w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
                 value={email}
                 onChange={(e) => onChangeEmail(e)}
@@ -492,7 +492,7 @@ const handleEyeConf = (e) => {
                     conditions générales d'utilisation
                   </Link>{" "}
                   et la{" "}
-                  <Link href="" className="underline">
+                  <Link to="/politiqueconf" className="underline">
                     politique de confidentialité
                   </Link>{" "}
                   et avoir au moins 18 ans.

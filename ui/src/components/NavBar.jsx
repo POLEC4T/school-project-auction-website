@@ -210,7 +210,7 @@ function NavBar({fixed}) {
 
                         <div className="sep h-px w-full bg-orange-50 my-4"></div>
 
-                        <span className="historique flex items-center mx-auto">
+                        <NavLink className="historique flex items-center mx-auto" to="/profil">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -226,7 +226,7 @@ function NavBar({fixed}) {
                             />
                           </svg>
                           Guide d'achat
-                        </span>
+                        </NavLink>
 
                         <div className="sep h-px w-full bg-orange-50 my-4"></div>
 
