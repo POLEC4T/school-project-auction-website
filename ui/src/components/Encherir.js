@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 import AuthService from "../services/AuthService";
 import Modal from "../components/Modal";
 import { getUserById } from "../services/UserService";
-
-const WS_URL = "ws://127.0.0.1:8000"; // à changer en prod
 import { isArticleLikedByUser, createLike, removeLike } from "../services/LikeService";
+const WS_URL = "ws://127.0.0.1:8000"; // à changer en prod
+
 
 function Encherir({ article, vendeur }) {
 
