@@ -7,13 +7,10 @@ import { useParams } from 'react-router-dom';
 
 function PublicProfilePage() {
 
-    const userId = useParams().userId;
+  const userId = useParams().userId;
 
   const [data, setData] = useState(null);
   const [banniere, setBanniere] = useState(null);
-  const [avatar, setAvatar] = useState(
-    require("../static/images/default-avatar.png")
-  );
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -26,8 +23,6 @@ function PublicProfilePage() {
         } else {
           setData(response);
           setBanniere(response.banniere);
-            if (response.pdp !== null)
-              setAvatar(require(`${response.pdp}`));
           setIsLoading(false);
         }
       })
@@ -52,7 +47,6 @@ function PublicProfilePage() {
                 {data.login}
               </h1>
             </section>
-
           {<ProfilContent user={data} />}
         </>
       )}

@@ -25,7 +25,7 @@ function App() {
           <Route path="/profil" element={<ProfilePage />} />
           <Route path="/inscription" element={<SignupPage />} />
           <Route path="/paiement" element={<PaypalPage />} />
-          <Route path="/publicprofile/:userId" element={<PublicProfilePage />} />
+          <Route path="/publicprofil/:userId" element={<PublicProfilePage />} />
           <Route exact path="*" element={< NotFoundErrorPage/>} />
         </Routes>
       </div>
