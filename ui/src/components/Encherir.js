@@ -139,6 +139,11 @@ function Encherir({ article, vendeur }) {
   const [isArticleLiked, setIsArticleLiked] = useState(false);
 
   function handleClickLike() {
+    //si l'utilisateur n'est pas connecté on affiche un message
+    if (!user) {
+      setMessage("Vous devez être connecté pour liker un article");
+      return;
+    }
     setIsArticleLiked(!isArticleLiked);
     if (isArticleLiked) {
       removeLike(article.id);
