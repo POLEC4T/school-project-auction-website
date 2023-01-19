@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
 const cors = require('cors');
+const fs = require('fs')
 
 const userController = require("./controller/user.controller");
 
@@ -22,12 +23,19 @@ app.use(cors({ origin: true, credentials: true }));
 
 //routes
 app.use('/images', express.static('images'));
+app.use('/pdf', express.static('pdf'));
 
 app.get("/api", (req, res) => {
   res.json({ message: "L'API marche bien !" });
 });
 
 app.get("/api/users", userController.getUsers);
+
+app.get('/pdf/:pdfName', (req, res) => {
+  const pdfName = req.params.pdfName
+  const readStream = fs.createReadStream(`pdf/${pdfName}`)
+  readStream.pipe(res)
+});
 
 app.get("/api/users/:login", userController.getUserByLogin);
 

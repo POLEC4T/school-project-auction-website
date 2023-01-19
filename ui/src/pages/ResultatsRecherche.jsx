@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import CheckboxFiltre from "../components/CheckboxFiltre";
 
 function ResultatsRecherche() {
+  
   const imageFiltreTaille = require("../static/images/image-filtre-taille.png");
 
   const [numArticles, setNumArticles] = React.useState(12);
@@ -55,30 +56,6 @@ function ResultatsRecherche() {
     }
   }, [mat, col, taille]);
 
-  const chunkSize = 4;
-  const chunks = Array.from(
-    { length: Math.ceil(numArticles / chunkSize) },
-    (_, i) => {
-      const start = i * chunkSize;
-      return (
-        <div
-          className="flex flex-row justify-around sm:gap-2 gap-0 sm:flex-no-wrap flex-wrap"
-          key={i}
-        >
-          {Array.from({ length: chunkSize }, (_, j) => {
-            const index = start + j;
-            if (index < numArticles && topArticles && topArticles[index]) {
-              return (
-                <ArticleCompact key={index} article={topArticles[index]} />
-              );
-            }
-            return null;
-          })}
-        </div>
-      );
-    }
-  );
-
   useEffect(() => {
     getArticlesWithLeastTimeLeft()
       .then((response) => {
@@ -94,6 +71,7 @@ function ResultatsRecherche() {
         setError("Error connecting to server. Please try again later.");
       });
   }, []);
+  
 
   const filteredArticles = topArticles.filter((article) => {
     let matches = true;
@@ -142,9 +120,13 @@ function ResultatsRecherche() {
     <>
       <NavBar fixed={true} />
       <main className="flex sm:flex-row flex-col font-outfit">
-      <aside 
-            className={`bg-zinc-200 text-zinc-800 sm:w-[400px] w-full flex flex-col ${(openFiltres || window.innerWidth > 768) ? 'sm:fixed block h-screen sm:mt-10 mt-0 sm:block' : 'hidden'}`}
-          >
+        <aside
+          className={`bg-zinc-200 text-zinc-800 sm:w-[400px] w-full flex flex-col ${
+            openFiltres || window.innerWidth > 768
+              ? "sm:fixed block h-screen sm:mt-10 mt-0 sm:block"
+              : "hidden"
+          }`}
+        >
           <button
             className="bg-zinc-800 text-orange-50 border-2 border-zinc-800 text-xl py-2 px-4 rounded-lg mx-4 mt-12 mb-2 flex flex-row justify-center items-center gap-2 sm:w-3/4 sm:translate-x-8 translate-x-0"
             onClick={handleClickRemoveFilters}
@@ -169,11 +151,13 @@ function ResultatsRecherche() {
           <button
             className="bg-zinc-200 text-zinc-800 border-2 border-zinc-800 text-xl py-2 px-4 rounded-lg mx-4 flex flex-row justify-center items-center gap-2 sm:hidden block"
             onClick={() => setOpenFiltres(false)}
-          >Fermer les filtres </button>
+          >
+            Fermer les filtres{" "}
+          </button>
 
           {/*==================== CATEGORIES ==================== */}
 
-          <section className="categories flex flex-col sm:my-4 my-2 px-4 py-5">
+          <section className="categories flex flex-col sm:my-4 sm:my-2 my-1 px-4 py-5">
             <h2 className="text-3xl flex flex-row">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -196,28 +180,35 @@ function ResultatsRecherche() {
               </svg>
               Catégories
             </h2>
-            <div className="check text-xl flex flex-row mt-4 justify-between">
-              <CheckboxFiltre
-                name="categorie"
-                value="haut"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="categorie"
-                value="bas"
-                onChange={handleFilterChange}
-              />
-              <CheckboxFiltre
-                name="categorie"
-                value="autres"
-                onChange={handleFilterChange}
-              />
+            <div className="check text-xl flex flex-row mt-4 justify-center">
+              <div className="gauche">
+                <CheckboxFiltre
+                  name="categorie"
+                  value="haut"
+                  onChange={handleFilterChange}
+                />
+              </div>
+              <div className="middle mx-10">
+                <CheckboxFiltre
+                  name="categorie"
+                  value="bas"
+                  onChange={handleFilterChange}
+                />
+              </div>
+              <div className="droite">
+                {" "}
+                <CheckboxFiltre
+                  name="categorie"
+                  value="autres"
+                  onChange={handleFilterChange}
+                />
+              </div>
             </div>
           </section>
 
           {/* ====================== TAILLE ======================= */}
 
-          <div className="bg-zinc-800 w-3/4 h-px mx-auto my-2"></div>
+          <div className="bg-zinc-800 w-3/4 h-px mx-auto sm:my-2 my-1"></div>
 
           <section className="taille flex flex-col px-4 py-5">
             <h2 className="text-3xl flex flex-row">
@@ -229,26 +220,26 @@ function ResultatsRecherche() {
               Taille
             </h2>
 
-            <div className="check text-xl flex flex-row mt-4 gap-24">
-            <div className="droite flex flex-col">
+            <div className="check text-xl flex flex-row mt-4 justify-center">
+              <div className="droite flex flex-col">
                 <CheckboxFiltre
                   name="taille"
-                  value="0-4"
+                  value="0-4 ans"
                   onChange={handleFilterChange}
                 />
                 <CheckboxFiltre
                   name="taille"
-                  value="5-9"
+                  value="5-9 ans"
                   onChange={handleFilterChange}
                 />
                 <CheckboxFiltre
                   name="taille"
-                  value="10-14"
+                  value="10-14 ans"
                   onChange={handleFilterChange}
                 />
               </div>
 
-              <div className="middle flex flex-col">
+              <div className="middle flex flex-col mx-7">
                 <CheckboxFiltre
                   name="taille"
                   value="XS"
@@ -265,7 +256,7 @@ function ResultatsRecherche() {
                   onChange={handleFilterChange}
                 />
               </div>
-              <div className="droite flex flex-col">
+              <div className="droite flex flex-col mx-6">
                 <CheckboxFiltre
                   name="taille"
                   value="L"
@@ -287,7 +278,7 @@ function ResultatsRecherche() {
 
           {/* ======================== COULEURS =========================== */}
 
-          <div className="bg-zinc-800 w-3/4 h-px mx-auto my-2"></div>
+          <div className="bg-zinc-800 w-3/4 h-px mx-auto sm:my-2 my-1"></div>
           <section className="couleurs flex flex-col px-4 py-5">
             <h2 className="text-3xl flex flex-row">
               <svg
@@ -307,7 +298,7 @@ function ResultatsRecherche() {
               Couleurs
             </h2>
 
-            <div className="check text-xl flex flex-row mt-4 justify-between">
+            <div className="check text-xl flex flex-row mt-4 justify-center">
               <div className="gauche flex flex-col">
                 <CheckboxFiltre
                   name="couleurs"
@@ -326,7 +317,7 @@ function ResultatsRecherche() {
                 />
               </div>
 
-              <div className="milieu flex flex-col">
+              <div className="milieu flex flex-col mx-12">
                 <CheckboxFiltre
                   name="couleurs"
                   value="blanc"
@@ -366,7 +357,7 @@ function ResultatsRecherche() {
 
           {/*==================== MATERIAUX ==================== */}
 
-          <div className="bg-zinc-800 w-3/4 h-px mx-auto my-2"></div>
+          <div className="bg-zinc-800 w-3/4 h-px mx-auto sm:my-2 my-1"></div>
           <section className="materiaux flex flex-col px-4 py-5">
             <h2 className="text-3xl flex flex-row">
               <svg
@@ -386,7 +377,7 @@ function ResultatsRecherche() {
               Matériaux
             </h2>
 
-            <div className="check text-xl flex flex-row mt-4 justify-between">
+            <div className="check text-xl flex flex-row mt-4 justify-center">
               <div className="gauche">
                 <CheckboxFiltre
                   name="materiaux"
@@ -404,7 +395,7 @@ function ResultatsRecherche() {
                   onChange={handleFilterChange}
                 />
               </div>
-              <div className="milieu mr-4">
+              <div className="milieu mx-6">
                 <CheckboxFiltre
                   name="materiaux"
                   value="laine"
@@ -438,12 +429,13 @@ function ResultatsRecherche() {
         </aside>
 
         <section className="flex flex-col w-full sm:pl-100 pl-0 sm:pt-20 pt-0 sm:pr-16 pr-0">
-
-          <div className="flex flex-row justify-between sm:pt-0 pt-10 sm:pr-0 pr-5">
-
+          <div className="flex flex-row justify-between sm:pt-0 pt-12 sm:pr-0 pr-5">
             <FilAriane />
 
-            <button className="openFiltre sm:hidden block" onClick={() => setOpenFiltres(true)}>
+            <button
+              className="openFiltre sm:hidden block"
+              onClick={() => setOpenFiltres(true)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -453,27 +445,22 @@ function ResultatsRecherche() {
                 class="w-8 h-8"
               >
                 <path
-
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-
             </button>
 
-            <select className="select-tri cursor-pointer bg-zinc-800 rounded-lg text-orange-50 sm:text-2xl text-lg sm:h-16 h-10 text-center focus:outline-none hover:bg-zinc-600 sm:pt-0 pt-10">
-              <option selected disabled value="select" className="text-orange-50">
-                Trier par
-              </option>
-              <option value="option1">Prix croissant</option>
-              <option value="option2">Prix décroissant</option>
-              <option value="option3">Temps restant croissant</option>
-              <option value="option4">Temps restant décroissant</option>
+            <select  className="select-tri cursor-pointer bg-zinc-800 rounded-lg text-orange-50 sm:text-2xl text-lg sm:h-16 h-10 text-center focus:outline-none hover:bg-zinc-600 sm:pt-0 pt-10">
+              <option value="prix-croissant">Prix croissant</option>
+              <option value="prix-decroissant">Prix décroissant</option>
+              <option value="temps-croissant">Temps restant croissant</option>
+              <option value="temps-decroissant">Temps restant décroissant</option>
             </select>
           </div>
 
-          <section className="flex pt-10">
+          <section className="flex sm:pt-10 pt-0">
             {filteredArticles.length === 0 ? (
               <p className="flex items-center justify-center text-4xl">
                 Aucun article ne correspond à votre recherche
@@ -510,7 +497,10 @@ function ResultatsRecherche() {
           </section>
         </section>
 
-        <a href="#" className="h-10 w-10 fixed right-3 bottom-5 bg-zinc-800 rounded-full flex items-center justify-center">
+        <a
+          href="#"
+          className="h-10 w-10 fixed right-3 bottom-5 bg-zinc-800 rounded-full flex items-center justify-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
