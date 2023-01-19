@@ -24,7 +24,7 @@ function RefusedAccess(props) {
 
                 
 
-                <p className="px-24 mt-10 text-lg text-justify">Si vous souhaitez vendre des articles que vous avez créé · e, vous devez vous inscrire en tant que vendeur·euse. Pour cela, allez sur la page d'inscription, 
+                <p className="px-24 mt-10 text-lg text-justify">Si vous souhaitez vendre des articles que vous avez créés, vous devez vous inscrire en tant que vendeur·euse. Pour cela, allez sur la page d'inscription, 
                     remplissez les informations de la première page et cliquez sur "Je souhaite vendre mes créations", remplissez les informations et voilà, vous possédez maintenant un compte vendeur · euse sur cloth2you </p>
 
                     <Link className="hover:bg-zinc-600 bg-zinc-800 text-amber-50 p-2 px-3 sm:text-2xl text-lg rounded-xl mt-10" to="/inscription">S'inscrire en tant que vendeur · euse</Link>
