@@ -5,6 +5,8 @@ import moment from "moment";
 import Timer from "./Timer";
 import { getNbLikeArticle } from "../services/ArticleService";
 import { Link } from "react-router-dom";
+import AuthService from "../services/AuthService";
+import { isArticleLikedByUser, createLike, removeLike } from "../services/LikeService";
 
 function Encherir({ article, vendeur }) {
   const pfpImageExample = require("../static/images/pfp-image-example.jpeg");
@@ -29,6 +31,23 @@ function Encherir({ article, vendeur }) {
     }
   }, [article]);
 
+  const [likeStroke, setLikeStroke] = useState("black");
+  const [likeFill, setLikeFill] = useState("none");
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user && article) {
+      isArticleLikedByUser(article.id).then((isLiked) => {
+        console.log("isLiked", isLiked)
+        isLiked.liked ? setLikeStroke("red") : setLikeStroke("black");
+        isLiked.liked ? setLikeFill("red") : setLikeFill("none");
+        isLiked.liked ? setIsArticleLiked(true) : setIsArticleLiked(false);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [article]);
+
   const placeholderPrixForm = `${
     offreActuelle.montant + offreActuelle.montant * 0.1
   }€ ou plus`;
@@ -43,6 +62,21 @@ function Encherir({ article, vendeur }) {
     taille: article.taille,
     categorie: article.categorie,
   };
+  const [isArticleLiked, setIsArticleLiked] = useState(false);
+  function handleClickLike() {
+    setIsArticleLiked(!isArticleLiked);
+    if (isArticleLiked) {
+      removeLike(article.id);
+      setLikeFill("none");
+      setLikeStroke("black");
+      setNbLikesConst(nbLikesConst - 1);
+    } else {
+      createLike(article.id);
+      setLikeFill("red");
+      setLikeStroke("red");
+      setNbLikesConst(nbLikesConst + 1);
+    }
+  }
 
   const handleClickButtonProposition = (e) => {
     setMontantInput(e);
@@ -84,13 +118,13 @@ function Encherir({ article, vendeur }) {
               <p className="text-gray-500 text-lg">Avec prix de réserve</p>
             </div>
 
-            <button className="bouton-jaime flex items-center gap-1 bg-white px-2 rounded">
+            <button className="bouton-jaime flex items-center gap-1 bg-white px-2 rounded" onClick={handleClickLike}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                fill={likeFill}
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke={likeStroke}
                 className="w-4 h-4"
               >
                 <path
