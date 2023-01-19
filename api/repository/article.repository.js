@@ -22,6 +22,22 @@ class ArticleRepository {
         }
     }
 
+    getArticleByTitle(title) {
+        try {
+            const article = this.db.articles.findOne({
+                where: {
+                    titre: title
+                },
+            });
+            return article;
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+        
+    }
+
+
     async getNbLikeArticle(id) {
             
             try {
@@ -79,6 +95,35 @@ class ArticleRepository {
             console.log(err);
             return {};
         }
+    }
+
+    deleteArticle(id) {
+        
+        try {
+            this.db.articles.destroy({
+                where: {
+                    id: id
+                },
+            });
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+        
+    }
+
+    deleteArticleByTitle(titre) {
+        try {
+            this.db.articles.destroy({
+                where: {
+                    titre: titre
+                },
+            });
+        } catch (err) {
+            console.log(err);
+            return {};
+        }
+        
     }
 }
 

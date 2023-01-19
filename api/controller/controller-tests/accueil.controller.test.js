@@ -12,7 +12,6 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 const accueilController = require("../accueil.controller");
-
 const accueilRepository = require("../../repository/accueil.repository");
 
 

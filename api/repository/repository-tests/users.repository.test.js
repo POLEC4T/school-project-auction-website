@@ -88,7 +88,7 @@ describe("Tests UserRepository", () => {
 
   describe("Tests getUserWithPasswordByLogin", () => {
     it("devrait renvoyer un objet avec un utilisateur correspondant au login fourni", async () => {
-      const user = await UserRepository.getUserWithPasswordByLogin("nathan");
+      const user = await UserRepository.getUserWithPasswordByLogin("nathan38");
 
       // // parcours de l'ensemble des données de l'utilisateur
       // for (const key in user.dataValues) {
