@@ -296,7 +296,7 @@ const handleSubmit = (e) => {
   } else {
     return (
       <>
-        <RefusedAccess message="Vous devez être vendeur pour accéder à cette page" />
+        <RefusedAccess message="Vous devez être vendeur · euse pour accéder à cette page" />
       </>
     );
   }

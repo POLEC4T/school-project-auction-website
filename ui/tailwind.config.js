@@ -33,7 +33,10 @@ module.exports = {
         },
         colors: {
             'goldenyellow':  '#D09C16'
-        }
+        },
+        padding: {
+            '100': '30rem'
+          }
     }   
 
 },

@@ -141,7 +141,7 @@ function PaypalPage() {
 
                   <button
                     type="button"
-                    className="paypal flex flex-col bg-orange-400 hover:bg-orange-300 items-center mt-5 w-1/3 text-xl rounded-xl"
+                    className="paypal flex flex-col bg-amber-400 hover:bg-amber-300 items-center mt-5 w-1/3 text-xl rounded-xl"
                     disabled={montant === null}
                     onClick={() => setIsOpen(true)}
                   >

@@ -5,7 +5,7 @@ function Footer(){
 
     return (
 
-        <div className="bg-zinc-800 text-orange-200 font-outfit sm:px-32 px-4 py-5">
+        <div className="bg-zinc-800 text-orange-50 font-outfit sm:px-32 px-4 py-5">
             <div className="text-top sm:text-lg text-sm w-full flex justify-center">
                 <p className="sm:text-center text-justify">Bonjour, nous sommes cloth2you, le première plateforme de vente aux enchères de vêtements fait-mains. Notre objectif, laisser Nathan finir ce texte.</p>
             </div>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { getUserById } from "../services/UserService";
 import SearchBar from "./SearchBar";
 
-function NavBar() {
+function NavBar({fixed}) {
   const logoCloth2you = require("../static/images/logo-outline.png");
   const imageProfil = require("../static/images/pfp-image-example.jpeg");
 
@@ -58,15 +58,17 @@ function NavBar() {
 
   return (
     <div>
-      <nav className="sm:h-20 h-16 bg-zinc-800 w-full flex flex-row justify-around items-center font-outfit gap-2 text-xl">
+      <nav className={`sm:h-20 h-16 bg-zinc-800 w-full flex flex-row justify-around items-center font-outfit gap-2 text-xl ${fixed && fixed === true ? 'fixed z-[1000]' : ''}`}>
         <NavLink
           style={{ backgroundColor: "rgb(39, 39, 42)" }}
           to="/"
-          className="logo flex flex-row h-full items-center active:bg-non"
+          className="logo flex flex-row h-full items-center"
         >
           <img src={logoCloth2you} alt="logo" className="h-1/2 mx-1 mr-3" />
 
-          <h2 className="text-3xl text-orange-200 md:block hidden">cloth2you</h2>
+          <h2 className="text-3xl text-orange-200 md:block hidden">
+            cloth2you
+          </h2>
         </NavLink>
 
         <NavLink
@@ -361,22 +363,31 @@ function NavBar() {
       </nav>
       <div className="categories h-10 w-full flex justify-around items-center font-outfit text-xl">
         <NavLink
+          style={{ backgroundColor: "rgb(255, 247, 237)" }}
           to="/recherche?cat=haut"
-          className="bg-orange-50 w-1/3 h-full text-center ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center"
+          className="w-1/3 h-full "
         >
-          Hauts
+          <div className="text-center h-full ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center">
+            Autres
+          </div>
         </NavLink>
         <NavLink
+          style={{ backgroundColor: "rgb(255, 247, 237)" }}
           to="/recherche?cat=bas"
-          className="bg-orange-50 w-1/3 h-full text-center ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center"
+          className="w-1/3 h-full "
         >
-          Bas
+          <div className="text-center h-full ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center">
+            Autres
+          </div>
         </NavLink>
         <NavLink
+          style={{ backgroundColor: "rgb(255, 247, 237)" }}
           to="/recherche?cat=autres"
-          className="bg-orange-50 w-1/3 h-full text-center ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center"
+          className="w-1/3 h-full "
         >
-          Autres
+          <div className="text-center h-full ease-in-out duration-200 hover:bg-orange-100 flex items-center justify-center">
+            Autres
+          </div>
         </NavLink>
       </div>
     </div>

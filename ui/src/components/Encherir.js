@@ -72,7 +72,7 @@ function Encherir({ article, vendeur }) {
     <div className="sm:w-1/2 w-full z-10">
       <section className="droite flex flex-col items-center">
         <div className="chrono text-orange-200 bg-zinc-800 sm:w-2/6 w-full justify-center sm:rounded-t flex h-10 items-center min-w-fit drop-shadow-lg">
-          <span className="flex flex-row justify-center p-2 md:text-2xl text-xl">
+          <span className="flex flex-row justify-center items-center p-2 md:text-2xl text-xl">
             <Timer endDate={endDate} />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ function Encherir({ article, vendeur }) {
             <div className="prix flex flex-col">
               <p className="font-chivo text-gray-400 text-xl">Offre actuelle</p>
               {offreActuelle.montant && (
-                <p className="text-9xl">{offreActuelle.montant}€</p>
+                <p className="sm:text-9xl text-9xl">{offreActuelle.montant}€</p>
               )}
              {article.seuil_reserve != null ? <p className="text-gray-400 text-xl">Avec prix de réserve</p> : null}
             </div>
@@ -126,21 +126,21 @@ function Encherir({ article, vendeur }) {
               src={pfpImageExample}
               alt="photo-profil"
             />
-            <div className="text-profil flex flex-row flex-wrap">
-              <p className="ml-5 sm:text-3xl text-xl">par {vendeur.login}</p>
+            <div className="text-profil flex flex-row flex-wrap items-center">
+              <p className="ml-5 text-3xl">par {vendeur.login}</p>
 
               {user && user.id === vendeur.id ? (
                 <Link
                   to={`/profil`}
-                  className="flex items-center ml-5 text-gray-500 text-xl hover:text-gray-400"
+                  className="flex items-center justify-center ml-5 text-gray-500 text-xl hover:text-gray-400"
                 >
-                  <p className="text-4xl mr-2 text-gray-400">+</p> Voir profil
+                  <p className="text-4xl mr-2 text-gray-400">+ Voir profil</p>
                 </Link>
               ) : (
               <Link to={`/publicprofil/${vendeur.id}`}
                 className="flex items-center ml-5 text-gray-500 text-xl hover:text-gray-400"
               >
-                <p className="text-4xl mr-2 text-gray-400">+</p> Voir profil
+                <p className="text-xl mr-2 text-gray-400">+  Voir profil</p>
               </Link>
               )}
             </div>
