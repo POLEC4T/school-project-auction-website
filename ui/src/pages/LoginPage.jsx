@@ -68,14 +68,14 @@ function LoginPage() {
         </nav>
 
         <div class="w-full h-full flex justify-center items-center text-zinc-800">
-                <div class="etape bg-white w-[600px] h-[500px] translate-y-[-20px] rounded-xl flex flex-col justify-between">
+                <div class="etape bg-white w-[700px] h-[600px] translate-y-[-20px] rounded-xl flex flex-col justify-between">
                     <div class="haut flex flex-col items-center pt-5 px-5">
 
-                        <h2 class="opacity-100 font-gowun text-4xl" >Connexion</h2>
+                        <h2 class="opacity-100 font-gowun text-6xl" >Connexion</h2>
 
-                        <button class="google-connexion mt-10 h-10 sm:w-1/2 w-3/4 border-2 border-zinc-800 flex flex-row items-center rounded-xl justify-between">
+                        <button class="google-connexion mt-10 h-16 sm:w-1/2 w-3/4 border-2 border-zinc-800 flex flex-row items-center rounded-xl justify-between opacity-30" disabled>
                             <img class="h-full pl-4 py-2" src={logoGoogle} alt="google-logo"/>
-                            <p class="sm:pr-3 pr-7 sm:text-lg text-sm ">Se connecter avec Google</p>
+                            <p class="sm:pr-3 pr-7 sm:text-xl text-lg ">Se connecter avec Google</p>
                         </button>
 
                         <div class="ligne w-full flex flex-row overflow-hidden mt-10">
@@ -86,17 +86,17 @@ function LoginPage() {
                         </div>
 
 
-                        <input type="text" placeholder="login" class="placeholder-zinc-600 text-xl mt-10 h-10 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2" value={username} onChange={(e)=>onChangeUsername(e)}/>             
+                        <input type="text" placeholder="login" class="placeholder-zinc-600 text-2xl mt-10 h-12 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2" value={username} onChange={(e)=>onChangeUsername(e)}/>             
 
-                        <div class="mdp border-2 mt-5 h-10 rounded-xl border-zinc-800 flex flex-row w-full">
+                        <div class="mdp border-2 mt-5 h-12 rounded-xl border-zinc-800 flex flex-row w-full">
 
                         {eye === "closed" ? (
 
-                            <input type="password" placeholder="mot de passe" class="placeholder-zinc-600 text-xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
+                            <input type="password" placeholder="mot de passe" className="placeholder-zinc-600 text-2xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
 
                         ) : (
 
-                            <input type="text" placeholder="mot de passe" class="placeholder-zinc-600 text-xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
+                            <input type="text" placeholder="mot de passe" className="placeholder-zinc-600 text-2xl w-full rounded-xl focus:outline-none pl-2" value={password} onChange={(e)=>onChangePassword(e)}/>
 
                         )
 
@@ -133,10 +133,10 @@ function LoginPage() {
                             </button>
                         </div>
                         
-                        <Link class="text-zinc-500 text-sm self-start hover:underline no-underline pl-1 pt-0.5" to="/forgotten">j'ai oublié mon mot de passe</Link>
+                        <Link class="text-zinc-500 text-md self-start hover:underline no-underline pl-1 pt-0.5" to="/forgotten">j'ai oublié mon mot de passe</Link>
                         <p class="text-red-500 text-sm">{message}</p>
-                        <button class="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg mt-5 text-xl hover:bg-zinc-600" onClick={(e) => handleLogin(e)}>Se connecter</button>
-                        <h2 class="mt-1">Vous n'avez pas de compte, <Link class="underline" href="/inscription">s'inscrire</Link>.</h2>
+                        <button class="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg mt-5 text-3xl hover:bg-zinc-600" onClick={(e) => handleLogin(e)}>Se connecter</button>
+                        <h2 class="mt-1 text-md">Vous n'avez pas de compte, <Link class="underline" href="/inscription">s'inscrire</Link>.</h2>
                     </div>
                 </div>      
         </div>

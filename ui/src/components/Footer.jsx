@@ -19,9 +19,10 @@ function Footer(){
                 <div className="infos-complementaires flex-row sm:items-start items-center sm:gap-5 gap-6 sm:text-lg text-sm">
                     <p>2022-2023</p>
                     <p>© cloth2you</p>
+                    <NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }}><p className='hover:underline'>Politique de confidentialité</p></NavLink>
                     <NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }}><p className='hover:underline'>Conditions générales d'utilisation</p></NavLink>
                     <NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }}><p className='hover:underline'>Conditions générales de vente</p></NavLink>
-                    <NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }}><p className='hover:underline'>Politique de confidentialité</p></NavLink>
+                    <NavLink style={{ backgroundColor: "rgb(39, 39, 42)" }}><p className='hover:underline'>Mentions légales</p></NavLink>
                 </div>
 
 

@@ -52,7 +52,7 @@ function Encherir({ article, vendeur }) {
   const propositionPrix1 = offreActuelle.montant + offreActuelle.montant * 0.1;
   const propositionPrix2 = offreActuelle.montant + offreActuelle.montant * 0.5;
   const propositionPrix3 = offreActuelle.montant + offreActuelle.montant;
-  const endDate = moment(article.createdAt).add(7, "days");
+  const endDate = moment(article.expires);
   const [montantInput, setMontantInput] = useState("");
   const articleTags = {
     col: article.couleurs.split(","),
@@ -73,7 +73,7 @@ function Encherir({ article, vendeur }) {
       <section className="droite flex flex-col items-center">
         <div className="chrono text-orange-200 bg-zinc-800 sm:w-2/6 w-full justify-center sm:rounded-t flex h-10 items-center min-w-fit drop-shadow-lg">
           <span className="flex flex-row justify-center items-center p-2 md:text-2xl text-xl">
-            <Timer endDate={endDate} />
+            <Timer endDate={endDate} full="true" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

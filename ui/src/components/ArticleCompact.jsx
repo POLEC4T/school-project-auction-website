@@ -43,7 +43,7 @@ function ArticleCompact({article}){
 
     useEffect(() => {
       if (article) {
-        setEndDate(moment(article.createdAt).add(7, 'days'));          
+        setEndDate(moment(article.expires));          
       }
     }, [article])
 

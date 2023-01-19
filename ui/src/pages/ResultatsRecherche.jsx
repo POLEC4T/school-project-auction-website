@@ -230,7 +230,25 @@ function ResultatsRecherche() {
             </h2>
 
             <div className="check text-xl flex flex-row mt-4 gap-24">
-              <div className="gauche flex flex-col">
+            <div className="droite flex flex-col">
+                <CheckboxFiltre
+                  name="taille"
+                  value="0-4"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="taille"
+                  value="5-9"
+                  onChange={handleFilterChange}
+                />
+                <CheckboxFiltre
+                  name="taille"
+                  value="10-14"
+                  onChange={handleFilterChange}
+                />
+              </div>
+
+              <div className="middle flex flex-col">
                 <CheckboxFiltre
                   name="taille"
                   value="XS"

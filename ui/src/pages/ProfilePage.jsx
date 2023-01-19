@@ -99,8 +99,6 @@ function ProfilePage() {
                             return <Historique user={data}/>;
                         case 'favoris':
                             return <Favoris user={data}/>;
-                        default:
-                            return <ProfilContent user={data} />;
                     }
                 })()}
 

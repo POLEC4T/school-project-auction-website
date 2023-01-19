@@ -19,11 +19,22 @@ function HistoriqueElement({ article, roleId }) {
   const [isOpen, setIsOpen] = useState(false);
   const [gagnant, setGagnant] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [offreActuelle, setOffreActuelle] = useState(null);
+  const [prixVente, setPrixVente] = useState(null);
 
   useEffect(() => {
     if (article) {
-      setEndDate(moment(article.createdAt).add(7, "days"));
+      getDerniereOffre(article.id).then((enchere) => {
+        enchere.message
+          ? setPrixVente(article.prix_depart)
+          : setPrixVente(enchere.montant);
+      });
+    }
+  }, [article]);
+
+
+  useEffect(() => {
+    if (article) {
+      setEndDate(moment(article.expires));
     }
   }, [article]);
 
@@ -67,15 +78,6 @@ function HistoriqueElement({ article, roleId }) {
     }
   }, [article]);
 
-  useEffect(() => {
-    if (article) {
-      getDerniereOffre(article.id).then((enchere) => {
-        enchere.message
-          ? setOffreActuelle({ montant: article.prix_depart })
-          : setOffreActuelle(enchere);
-      });
-    }
-  }, [article]);
 
   const handleConfirm = (e) => {
     const dateLivraison = new Date();
@@ -112,7 +114,7 @@ function HistoriqueElement({ article, roleId }) {
                 />
                 <div class="details sm:text-xl text-lg flex sm:flex-row flex-col sm:gap-8 gap-0 items-center sm:justify-between justify-around sm:text-3xl text-xl ml-10">
                   <h3>{article.titre}</h3>
-                  <h3>{article.prix_vente}€</h3>
+                  <h3>{}€</h3>
 
                   {vendeur && <h3>Vendu par {vendeur.login}</h3>}
                 </div>
@@ -190,9 +192,7 @@ function HistoriqueElement({ article, roleId }) {
                 <div class="details flex sm:flex-row flex-col sm:gap-8 gap-0 items-center sm:justify-between justify-around sm:text-3xl text-xl w-full sm:ml-10 ml-0">
                   <h3 className="w-1/3 text-center">{article.titre}</h3>
                   <h3 className="w-1/3 text-center">
-                    {article.statut === "En cours" && offreActuelle
-                      ? offreActuelle.montant
-                      : article.prix_vente}
+                    {prixVente && prixVente}
                     €
                   </h3>
                   {gagnant &&

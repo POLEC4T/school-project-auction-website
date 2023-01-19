@@ -1,25 +1,35 @@
-import React from 'react';
-import Countdown from 'react-countdown';
+import React from "react";
+import Countdown from "react-countdown";
 
-function Timer({endDate}) {
+function Timer({ endDate, full }) {
+  const renderer = ({ days, hours, minutes, seconds, completed }) => {
 
-    const renderer = ({ days, hours, minutes, seconds, completed }) => {
-        if (completed) {
-            return <span>Enchère terminée !</span>;
-        } else {
-            return (
-                <div>
-                    <span>{days}j : {hours}h : {minutes}m</span>
-                </div>
-            )
-        }
-    };
+    console.log(full)
 
-    return (
+    if (completed) {
+      return <span>Enchère terminée !</span>;
+    } else {
+      return (
         <div>
-            <Countdown date={endDate} renderer={renderer} />
+          {full === "true" ? (
+            <span>
+              {days}j : {hours}h : {minutes}m : {seconds}s
+            </span>
+          ) : (
+            <span>
+              {days}j : {hours}h : {minutes}m
+            </span>
+          )}
         </div>
-    );
+      );
+    }
+  };
+
+  return (
+    <div>
+      <Countdown date={endDate} renderer={renderer} />
+    </div>
+  );
 }
 
 export default Timer;
