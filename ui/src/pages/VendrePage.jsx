@@ -137,8 +137,7 @@ const handleSubmit = (e) => {
     //upload images
     console.log(response)
     images.forEach(image => {
-      console.log(image[0]);
-      uploadImage(image[0],response.data.vendeurId).then((response) => {
+      uploadImage(image[0],response.data.id).then((response) => {
         navigate("/");
         window.location.reload();
       }
