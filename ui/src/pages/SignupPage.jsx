@@ -399,13 +399,13 @@ const handleEyeConf = (e) => {
                 <p className="text-justify text-lg" disabled>
                   En cochant cette case, vous acceptez les termes et conditions
                   de cloth2you, les{" "}
-                  <Link href="/cgu" className="underline">
+                  <a href="/pdf/CGU.pdf" className="underline">
                     conditions générales d'utilisation
-                  </Link>{" "}
+                  </a>{" "}
                   et la{" "}
-                  <Link to="/confidentialite" className="underline">
+                  <a href="/pdf/politique_de_confidentialite.pdf" className="underline">
                     politique de confidentialité
-                  </Link>{" "}
+                  </a>{" "}
                   et avoir au moins 18 ans.
                 </p>
               </div>
