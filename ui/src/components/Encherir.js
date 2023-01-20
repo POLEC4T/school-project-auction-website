@@ -122,9 +122,8 @@ function Encherir({ article, vendeur }) {
     }
   }, [article]);
 
-  const placeholderPrixForm = `${
-    offreActuelle.montant + offreActuelle.montant * 0.1
-  }€ ou plus`;
+  const placeholderPrixForm = `${offreActuelle.montant + offreActuelle.montant * 0.1
+    }€ ou plus`;
   const propositionPrix1 = offreActuelle.montant + offreActuelle.montant * 0.1;
   const propositionPrix2 = offreActuelle.montant + offreActuelle.montant * 0.5;
   const propositionPrix3 = offreActuelle.montant + offreActuelle.montant;
@@ -170,8 +169,8 @@ function Encherir({ article, vendeur }) {
     if (montantInput < propositionPrix1) {
       setMessage(
         "Vous devez ajouter au moins 10% de l'offre actuelle (soit " +
-          propositionPrix1 +
-          "€)"
+        propositionPrix1 +
+        "€)"
       );
     } else {
       setMessage("");
@@ -292,13 +291,24 @@ function Encherir({ article, vendeur }) {
             />
             <div className="enchere-ou-offre-maximale flex mt-3 gap-4">
               {userData && userData.roleId === 2 ? (
-                <button
-                  onClick={() => setIsOpen(true)}
-                  className="bg-zinc-800 hover:bg-zinc-600 w-full rounded-lg h-12 text-2xl text-orange-200"
-                  disabled={montantInput === ""}
-                >
-                  Enchérir
-                </button>
+
+                article.statut === "En cours" ? (
+                  <button
+                    onClick={() => setIsOpen(true)}
+                    className="bg-zinc-800 hover:bg-zinc-600 w-full rounded-lg h-12 text-2xl text-orange-200"
+                    disabled={montantInput === ""}
+                  >
+                    Enchérir
+                  </button>
+                ) : (
+                  <button
+                    className="bg-zinc-400 w-full rounded-lg h-12 text-2xl text-orange-200"
+                    disabled
+                  >
+                    Cette enchère est terminée
+                  </button>
+                )
+
               ) : (
                 <Link
                   to="/connexion"
