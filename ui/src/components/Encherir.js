@@ -21,6 +21,7 @@ function Encherir({ article, vendeur }) {
   const [avatar, setAvatar] = useState(
     require("../static/images/default-avatar.png")
   );
+  const [isEnchereTerminee, setIsEnchereTerminee] = useState(false);
 
   const ws = useRef(null);
 
@@ -180,12 +181,17 @@ function Encherir({ article, vendeur }) {
     }
   };
 
+  const handleEnchereTerminee = () => {
+
+    setIsEnchereTerminee(true);
+  };
+
   return (
     <div className="sm:w-1/2 w-full z-10">
       <section className="droite flex flex-col items-center">
         <div className="chrono text-orange-200 bg-zinc-800 sm:w-2/6 w-full justify-center sm:rounded-t flex h-10 items-center min-w-fit drop-shadow-lg">
           <span className="flex flex-row justify-center items-center p-2 md:text-2xl text-xl">
-            <Timer endDate={endDate} full="true" />
+            <Timer endDate={endDate} full="true" onComplete={handleEnchereTerminee} />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -292,7 +298,7 @@ function Encherir({ article, vendeur }) {
             <div className="enchere-ou-offre-maximale flex mt-3 gap-4">
               {userData && userData.roleId === 2 ? (
 
-                article.statut === "En cours" ? (
+                !isEnchereTerminee ? (
                   <button
                     onClick={() => setIsOpen(true)}
                     className="bg-zinc-800 hover:bg-zinc-600 w-full rounded-lg h-12 text-2xl text-orange-200"
