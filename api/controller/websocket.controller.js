@@ -16,10 +16,25 @@ class TodoController {
       });
 
       //on vérifie que le montant de l'enchère est supérieur à la dernière enchère
-      if (montant <= lastEnchere.montant) {
-        throw new Error(
-          "Le montant de l'enchère doit être supérieur à la dernière enchère"
-        );
+      //si il n'y a pas encore d'enchère, on vérifie que le montant est supérieur au prix initial de l'article
+      if(lastEnchere){
+        if (montant <= lastEnchere.montant) {
+          throw new Error(
+            "Le montant de l'enchère doit être supérieur à la dernière enchère"
+          );
+        }
+      }else{
+        const article = await db.articles.findOne({
+          where: {
+            id: articleId,
+          },
+          transaction: t,
+        });
+        if (montant <= article.prix_depart) {
+          throw new Error(
+            "Le montant de l'enchère doit être supérieur au prix initial de l'article"
+          );
+        }
       }
 
       //on vérifie que l'utilisateur a un solde suffisant
@@ -35,10 +50,12 @@ class TodoController {
       }
 
       //on vérifie que la dernière enchère n'a pas déjà été faite par l'utilisateur
-      const lastUser = await lastEnchere.getUser();
-        if (lastUser.id == userId) {
-            throw new Error("Vous possédez déjà l'enchère la plus haute");
-        }
+      if(lastEnchere){
+        const lastUser = await lastEnchere.getUser();
+          if (lastUser.id == userId) {
+              throw new Error("Vous possédez déjà l'enchère la plus haute");
+          }
+      }
 
       //on vérifie que l'utilisateur n'a pas le role vendeur
       const role = await user.getRole();
@@ -55,12 +72,14 @@ class TodoController {
         { transaction: t }
       );
       //puis on redonne l'argent de la dernière enchère à l'utilisateur qui l'a faite
-      await lastUser.update(
-        {
-          solde: lastUser.solde + lastEnchere.montant,
-        },
-        { transaction: t }
-      );
+      if(lastEnchere){
+        await lastUser.update(
+          {
+            solde: lastUser.solde + lastEnchere.montant,
+          },
+          { transaction: t }
+        );
+      }
       //et on ajoute l'enchère en base de données
       const enchere = await db.encheres.create(
         {
