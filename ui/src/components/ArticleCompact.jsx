@@ -53,7 +53,7 @@ function ArticleCompact({article}){
     
 
     return (
-        <Link to={`/article/${article.id}`} class="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
+        <Link to={`/article/${article.id}`} className="article flex flex-col sm:h-102 h-64 sm:w-80 w-42 bg-white rounded-xl sm:mt-0 mt-5">
 
         {imagesLoaded&&
 
@@ -63,17 +63,17 @@ function ArticleCompact({article}){
 
         }
 
-        <div class="caracteristiques flex justify-between p-2" >
-            <div class="offre flex-col justify-items-start">
-                <p class="font-chivo text-zinc-400 sm:text-lg text-xs">Offre Actuelle</p>
+        <div className="caracteristiques flex justify-between p-2" >
+            <div className="offre flex-col justify-items-start">
+                <p className="font-chivo text-zinc-400 sm:text-lg text-xs">Offre Actuelle</p>
 
                 {offreActuelle&&
-                <p class="font-gowun sm:text-2xl text-md">{offreActuelle.montant}€</p>
+                <p className="font-gowun sm:text-2xl text-md">{offreActuelle.montant}€</p>
                 }
             </div>
-            <div class="temps_restant flex flex-col justify-items-end text-end">
-                <p class="font-chivo text-zinc-400 sm:text-lg text-xs">Finit dans</p>
-                <p class="font-gowun sm:text-2xl text-md">{endDate&& <Timer endDate={endDate}/>}</p>
+            <div className="temps_restant flex flex-col justify-items-end text-end">
+                <p className="font-chivo text-zinc-400 sm:text-lg text-xs">Finit dans</p>
+                <p className="font-gowun sm:text-2xl text-md">{endDate&& <Timer endDate={endDate}/>}</p>
             </div>
         </div>
     </Link> 

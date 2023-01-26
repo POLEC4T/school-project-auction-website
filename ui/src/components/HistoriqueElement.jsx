@@ -92,8 +92,8 @@ function HistoriqueElement({ article, roleId }) {
     <>
       {article && roleId === 2 ? (
         <>
-          <div class="histo1 my-10 text-zinc-800 rounded-xl w-full font-outfit">
-            <div class="infos-livraison border-2 border-zinc-800 text-xl flex sm:flex-row flex-col justify-between pl-4 p-2 rounded-t-xl text-lg font-chivo text-start">
+          <div className="histo1 my-10 text-zinc-800 rounded-xl w-full font-outfit">
+            <div className="infos-livraison border-2 border-zinc-800 text-xl flex sm:flex-row flex-col justify-between pl-4 p-2 rounded-t-xl text-lg font-chivo text-start">
               <h3>
                 Gagnée le : {moment(article.expires).format("YYYY-MM-DD")}
               </h3>
@@ -105,25 +105,25 @@ function HistoriqueElement({ article, roleId }) {
               </h3>
               <h3>Statut : {article.statut} </h3>
             </div>
-            <div class="details-commande bg-zinc-800 flex sm:flex-row flex-col text-2xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-orange-200">
-              <div class="gestion-small flex sm:mt-0 mt-5">
+            <div className="details-commande bg-zinc-800 flex sm:flex-row flex-col text-2xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-orange-200">
+              <div className="gestion-small flex sm:mt-0 mt-5">
                 <img
-                  class="h-32 rounded-[50%] sm:ml-10 ml-0"
+                  className="h-32 rounded-[50%] sm:ml-10 ml-0"
                   src={image && image}
                   alt="cardigan-coloré"
                 />
-                <div class="details sm:text-xl text-lg flex sm:flex-row flex-col sm:gap-8 gap-0 items-center sm:justify-between justify-around sm:text-3xl text-xl ml-10">
+                <div className="details sm:text-xl text-lg flex sm:flex-row flex-col sm:gap-8 gap-0 items-center sm:justify-between justify-around sm:text-3xl text-xl ml-10">
                   <h3>{article.titre}</h3>
                   <h3>{}€</h3>
 
                   {vendeur && <h3>Vendu par {vendeur.login}</h3>}
                 </div>
               </div>
-              <div class="actions flex sm:flex-col flex-row sm:text-xl text-sm gap-4 font-chivo sm:p-0 p-2">
+              <div className="actions flex sm:flex-col flex-row sm:text-xl text-sm gap-4 font-chivo sm:p-0 p-2">
                 {article.statut !== "Livrée" && (
                   <>
                     <button
-                      class="bg-orange-50 text-zinc-800 px-2 py-1 rounded-xl hover:bg-orange-100"
+                      className="bg-orange-50 text-zinc-800 px-2 py-1 rounded-xl hover:bg-orange-100"
                       onClick={() => setIsOpen(true)}
                     >
                       Confirmer réception
@@ -141,14 +141,14 @@ function HistoriqueElement({ article, roleId }) {
                   </>
                 )}
                 <button
-                  class="bg-orange-50 text-zinc-800 opacity-30 px-2 py-1 rounded-xl hover:bg-orange-100"
+                  className="bg-orange-50 text-zinc-800 opacity-30 px-2 py-1 rounded-xl hover:bg-orange-100"
                   disabled
                 >
                   Faire une réclamation
                 </button>
                 <button
                   name="notation-vendeur"
-                  class="bg-orange-50 text-zinc-800 px-2 opacity-30 py-1 rounded-xl hover:bg-orange-100"
+                  className="bg-orange-50 text-zinc-800 px-2 opacity-30 py-1 rounded-xl hover:bg-orange-100"
                   disabled
                 >
                   Noter le vendeur
@@ -160,8 +160,8 @@ function HistoriqueElement({ article, roleId }) {
       ) : (
         <>
           {article && (
-            <div class="histo1 my-10 text-zinc-800 rounded-xl w-full font-outfit">
-              <div class="infos-livraison border-2 border-zinc-800 text-xl flex sm:flex-row flex-col justify-between pl-4 p-2 rounded-t-xl text-lg font-chivo text-start">
+            <div className="histo1 my-10 text-zinc-800 rounded-xl w-full font-outfit">
+              <div className="infos-livraison border-2 border-zinc-800 text-xl flex sm:flex-row flex-col justify-between pl-4 p-2 rounded-t-xl text-lg font-chivo text-start">
                 {article.statut === "En cours" ? (
                   <h3 className="flex gap-1">Fini dans : {endDate && <Timer endDate={endDate} />}</h3>
                 ) : (
@@ -182,14 +182,14 @@ function HistoriqueElement({ article, roleId }) {
                 <h3>Statut : {article.statut}</h3>
               </div>
 
-              <div class="details-commande bg-zinc-800 flex sm:flex-row flex-col text-3xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-orange-200">
+              <div className="details-commande bg-zinc-800 flex sm:flex-row flex-col text-3xl justify-between sm:p-5 pt-5 items-center sm:gap-0 gap-8 rounded-b-xl text-orange-200">
                 <img
-                  class="h-28 rounded-full sm:ml-10"
+                  className="h-28 rounded-full sm:ml-10"
                   src={image && image}
                   alt="cardigan-coloré"
                 />
 
-                <div class="details flex sm:flex-row flex-col sm:gap-8 gap-0 items-center sm:justify-between justify-around sm:text-3xl text-xl w-full sm:ml-10 ml-0">
+                <div className="details flex sm:flex-row flex-col sm:gap-8 gap-0 items-center sm:justify-between justify-around sm:text-3xl text-xl w-full sm:ml-10 ml-0">
                   <h3 className="w-1/3 text-center">{article.titre}</h3>
                   <h3 className="w-1/3 text-center">
                     {prixVente && prixVente}

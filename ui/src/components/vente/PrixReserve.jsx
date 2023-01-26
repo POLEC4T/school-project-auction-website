@@ -25,18 +25,18 @@ function PrixReserve(props) {
 
   return (
     <>
-      <div class="choix_reserve w-5/6 mt-8 flex items-center">
+      <div className="choix_reserve w-5/6 mt-8 flex items-center">
         <input
           type="checkbox"
-          class="mr-2 accent-zinc-800 h-5 w-5 accent-zinc-800 focus:outline-none"
+          className="mr-2 accent-zinc-800 h-5 w-5 accent-zinc-800 focus:outline-none"
           onChange={handleCheckbox}
         />
         Je souhaite fixer un prix de réserve
       </div>
 
         {prix_reserve ? (
-            <div class="prix_reserve mb-2 mt-8 w-5/6">
-                <h2 class="font-gowun text-2xl font-bold">Prix de réserve :</h2>
+            <div className="prix_reserve mb-2 mt-8 w-5/6">
+                <h2 className="font-gowun text-2xl font-bold">Prix de réserve :</h2>
 
                 <input
                     onChange={props.onChange}
@@ -44,20 +44,20 @@ function PrixReserve(props) {
                     value={props.value}
                 type="text"
                 placeholder="exemple : 60€"
-                class="placeholder-zinc-600 h-12 sm:text-xl text-md w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2"
+                className="placeholder-zinc-600 h-12 sm:text-xl text-md w-full rounded-xl border-2 border-zinc-800 focus:outline-none pl-2"
                 />
-                <div class="sm:text-lg text-xs flex flex-row items-center mt-1">
+                <div className="sm:text-lg text-xs flex flex-row items-center mt-1">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
-                    class="sm:h-6 h-16 mr-2"
+                    className="sm:h-6 h-16 mr-2"
                 >
                     <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
                     />
                 </svg>
@@ -66,11 +66,11 @@ function PrixReserve(props) {
                 assurance, si les enchères ne décollent pas
                 </div>
                 {message && (
-                <p class="text-red-600 text-sm">{message}</p>)}
+                <p className="text-red-600 text-sm">{message}</p>)}
             </div>
         ) : (
-          <div class="flex flex-row items-center justify-center px-3 py-5 sm:px-20 sm:py-10">
-          <p class="text-gray-800">
+          <div className="flex flex-row items-center justify-center px-3 py-5 sm:px-20 sm:py-10">
+          <p className="text-gray-800">
             Lorsque votre article sera mis en vente, l'enchère durera 7
             jours. Vous pouvez choisir de mettre un prix de réserve
             pour votre article. Si le prix de réserve n'est pas atteint

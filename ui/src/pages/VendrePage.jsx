@@ -215,27 +215,27 @@ const handleSubmit = (e) => {
     return (
       <>
         <NavBar />
-        <main class="main-container flex flex-row items-center fixed justify-center font-outfit h-screen w-screen bg-zinc-800 bg-vente bg-auto bg-100 overflow-hidden">
-          <div class="etape bg-white sm:w-3/4 w-full h-3/4 sm:rounded-xl rounded-none flex flex-row justify-between translate-y-[-40px]">
-            <button class="precedent sm:px-5 px-1" onClick={handlePreviousPage}>
+        <main className="main-container flex flex-row items-center fixed justify-center font-outfit h-screen w-screen bg-zinc-800 bg-vente bg-auto bg-100 overflow-hidden">
+          <div className="etape bg-white sm:w-3/4 w-full h-3/4 sm:rounded-xl rounded-none flex flex-row justify-between translate-y-[-40px]">
+            <button className="precedent sm:px-5 px-1" onClick={handlePreviousPage}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-10 h-10"
+                className="w-10 h-10"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
             </button>
 
-            <div class="formulaire mt-5 flex flex-col items-center w-full">
-              <h2 class="font-gowun text-center sm:text-5xl text-3xl">
+            <div className="formulaire mt-5 flex flex-col items-center w-full">
+              <h2 className="font-gowun text-center sm:text-5xl text-3xl">
                 Mise aux enchères ({page}/3)
               </h2>
 
@@ -264,26 +264,26 @@ const handleSubmit = (e) => {
                     value={prix_depart}
                   />
                   <PrixReserve onChange={handleSeuil} value={seuil} prix_depart={prix_depart} />
-                  <button class="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg sm:mt-6 mt-2 sm:text-2xl text-sm hover:bg-zinc-600 mt-16" onClick={handleSubmit}>
+                  <button className="bg-zinc-800 text-orange-200 px-3 py-1 rounded-lg sm:mt-6 mt-2 sm:text-2xl text-sm hover:bg-zinc-600 mt-16" onClick={handleSubmit}>
                     Mettre en ligne
                   </button>
                 </>
               )}
 
-              {message && <p class="text-red-500">{message}</p>}
+              {message && <p className="text-red-500">{message}</p>}
             </div>
-            <button class="suivant sm:px-5 px-2" onClick={handleNextPage}>
+            <button className="suivant sm:px-5 px-2" onClick={handleNextPage}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-10 h-10"
+                className="w-10 h-10"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>

@@ -16,8 +16,8 @@ function Categorie(props) {
     }
 
   return (
-    <div class="categorie sm:mt-8 mt-6 w-5/6">
-      <h2 class="font-gowun sm:text-2xl text-xl font-bold">Catégorie :</h2>
+    <div className="categorie sm:mt-8 mt-6 w-5/6">
+      <h2 className="font-gowun sm:text-2xl text-xl font-bold">Catégorie :</h2>
 
       <select
         onBlur={handleBlur}
@@ -25,7 +25,7 @@ function Categorie(props) {
         value={props.value}
         name="catégorie"
         id=""
-        class="rounded-xl px-2 sm:h-12 h-10 w-full bg-white border-2 border-zinc-800 sm:text-xl text-md"
+        className="rounded-xl px-2 sm:h-12 h-10 w-full bg-white border-2 border-zinc-800 sm:text-xl text-md"
       >
         <option selected value="select">
           Selectionner une catégorie
@@ -35,7 +35,7 @@ function Categorie(props) {
         <option value="autres">Autres</option>
       </select>
         {message.length > 0 && (
-            <div class="text-red-500 text-xs">{message}</div>
+            <div className="text-red-500 text-xs">{message}</div>
         )}
     </div>
   );

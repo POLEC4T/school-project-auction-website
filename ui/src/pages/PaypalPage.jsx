@@ -66,11 +66,11 @@ function PaypalPage() {
   return (
     <div>
       <NavBar></NavBar>
-      <section class="main-container font-outfit h-screen bg-zinc-800 bg-hero bg-center bg-100 overflow-hidden">
-        <div class="w-full h-full flex justify-center items-center text-zinc-800">
-          <div class="etape bg-white w-[600px] h-[500px] translate-y-[-40px] rounded-xl flex flex-col justify-between">
-            <div class="haut flex flex-col items-center pt-5 px-5">
-              <h2 class="opacity-100 font-gowun text-4xl">
+      <section className="main-container font-outfit h-screen bg-zinc-800 bg-hero bg-center bg-100 overflow-hidden">
+        <div className="w-full h-full flex justify-center items-center text-zinc-800">
+          <div className="etape bg-white w-[600px] h-[500px] translate-y-[-40px] rounded-xl flex flex-col justify-between">
+            <div className="haut flex flex-col items-center pt-5 px-5">
+              <h2 className="opacity-100 font-gowun text-4xl">
                 Recharger votre compte
               </h2>
               <p className="text-center text-sm mt-2">
@@ -80,24 +80,24 @@ function PaypalPage() {
                 au-dessus de ses moyens.
               </p>
 
-              <div class="ligne w-full flex flex-row overflow-hidden mt-10">
+              <div className="ligne w-full flex flex-row overflow-hidden mt-10">
                 <img
-                  class="w-1/4"
+                  className="w-1/4"
                   src={require("../static/images/ligne-1.png")}
                   alt=""
                 />
                 <img
-                  class="w-1/4"
+                  className="w-1/4"
                   src={require("../static/images/ligne-2.png")}
                   alt=""
                 />
                 <img
-                  class="w-1/4"
+                  className="w-1/4"
                   src={require("../static/images/ligne-1.png")}
                   alt=""
                 />
                 <img
-                  class="w-1/4"
+                  className="w-1/4"
                   src={require("../static/images/ligne-2.png")}
                   alt=""
                 />
@@ -108,7 +108,7 @@ function PaypalPage() {
                 <input
                   type="text"
                   placeholder="exemple : 60€"
-                  class="placeholder-zinc-400 text-xl mt-1 h-10 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
+                  className="placeholder-zinc-400 text-xl mt-1 h-10 w-full rounded-xl border-2 border-zinc-800  focus:outline-none pl-2"
                   value={montant}
                   onChange={(e) => onChangeMontant(e)}
                 />
@@ -126,13 +126,13 @@ function PaypalPage() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
-                      class="w-12 h-12"
+                      className="w-12 h-12"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
                       />
                     </svg>
@@ -172,13 +172,13 @@ function PaypalPage() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
-                      class="w-12 h-12"
+                      className="w-12 h-12"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M12 4.5v15m7.5-7.5h-15"
                       />
                     </svg>
