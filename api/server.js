@@ -51,7 +51,7 @@ require('./routes/like.route')(app);
 //utile pour la mise en production
 //cas où la route n'est pas un endpoint de l'API -> accès au frontend
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "ui", "build", "index.html"));
 });
 
 app.listen(port, () => {

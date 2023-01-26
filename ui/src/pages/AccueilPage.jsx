@@ -186,7 +186,7 @@ function AccueilPage() {
                 <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
                   <p className="font-chivo text-3xl">
                     <Timer
-                      endDate={moment(topArticles[0].createdAt).add(7, "days")}
+                      endDate={moment(topArticles[0].expires)}
                     />
                   </p>
                   <p className="mt-5 text-2xl text-center">
@@ -208,7 +208,7 @@ function AccueilPage() {
                 <div className="details-selection flex flex-col justify-center items-center p-2 w-full h-full rounded-xl backdrop-blur-sm hover:backdrop-blur-none ease-in-out duration-300">
                   <p className="font-chivo text-3xl">
                     <Timer
-                      endDate={moment(topArticles[1].createdAt).add(7, "days")}
+                      endDate={moment(topArticles[1].expires)}
                     />
                   </p>
                   <p className="mt-5 text-2xl text-center">

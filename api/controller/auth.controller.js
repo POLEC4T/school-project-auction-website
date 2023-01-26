@@ -15,17 +15,17 @@ class AuthController{
 //enregistrement
 signup = (req, res) => {
   // Enregistrer l'utilisateur en bdd
-  bcrypt.hash(req.params.password, 10).then(hash => {
+  bcrypt.hash(req.body.password, 10).then(hash => {
     const user = {
-      login: req.params.login,
-      email: req.params.email,
+      login: req.body.login,
+      email: req.body.email,
       password: hash,
-      roleId: req.params.role_id,
+      roleId: req.body.role_id,
     }
-    if (req.params.nom){
-      user.nom = req.params.nom
-      user.prenom = req.params.prenom
-      user.siren = req.params.siren
+    if (req.body.nom){
+      user.nom = req.body.nom
+      user.prenom = req.body.prenom
+      user.siren = req.body.siren
     }
     UserRepository.createUser(user).then((user) => {
         res.status(200).json({ message: "L'utilisateur a été créé avec succès !" });

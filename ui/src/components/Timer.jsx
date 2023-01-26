@@ -1,11 +1,12 @@
 import React from "react";
 import Countdown from "react-countdown";
 
-function Timer({ endDate, full }) {
+function Timer({ endDate, full, onComplete }) {
   
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
 
     if (completed) {
+      onComplete();
       return <span>Enchère terminée !</span>;
     } else {
       return (

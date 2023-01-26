@@ -12,11 +12,11 @@ class AccueilRepository {
 
             const articles = await this.db.articles.findAll();
     
-            const activeArticles = articles; /*.filter(article => new Date(article.expires) > new Date());*/
+            const activeArticles = articles.filter(article => new Date(article.expires) > new Date());
 
-            const sortedArticles = activeArticles /*.sort((a, b) => {
+            const sortedArticles = activeArticles.sort((a, b) => {
                 return new Date(a.expires) - new Date(b.expires);
-            }); */
+            });
 
             return sortedArticles;
 
