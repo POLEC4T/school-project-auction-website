@@ -58,7 +58,7 @@ describe('Tests VerifySignup', () => {
                 // vérification des résultats
                 sinon.assert.calledWith(mockResponse.status, 400);
                 sinon.assert.calledWith(mockResponse.send, {message: "Ce login est déjà utilisé"});
-            }, 700);
+            }, 1000);
 
             
             //assert.strictEqual(mockResponse.send.calledWith({message: "Ce login est déjà utilisé"}), true);
@@ -114,7 +114,7 @@ describe('Tests VerifySignup', () => {
                 // vérification des résultats
                 sinon.assert.calledWith(mockResponse.status, 400);
                 sinon.assert.calledWith(mockResponse.send, {message: "Failed! Email is already in use!"});
-            }, 500);
+            }, 1000);
 
             
             

@@ -13,11 +13,12 @@
 // const { response } = require('express');
 
 
+
 // describe('Tests AuthController', () => {
 //     describe('Tests signup', () => {
 //         it('devrait retourner une 200 OK response quand un utilisateur est trouvé', async () => {
 //             // On crée un stub pour la méthode signup
-//             sandbox = sinon.createSandbox();
+//             //sandbox = sinon.createSandbox();
 
 //             // on supprime l'utilisateur créé pour le test si il existe
 //             if (await AuthRepository.getUserByLogin('testUserAuthController')) {
@@ -35,7 +36,7 @@
 //             app.use("/api/auth/signup", AuthController.signup);
 
 //             const req = {
-//                 params: {
+//                 body: {
 //                     login: 'testUserAuthController',
 //                     email: 'testEmail@gm.fr',
 //                     password: 'testMotDePasse',
@@ -43,29 +44,65 @@
 //                 }
 //             };
 //             const res = {
-//                 status: sinon.stub().returns({ send: sinon.stub() }),
+//                 status: sinon.stub().returnsThis(),
+//                 send: sinon.stub().returnsThis(),
+//                 json: sinon.stub().returnsThis(),
 //             };
             
-        
-//             // reponse est une promesse qui contient la réponse de la requête GET sur la route /api/auth/signup 
-//             const reponse = await request(app).post("/api/auth/signup",
-//             // [
-//             //     verifySignUp.checkDuplicateLoginOrEmail,
-//             //     verifySignUp.checkRoleExists,
-//             //     rateLimit.loginRateLimiter
-//             // ],b
-//             AuthController.signup(req, res));
+//             console.log("avant post");
+
+//             await request(app).post("/api/auth/signup", AuthController.signup(req, res))
+//             .then(() => {
+//                     // vérifie que la réponse.statusCode est 200
+//                     //  vérifie que le premier appel de res.status a été fait avec 201
+//                     console.log("toto");
+//                     //sinon.assert.calledWith(res.status, 200);
+//                     // vérifie que le message retourné avec res.json est le bon
+//                     //sinon.assert.calledWith(res.json, { message: "L'utilisateur a été créé avec succès !" });
+//                 });
             
-//             // vérifie que la réponse.statusCode est 200
-//             reponse && expect(reponse.statusCode).to.equal(200);
-//             // vérifie que la réponse.body est un utilisateur
-//             expect(reponse.body).to.be.an('object');
-//             // vérifie que la réponse.body contient un login
+//             console.log('apres post');
+
+//             // console.log('reponse : ' + reponse.send);
             
             
+//             // setTimeout(() => {
+//             //     console.log(res.status);
+//             // sinon.assert.calledWith(res.status, 200);
+//             // sinon.assert.calledWith(res.json, { message: "L'utilisateur a été créé avec succès !" });
+
+//             // }, 1000);
+
+//             console.log('fin du test');
+
+
+
+//             // // reponse est une promesse qui contient la réponse de la requête GET sur la route /api/auth/signup 
+//             // request(app).post("/api/auth/signup",AuthController.signup(req, res)).then(() => {
+//             //     // vérifie que la réponse.statusCode est 200
+//             //     //  vérifie que le premier appel de res.status a été fait avec 201
+//             //     console.log("toto");
+//             //     sinon.assert.calledWith(res.status, 201);
+//             //     // vérifie que le message retourné avec res.json est le bon
+//             //     sinon.assert.calledWith(res.json, { message: "L'utilisateur a été créé avec succès !" });
+//             // });
+
             
 
             
+//             // // vérifie que la réponse.statusCode est 200
+//             // reponse && expect(reponse.statusCode).to.equal(200);
+
+//             // setTimeout(() => {
+                
+//             //     // vérifie que le premier appel de res.status a été fait avec 201
+//             //     sinon.assert.calledWith(res.status, 200);
+//             //     // vérifie que le message retourné avec res.json est le bon
+//             //     sinon.assert.calledWith(res.json, { message: "L'utilisateur a été créé avec succès !" });
+                
+//             // }, 1000);
+
+
 
 //             // // on vérifie que l'utilisateur a bien été créé
 //             // const user = await AuthRepository.getUserByLogin('testUserAuthController');
@@ -83,22 +120,23 @@
 //             await AuthRepository.deleteUserByLogin('testUserAuthController') : null;
 //             console.log('suppression de l\'utilisateur testUserAuthController après le test');
             
-//             // on restaure le sandbox sinon pour éviter les effets de bord
-//             sandbox.restore();
+            
 
 //         });
 
-//         // it('devrait retourner une 404 NOT FOUND response quand aucun utilisateur n\'est trouvé', async (done) => {
-
-//         //     // stub le signup de REPOSITORY pour qu'il retourne null
-//         //     const AuthControllerStub = sinon.stub(AuthRepository, "createUser").resolves(null);
+//         // it("devrait retourner une 500 response quand l'utilisateur n'est pas créé correctement", async () => {
+//         //     // stub le signup de REPOSITORY pour qu'il produise une erreur "erreur de création"
+//         //     sinon.stub(AuthRepository, "createUser").throws("erreur de création");
 
 //         //     // on supprime l'utilisateur créé pour le test si il existe
 //         //     if (await AuthRepository.getUserByLogin('testUserAuthController')) {
+//         //         console.log('suppression de l\'utilisateur testUserAuthController avant le test');
 //         //         await AuthRepository.deleteUserByLogin('testUserAuthController');
 //         //     }
 
+//         //     // On crée une instance d'express
 //         //     const app = express();
+//         //     // On monte la route sur l'instance d'express
 //         //     app.use("/api/auth/signup", AuthController.signup);
 
 //         //     const req = {
@@ -106,48 +144,38 @@
 //         //             login: 'testUserAuthController',
 //         //             email: 'testEmail@gm.fr',
 //         //             password: 'testMotDePasse',
-//         //             roleId: 2,
+//         //             role_id: 2,
 //         //         }
 //         //     };
 //         //     const res = {
-//         //         status: sinon.stub().returns({ send: sinon.stub() }),
+//         //         status: sinon.stub().returnsThis(),
+//         //         send: sinon.stub().returnsThis(),
+//         //         json: sinon.stub().returnsThis(),
 //         //     };
             
         
-//         //     // // reponse est une promesse qui contient la réponse de la requête GET sur la route /api/auth/signup
-//         //     // const reponse = await request(app).get("/api/auth/signup", AuthController.signup(req, res));
-            
-//         //     // // vérifie que la réponse.statusCode est 404
-//         //     // expect(reponse.statusCode).to.equal(404);
-//         //     // // vérifie que la réponse.body est un message d'erreur
-//         //     // expect(reponse.body).to.be.an('object');   
-
-            
-
-
-//         //     request(app)
-//         //     .post("/api/auth/signup")
-//         //     .send({
-//         //         login: 'testUserAuthController',
-//         //         email: 'testEmail@gm.fr',
-//         //         password: 'testMotDePasse',
-//         //         roleId: 2,
-//         //     })
-//         //     .expect(404)
-//         //     .end((err, res) => {
-//         //       if (err) return done(err);
-//         //       done();
-//         //     });
-
+//         //     // reponse est une promesse qui contient la réponse de la requête GET sur la route /api/auth/signup 
+//         //     request(app).post("/api/auth/signup",
+//         //     // [
+//         //     //     verifySignUp.checkDuplicateLoginOrEmail,
+//         //     //     verifySignUp.checkRoleExists,
+//         //     //     rateLimit.loginRateLimiter
+//         //     // ],b
+//         //     AuthController.signup(req, res));
+      
+//         //     setTimeout(() => {
+//         //       // vérifie que le premier appel de res.status a été fait avec 404
+//         //       sinon.assert.calledWith(res.status, 200);
+//         //       // vérifie que le message retourné avec res.json est le bon
+//         //     //   sinon.assert.calledWith(res.send, {error: "erreur de création",});
+//         //     }, 1000);
+      
 //         //     // on supprime l'utilisateur créé pour le test si il existe
-//         //     if (await AuthRepository.getUserByLogin('testUserAuthController')) {
-//         //         await AuthRepository.deleteUserByLogin('testUserAuthController');
+//         //     if (await AuthRepository.getUserByLogin("testUserAuthController")) {
+//         //       await AuthRepository.deleteUserByLogin("testUserAuthController");
 //         //     }
-            
-//         //     // on restaure le sandbox sinon pour éviter les effets de bord
-//         //     AuthControllerStub.restore();
-
-//         // });
+      
+//         //   });
 //     });
 
 //     // describe('Tests signin', () => {
@@ -205,3 +233,7 @@
             
 
 // });
+
+
+
+

@@ -5,6 +5,12 @@ const UserRepository = require("../repository/user.repository");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+function sleep(ms) {
+  for (let i = 0; i < ms; i++) {
+ }
+}
+
+
 class AuthController{
 //enregistrement
 signup = (req, res) => {
@@ -29,6 +35,39 @@ signup = (req, res) => {
       });
   })
 };
+
+// signup = async (req, res) => {
+//   //useEffect(() => {
+//     console.log("signup1")
+//     // Enregistrer l'utilisateur en bdd
+//     const hash = await bcrypt.hash(req.body.password, 10)
+//     console.log(hash)
+//     const user = {
+//       login: req.body.login,
+//       email: req.body.email,
+//       password: hash,
+//       roleId: req.body.role_id,
+//     }
+//     // console.log(user)
+//     // console.log('')
+//     // console.log(req)
+//     if (req.body.nom){
+//       user.nom = req.body.nom
+//       user.prenom = req.body.prenom
+//       user.siren = req.body.siren
+//     }
+
+//     res.status(200).json({ message: "L'utilisateur a été créé avec succès !" });
+
+//     // UserRepository.createUser(user)
+//     //   .then((user) => {
+//     //     res.status(200).json({ message: "L'utilisateur a été créé avec succès !" });
+//     //   })
+//     //   .catch(err => {
+//     //     res.status(500).send({ message: err.message });
+//     //   });
+    
+// };
 
 //connexion
 signin = (req,res) => {

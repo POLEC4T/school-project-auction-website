@@ -79,7 +79,7 @@ describe('Test ArticleRepository', () => {
             const articleCreated = await articleRepository.getArticleByTitle(title);
             assert.strictEqual(articleCreated.titre, title);
             // Suppression de l'article de test
-            await articleRepository.deleteArticleByTitle(title);
+            articleRepository.deleteArticleByTitle(title);
         });
         // Test pour vérifier que la méthode retourne un objet vide en cas d'erreur
         it('devrait retourner un opbjet vide en cas d\'erreur', async () => {
@@ -108,7 +108,7 @@ describe('Test ArticleRepository', () => {
 
             // on supprime l'article de test si il existe déjà
             if (articleRepository.getArticleByTitle(title)) {
-                await articleRepository.deleteArticleByTitle(title);
+                articleRepository.deleteArticleByTitle(title);
             }
 
             // Création d'un article de test pour le test
@@ -140,7 +140,7 @@ describe('Test ArticleRepository', () => {
 
             // on supprime l'article de test si il existe déjà
             if (articleRepository.getArticleByTitle(article.titre)) {
-                await articleRepository.deleteArticleByTitle(article.titre);
+                articleRepository.deleteArticleByTitle(article.titre);
             }
 
             // Création d'un article de test pour le test

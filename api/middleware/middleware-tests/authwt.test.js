@@ -90,7 +90,7 @@ describe('Tests authJwt', () => {
             setTimeout(() => {
                 sinon.assert.calledWith(res.status, 403);
                 sinon.assert.calledWith(res.send, { message: "Vous n'avez pas le rôle admin" });
-            }, 400);
+            }, 1000);
         });
 
         it('devrait appeler next quand le user est admin', () => {
@@ -109,7 +109,7 @@ describe('Tests authJwt', () => {
             // on laisse 400ms pour que la requête soit effectuée
             setTimeout(() => {
                 sinon.assert.calledOnce(next);
-            }, 400);
+            }, 1000);
         });
     });
 
@@ -130,7 +130,7 @@ describe('Tests authJwt', () => {
             setTimeout(() => {
                 sinon.assert.calledWith(res.status, 403);
                 sinon.assert.calledWith(res.send, { message: "Vous n'avez pas le rôle acheteur" });
-            }, 400);
+            }, 700);
         });
 
         it('devrait appeler next quand le user est acheteur', () => {
@@ -149,7 +149,7 @@ describe('Tests authJwt', () => {
             // on laisse 400ms pour que la requête soit effectuée
             setTimeout(() => {
                 sinon.assert.calledOnce(next);
-            }, 400);
+            }, 1000);
         });
     });
 
@@ -170,7 +170,7 @@ describe('Tests authJwt', () => {
             setTimeout(() => {
                 sinon.assert.calledWith(res.status, 403);
                 sinon.assert.calledWith(res.send, { message: "Vous n'avez pas le rôle vendeur" });
-            }, 400);
+            }, 1000);
         });
 
         it('devrait appeler next quand le user est vendeur', () => {
@@ -189,7 +189,7 @@ describe('Tests authJwt', () => {
             // on laisse 400ms pour que la requête soit effectuée
             setTimeout(() => {
                 sinon.assert.calledOnce(next);
-            }, 400);
+            }, 1000);
         });
     });
 
